@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Python Basics — Quiz</title>
+<style>
+  :root{
+    --bg: #06060a;
+    --panel: #0d0d12;
+    --line: rgba(255,255,255,0.16);
+    --line-strong: rgba(255,255,255,0.4);
+    --text: #f2f2f4;
+    --muted: #9a9aa4;
+    --ok: #6ee7a8;
+    --ok-dim: rgba(110,231,168,0.12);
+    --bad: #ff6b6b;
+    --bad-dim: rgba(255,107,107,0.12);
+    --accent: #ffffff;
+  }
+
+  *{ box-sizing:border-box; }
+
+  html,body{
+    margin:0; padding:0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+    min-height:100vh;
+  }
+
+  /* ambient diagonal "glass building" streaks, echoing the hero photo */
+  body{
+    position:relative;
+    overflow-x:hidden;
+    background:
+      radial-gradient(1200px 600px at 85% -10%, rgba(255,255,255,0.05), transparent 60%),
+      linear-gradient(180deg, #08080c 0%, #050507 100%);
+  }
+  body::before, body::after{
+    content:"";
+    position:fixed;
+    top:-20%;
+    width:140%;
+    height:180%;
+    background: linear-gradient(100deg, transparent 46%, rgba(255,255,255,0.05) 48%, rgba(255,255,255,0.09) 49%, transparent 51%);
+    pointer-events:none;
+    z-index:0;
+  }
+  body::before{ left:-60%; transform:rotate(8deg); }
+  body::after{ left:10%; transform:rotate(8deg); opacity:0.6; }
+
+  .wrap{
+    position:relative;
+    z-index:1;
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 64px 28px 96px;
+  }
+
+  .eyebrow{
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    font-size: 12px;
+    color: var(--muted);
+    margin: 0 0 10px;
+  }
+
+  h1{
+    font-size: clamp(32px, 5vw, 52px);
+    font-weight: 300;
+    margin: 0 0 22px;
+    letter-spacing: -0.01em;
+  }
+
+  .progress-track{
+    height: 3px;
+    width: 100%;
+    background: rgba(255,255,255,0.14);
+    margin-bottom: 10px;
+    position: relative;
+  }
+  .progress-fill{
+    height:100%;
+    width:0%;
+    background: var(--accent);
+    transition: width 0.5s ease;
+  }
+  .progress-label{
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 48px;
+    display:flex;
+    justify-content: space-between;
+  }
+
+  .question{
+    border: 1px solid var(--line);
+    background: var(--panel);
+    padding: 34px 32px;
+    margin-bottom: 24px;
+    transition: border-color 0.3s ease, background 0.3s ease;
+  }
+  .question.correct{
+    border-color: var(--ok);
+    background: linear-gradient(180deg, var(--ok-dim), var(--panel) 60%);
+  }
+  .question.incorrect{
+    border-color: var(--bad);
+    animation: shake 0.4s ease;
+  }
+  @keyframes shake{
+    0%,100%{ transform: translateX(0); }
+    20%{ transform: translateX(-6px); }
+    40%{ transform: translateX(6px); }
+    60%{ transform: translateX(-4px); }
+    80%{ transform: translateX(4px); }
+  }
+
+  .q-head{
+    display:flex;
+    align-items:baseline;
+    gap: 14px;
+    margin-bottom: 22px;
+  }
+  .q-num{
+    font-size: 13px;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    border: 1px solid var(--line);
+    padding: 3px 9px;
+    flex-shrink:0;
+  }
+  .q-text{
+    font-size: 19px;
+    font-weight: 400;
+    line-height: 1.4;
+  }
+
+  .options{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  @media (max-width: 620px){
+    .options{ grid-template-columns: 1fr; }
+  }
+
+  .option{
+    border: 1px solid var(--line);
+    background: transparent;
+    color: var(--text);
+    padding: 14px 16px;
+    text-align:left;
+    font-size: 15px;
+    cursor:pointer;
+    transition: all 0.2s ease;
+    font-family: inherit;
+  }
+  .option:hover:not(:disabled){
+    border-color: var(--line-strong);
+    background: rgba(255,255,255,0.04);
+  }
+  .option.selected{
+    border-color: var(--accent);
+    background: rgba(255,255,255,0.08);
+  }
+  .option.right{
+    border-color: var(--ok);
+    background: var(--ok-dim);
+    color: var(--ok);
+  }
+  .option.wrong{
+    border-color: var(--bad);
+    background: var(--bad-dim);
+    color: var(--bad);
+  }
+  .option:disabled{ cursor:default; }
+
+  .q-feedback{
+    margin-top: 14px;
+    font-size: 13px;
+    min-height: 18px;
+    color: var(--muted);
+  }
+  .q-feedback.ok{ color: var(--ok); }
+  .q-feedback.bad{ color: var(--bad); }
+
+  .actions{
+    display:flex;
+    justify-content: center;
+    margin-top: 42px;
+  }
+
+  .check-btn{
+    background: var(--accent);
+    color: #08080a;
+    border: none;
+    padding: 15px 46px;
+    font-size: 15px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    cursor:pointer;
+    transition: transform 0.15s ease, opacity 0.15s ease;
+  }
+  .check-btn:hover{ transform: translateY(-2px); }
+  .check-btn:disabled{
+    opacity: 0.3;
+    cursor:not-allowed;
+    transform:none;
+  }
+
+  .complete{
+    text-align:center;
+    padding: 70px 20px 20px;
+    display:none;
+  }
+  .complete.show{ display:block; }
+  .complete .mark{
+    width: 64px; height:64px;
+    margin: 0 auto 24px;
+    border: 1px solid var(--ok);
+    color: var(--ok);
+    display:flex; align-items:center; justify-content:center;
+    font-size: 28px;
+  }
+  .complete h2{
+    font-weight: 300;
+    font-size: 30px;
+    margin: 0 0 12px;
+  }
+  .complete p{
+    color: var(--muted);
+    font-size: 15px;
+  }
+
+  .quiz-body{ display:block; }
+  .quiz-body.hide{ display:none; }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <p class="eyebrow">Python Basics · Check Your Understanding</p>
+    <h1>Quick Quiz</h1>
+
+    <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+    <div class="progress-label">
+      <span id="progressText">0 of 3 correct</span>
+      <span>Keep going until every answer is correct — Good Luck!!</span>
+    </div>
+
+    <div class="quiz-body" id="quizBody">
+
+      <div class="question" data-q="0">
+        <div class="q-head">
+          <span class="q-num">Q1</span>
+          <span class="q-text">Which libraries are commonly used for data analysis in Python?</span>
+        </div>
+        <div class="options">
+          <button class="option" data-correct="true">Pandas and NumPy</button>
+          <button class="option">TensorFlow and Scikit-learn</button>
+          <button class="option">React and Vue</button>
+          <button class="option">Django and Flask</button>
+        </div>
+        <div class="q-feedback"></div>
+      </div>
+
+      <div class="question" data-q="1">
+        <div class="q-head">
+          <span class="q-num">Q2</span>
+          <span class="q-text">How is Python used in embedded systems and IoT?</span>
+        </div>
+        <div class="options">
+          <button class="option">It powers game engines for VR development.</button>
+          <button class="option" data-correct="true">It runs on microcomputers like Raspberry Pi and compatible boards.</button>
+          <button class="option">It is primarily used for designing UI components.</button>
+          <button class="option">It replaces low-level languages like C in all cases.</button>
+        </div>
+        <div class="q-feedback"></div>
+      </div>
+
+      <div class="question" data-q="2">
+        <div class="q-head">
+          <span class="q-num">Q3</span>
+          <span class="q-text">Which Python frameworks are used in web development?</span>
+        </div>
+        <div class="options">
+          <button class="option">React, Vue, Angular</button>
+          <button class="option">TensorFlow, PyTorch, Scikit-learn</button>
+          <button class="option">NumPy, Pandas, Matplotlib</button>
+          <button class="option" data-correct="true">Django, FastAPI, Flask</button>
+        </div>
+        <div class="q-feedback"></div>
+      </div>
+
+      <div class="actions">
+        <button class="check-btn" id="checkBtn">Check Answers</button>
+      </div>
+    </div>
+
+    <div class="complete" id="complete">
+      <div class="mark">✓</div>
+      <h2>All correct</h2>
+      <p>Nice reading. Consistency is a key in here — on to the next lesson.</p>
+    </div>
+  </div>
+
+<script>
+  const questions = Array.from(document.querySelectorAll('.question'));
+  const checkBtn = document.getElementById('checkBtn');
+  const progressFill = document.getElementById('progressFill');
+  const progressText = document.getElementById('progressText');
+  const quizBody = document.getElementById('quizBody');
+  const complete = document.getElementById('complete');
+
+  const state = questions.map(() => ({ selected: null, solved: false }));
+
+  questions.forEach((q, qi) => {
+    const opts = q.querySelectorAll('.option');
+    opts.forEach((opt, oi) => {
+      opt.addEventListener('click', () => {
+        if (state[qi].solved) return;
+        opts.forEach(o => o.classList.remove('selected'));
+        opt.classList.add('selected');
+        state[qi].selected = oi;
+        updateCheckBtn();
+      });
+    });
+  });
+
+  function updateCheckBtn(){
+    const allSelected = state.every((s, i) => s.solved || s.selected !== null);
+    checkBtn.disabled = !allSelected;
+  }
+  updateCheckBtn();
+
+  function updateProgress(){
+    const solvedCount = state.filter(s => s.solved).length;
+    progressFill.style.width = (solvedCount / state.length * 100) + '%';
+    progressText.textContent = solvedCount + ' of ' + state.length + ' correct';
+    if (solvedCount === state.length){
+      quizBody.classList.add('hide');
+      complete.classList.add('show');
+    }
+  }
+
+  checkBtn.addEventListener('click', () => {
+    questions.forEach((q, qi) => {
+      if (state[qi].solved) return;
+      const opts = q.querySelectorAll('.option');
+      const feedback = q.querySelector('.q-feedback');
+      const chosen = opts[state[qi].selected];
+      const isCorrect = chosen.dataset.correct === 'true';
+
+      if (isCorrect){
+        state[qi].solved = true;
+        q.classList.remove('incorrect');
+        q.classList.add('correct');
+        chosen.classList.add('right');
+        opts.forEach(o => o.disabled = true);
+        feedback.textContent = 'Correct.';
+        feedback.className = 'q-feedback ok';
+      } else {
+        q.classList.remove('correct');
+        q.classList.add('incorrect');
+        chosen.classList.add('wrong');
+        feedback.textContent = 'Not quite — try again.';
+        feedback.className = 'q-feedback bad';
+        setTimeout(() => {
+          q.classList.remove('incorrect');
+          chosen.classList.remove('wrong', 'selected');
+          state[qi].selected = null;
+          updateCheckBtn();
+        }, 900);
+      }
+    });
+    updateProgress();
+    updateCheckBtn();
+  });
+</script>
+</body>
+</html>
