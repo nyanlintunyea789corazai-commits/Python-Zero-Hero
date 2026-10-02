@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Numbers & Mathematical Operations — Python Fundamentals</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="templatemo-621-luminary-style.css">
+<!--
+TemplateMo 621 Luminary
+https://templatemo.com/tm-621-luminary
+-->
+</head>
+<style>
+  /* From Uiverse.io by Gaurav-WebDev */ 
+.button {
+  height: 50px;
+  width: 150px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.5s ease-in-out;
+}
+
+.button:hover {
+  box-shadow: .5px .5px 150px #252525;
+}
+
+.type1::after {
+  content: "Chapter";
+  height: 50px;
+  width: 150px;
+  background-color: #008080;
+  color: #fff;
+  position: absolute;
+  top: 0%;
+  left: 0%;
+  transform: translateY(50px);
+  font-size: 1.2rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.5s ease-in-out;
+}
+
+.type1::before {
+  content: "Next";
+  height: 50px;
+  width: 150px;
+  background-color: #fff;
+  color: #008080;
+  position: absolute;
+  top: 0%;
+  left: 0%;
+  transform: translateY(0px) scale(1.2);
+  font-size: 1.2rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.5s ease-in-out;
+}
+
+.type1:hover::after {
+  transform: translateY(0) scale(1.2);
+}
+
+.type1:hover::before {
+  transform: translateY(-50px) scale(0) rotate(120deg);
+}
+.footer-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.footer-links a {
+  text-decoration: none;
+  color: inherit;
+}
+</style>
+<body>
+
+<svg class="grain" width="100%" height="100%">
+  <filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="5" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter>
+  <rect width="100%" height="100%" filter="url(#n)"/>
+</svg>
+<div class="atmosphere"></div>
+
+<!-- Nav -->
+<nav class="top-nav" id="topNav">
+  <a href="../../../index.html" class="nav-brand">Numbers &<span>Mathematical Operations</span></a>
+  <ul class="nav-links">
+    <li><a href="#numbers-floats">Integers & Floats</a></li>
+    <li><a href="#arithmetic">Arithmetic</a></li>
+    <li><a href="#operators">Operators</a></li>
+    <li><a href="#conversions">Conversions</a></li>
+    <li><a href="#augmented">Augmented Assignment</a></li>
+  </ul>
+  <a href="#numbers-floats" class="nav-cta">Get Started</a>
+  <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+    <span class="toggle-bar"></span><span class="toggle-bar"></span>
+  </button>
+</nav>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <div class="mobile-menu-inner">
+    <div class="mobile-menu-links">
+      <a href="#numbers-floats" class="mobile-menu-link" data-index="01">Integers & Floats</a>
+      <a href="#arithmetic" class="mobile-menu-link" data-index="02">Arithmetic</a>
+      <a href="#operators" class="mobile-menu-link" data-index="03">Operators</a>
+      <a href="#conversions" class="mobile-menu-link" data-index="04">Conversions</a>
+      <a href="#augmented" class="mobile-menu-link" data-index="05">Augmented Assignment</a>
+    </div>
+    
+  </div>
+</div>
+
+<!-- Side Panels -->
+<nav class="side-panel left" aria-label="Scroll indicators">
+  <span class="side-label">Scroll</span>
+  <div class="side-track"><div class="side-track-fill" id="leftTrack"></div></div>
+  <div class="side-dot active"></div>
+  <div class="side-dot"></div>
+  <div class="side-dot"></div>
+  <div class="side-dot"></div>
+  <div class="side-dot"></div>
+  <div class="side-dot"></div>
+  <div class="side-readout" id="scrollPct">00</div>
+</nav>
+
+<nav class="side-panel right" aria-label="Status indicators">
+  <span class="side-label">Python</span>
+  <div class="side-track"><div class="side-track-fill" id="rightTrack"></div></div>
+  <div class="side-dot"></div>
+  <div class="side-dot"></div>
+  <div class="side-dot active"></div>
+  <div class="side-dot"></div>
+  <div class="side-dot"></div>
+  <div class="side-dot"></div>
+  <div class="side-readout">Python</div>
+</nav>
+
+<main class="main">
+
+  <!-- ═══ HERO ═══ -->
+  <section class="hero" id="hero">
+    <div class="hero-grid"></div>
+    <div class="hero-badge">
+      <div class="hero-badge-dot"></div>
+      <span>Solo-Leveling Begins!</span>
+    </div>
+    <h1>Numbers & Mathematical<br><em>Operations</em></h1>
+    <p class="hero-sub">
+      In this lesson, you'll learn how Python works with integers and floats — how to perform arithmetic operations, mix numeric types, use the modulo, floor division, and exponentiation operators, convert and round numbers, and write cleaner code with augmented assignment.
+    </p>
+    <div class="hero-ctas">
+      <a href="#numbers-floats" class="btn-primary">Get Start</a>
+    </div>
+    <div class="hero-metrics">
+      <div class="metric">
+        <div class="metric-value"><span class="counter" data-target="57.9%" data-decimals="1">0.0</span><span>%</span></div>
+        <div class="metric-label">World Wide Usage</div>
+      </div>
+      <div class="metric">
+        <div class="metric-value"><span class="counter" data-target="34%" data-decimals="0">0</span><span>+</span></div>
+        <div class="metric-label">Primary Language</div>
+      </div>
+      <div class="metric">
+        <div class="metric-value"><span class="counter" data-target="100" data-decimals="0">0</span><span>%</span></div>
+        <div class="metric-label">Complicated Thought</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ LOGO TICKER ═══ -->
+  <div class="logo-ticker reveal">
+    <div class="logo-ticker-label">Python Usage Fields</div>
+    <div class="ticker-track" id="tickerTrack">
+      <span class="ticker-item">Web Development</span><span class="ticker-dot"></span>
+      <span class="ticker-item">Data Science and Analysis</span><span class="ticker-dot"></span>
+      <span class="ticker-item">Artificial Intelligence </span><span class="ticker-dot"></span>
+      <span class="ticker-item">Machine Learning</span><span class="ticker-dot"></span>
+      <span class="ticker-item">Automation</span><span class="ticker-dot"></span>
+      <span class="ticker-item">Cybersecurity</span><span class="ticker-dot"></span>
+      <span class="ticker-item">Scripting</span><span class="ticker-dot"></span>
+      <span class="ticker-item">Scientific Computing</span><span class="ticker-dot"></span>
+      <!-- Duplicated for seamless loop -->
+      <span class="ticker-item">Web Development</span><span class="ticker-dot"></span>
+      <span class="ticker-item">Data Science and Analysis</span><span class="ticker-dot"></span>
+      <span class="ticker-item">Artificial Intelligence </span><span class="ticker-dot"></span>
+      <span class="ticker-item">Machine Learning</span><span class="ticker-dot"></span>
+      <span class="ticker-item">Automation</span><span class="ticker-dot"></span>
+      <span class="ticker-item">Cybersecurity</span><span class="ticker-dot"></span>
+      <span class="ticker-item">Scripting</span><span class="ticker-dot"></span>
+      <span class="ticker-item">Scientific Computing</span><span class="ticker-dot"></span>
+    </div>
+  </div><br>
+
+  <!-- ═══ FEATURES ═══ -->
+    <section class="section" id="numbers-floats">
+
+    <div class="feature reveal">
+      <div class="feature-visual-code">
+        <div class="code-block"><pre><code>my_int_1 = <span class="tok-num">56</span>
+my_int_2 = <span class="tok-num">-4</span>
+
+<span class="tok-fn">print</span>(<span class="tok-fn">type</span>(my_int_1))  <span class="tok-com"># &lt;class 'int'&gt;</span>
+<span class="tok-fn">print</span>(<span class="tok-fn">type</span>(my_int_2))  <span class="tok-com"># &lt;class 'int'&gt;</span></code></pre></div>
+      </div>
+      <div class="feature-content">
+        <div class="feature-number">01</div>
+        <p class="section-tag">Numbers</p>
+        <h2 class="section-title">How Do You Work With <strong>Integers and Floats?</strong></h2>
+        <p class="section-body">
+          Integers and floats are the primary numeric data types in Python. With them, you can store numeric data and perform mathematical operations.
+        </p>
+        <p class="section-body">
+          <strong>Integers</strong> are whole numbers without decimal points, either positive or negative. You can check a variable's type with the built-in <strong>type()</strong> function, as shown here.
+        </p>
+      </div>
+    </div>
+
+    <div class="feature-content2">
+      <p class="section-body2">
+        <strong style="color: #0e578c">Floats</strong> are positive or negative numbers <em>with</em> decimal points, like <strong>3.14</strong>, <strong>-0.5</strong>, or <strong>0.0</strong>.
+      </p>
+      <br>
+      <div class="code-block"><pre><code>my_float_1 = <span class="tok-num">-12.0</span>
+my_float_2 = <span class="tok-num">4.9</span>
+
+<span class="tok-fn">print</span>(<span class="tok-fn">type</span>(my_float_1))  <span class="tok-com"># &lt;class 'float'&gt;</span>
+<span class="tok-fn">print</span>(<span class="tok-fn">type</span>(my_float_2))  <span class="tok-com"># &lt;class 'float'&gt;</span></code></pre></div>
+    </div>
+
+    <br><br><br><hr><br><br>
+
+    <div class="feature reverse reveal" id="arithmetic">
+      <div class="feature-visual-code">
+        <div class="code-block"><pre><code>my_int_1 = <span class="tok-num">56</span>
+my_int_2 = <span class="tok-num">12</span>
+
+<span class="tok-fn">print</span>(<span class="tok-str">'Addition:'</span>, my_int_1 + my_int_2)     <span class="tok-com"># 68</span>
+<span class="tok-fn">print</span>(<span class="tok-str">'Subtraction:'</span>, my_int_1 - my_int_2)  <span class="tok-com"># 44</span></code></pre></div>
+      </div>
+      <div class="feature-content">
+        <div class="feature-number">02</div>
+        <p class="section-tag">Arithmetic Operations</p>
+        <h2 class="section-title">How Do <strong>Arithmetic Operations Work?</strong></h2>
+        <p class="section-body">
+          Python supports all the standard arithmetic operators. Addition uses <strong>+</strong> and subtraction uses <strong>-</strong>, and they work the same way with integers as they do with floats.
+        </p>
+      </div>
+    </div>
+
+    <div class="feature-content2">
+      <p class="section-body2">
+        Multiplication uses <strong style="color: #0e578c">*</strong> and division uses <strong style="color: #0e578c">/</strong>. Division in Python always returns a float, even when both numbers are integers.
+      </p>
+      <br>
+      <div class="code-block"><pre><code>my_int_1 = <span class="tok-num">56</span>
+my_int_2 = <span class="tok-num">12</span>
+
+<span class="tok-fn">print</span>(<span class="tok-str">'Multiplication:'</span>, my_int_1 * my_int_2)  <span class="tok-com"># 672</span>
+<span class="tok-fn">print</span>(<span class="tok-str">'Division:'</span>, my_int_1 / my_int_2)        <span class="tok-com"># 4.666666666666667</span></code></pre></div>
+
+      <br><br>
+      <p class="section-body2">
+        The same four operators work exactly the same way with floats:
+      </p>
+      <br>
+      <div class="code-block"><pre><code>my_float_1 = <span class="tok-num">5.4</span>
+my_float_2 = <span class="tok-num">12.0</span>
+
+<span class="tok-fn">print</span>(<span class="tok-str">'Addition:'</span>, my_float_1 + my_float_2)        <span class="tok-com"># 17.4</span>
+<span class="tok-fn">print</span>(<span class="tok-str">'Subtraction:'</span>, my_float_2 - my_float_1)     <span class="tok-com"># 6.6</span>
+<span class="tok-fn">print</span>(<span class="tok-str">'Multiplication:'</span>, my_float_2 * my_float_1)  <span class="tok-com"># 64.80000000000001</span>
+<span class="tok-fn">print</span>(<span class="tok-str">'Division:'</span>, my_float_2 / my_float_1)        <span class="tok-com"># 2.222222222222222</span></code></pre></div>
+
+      <br><br>
+      <p class="section-body2">
+        If you add an integer and a float, the result is automatically converted to a float. This is true for subtraction, multiplication, and division too &mdash; mix an int with a float anywhere, and Python hands back a float.
+      </p>
+      <br>
+      <div class="code-block"><pre><code>my_int = <span class="tok-num">56</span>
+my_float = <span class="tok-num">5.4</span>
+
+sum_int_and_float = my_int + my_float
+
+<span class="tok-fn">print</span>(sum_int_and_float)        <span class="tok-com"># 61.4</span>
+<span class="tok-fn">print</span>(<span class="tok-fn">type</span>(sum_int_and_float))  <span class="tok-com"># &lt;class 'float'&gt;</span></code></pre></div>
+    </div>
+
+    <br><br><br><hr><br><br>
+
+    <div class="feature reveal" id="operators">
+      <div class="feature-visual-code">
+        <div class="code-block"><pre><code>my_int_1 = <span class="tok-num">56</span>
+my_int_2 = <span class="tok-num">12</span>
+my_float_1 = <span class="tok-num">5.4</span>
+my_float_2 = <span class="tok-num">12.0</span>
+
+mod_ints = my_int_1 % my_int_2
+mod_floats = my_float_2 % my_float_1
+
+<span class="tok-fn">print</span>(<span class="tok-str">'Integer Modulo:'</span>, mod_ints)    <span class="tok-com"># 8</span>
+<span class="tok-fn">print</span>(<span class="tok-str">'Float Modulo:'</span>, mod_floats)  <span class="tok-com"># 1.1999999999999993</span></code></pre></div>
+      </div>
+      <div class="feature-content">
+        <div class="feature-number">03</div>
+        <p class="section-tag">More Operators</p>
+        <h2 class="section-title">What Do <strong>Modulo, Floor Division & Exponents Do?</strong></h2>
+        <p class="section-body">
+          The modulo operator <strong>( % )</strong> returns the remainder when the value on the left is divided by the value on the right.
+        </p>
+      </div>
+    </div>
+
+    <div class="feature-content2">
+      <p class="section-body2">
+        Floor division divides two numbers and returns the greatest integer less than or equal to the result. It's done with a double forward slash <strong style="color: #0e578c">( // )</strong>.
+      </p>
+      <br>
+      <div class="code-block"><pre><code>my_int_1 = <span class="tok-num">56</span>
+my_int_2 = <span class="tok-num">12</span>
+my_float_1 = <span class="tok-num">5.4</span>
+my_float_2 = <span class="tok-num">12.0</span>
+
+floor_div_ints = my_int_1 // my_int_2
+floor_div_floats = my_float_2 // my_float_1
+
+<span class="tok-fn">print</span>(<span class="tok-str">'Integer Floor Division:'</span>, floor_div_ints)  <span class="tok-com"># 4</span>
+<span class="tok-fn">print</span>(<span class="tok-str">'Float Floor Division:'</span>, floor_div_floats)   <span class="tok-com"># 2.0</span></code></pre></div>
+
+      <br><br>
+      <p class="section-body2">
+        Exponentiation raises a number to the power of another, done with a double asterisk <strong style="color: #0e578c">( ** )</strong>.
+      </p>
+      <br>
+      <div class="code-block"><pre><code>my_int_1 = <span class="tok-num">56</span>
+my_int_2 = <span class="tok-num">12</span>
+my_float_1 = <span class="tok-num">5.4</span>
+my_float_2 = <span class="tok-num">12.0</span>
+
+exp_ints = my_int_1 ** my_int_2
+exp_floats = my_float_1 ** my_float_2
+
+<span class="tok-fn">print</span>(<span class="tok-str">'Integer Exponentiation:'</span>, exp_ints)    <span class="tok-com"># 951166013805414055936</span>
+<span class="tok-fn">print</span>(<span class="tok-str">'Float Exponentiation:'</span>, exp_floats)  <span class="tok-com"># 614787626.1765089</span></code></pre></div>
+
+      <br><br>
+      <p class="section-body2">
+        You might also notice that operations with floats sometimes produce more decimal digits than expected &mdash; the sum <strong style="color: #0e578c">0.1 + 0.2</strong> equals <strong style="color: #0e578c">0.30000000000000004</strong> instead of a clean <strong>0.3</strong>. This happens because numbers are stored in binary, and some decimal fractions can't be represented exactly &mdash; the same way <strong>⅓</strong> can't be written with a finite number of decimal digits <strong>(0.3333...)</strong>. It leads to small rounding errors.
+      </p>
+      <br>
+      <div class="code-block"><pre><code><span class="tok-fn">print</span>(<span class="tok-num">0.1</span> + <span class="tok-num">0.2</span>)  <span class="tok-com"># 0.30000000000000004</span></code></pre></div>
+    </div>
+
+    <br><br><br><hr><br><br>
+
+    <div class="feature reverse reveal" id="conversions">
+      <div class="feature-visual-code">
+        <div class="code-block"><pre><code>my_int_1 = <span class="tok-num">56</span>
+my_float_1 = <span class="tok-fn">float</span>(my_int_1)
+
+<span class="tok-fn">print</span>(my_float_1)        <span class="tok-com"># 56.0</span>
+<span class="tok-fn">print</span>(<span class="tok-fn">type</span>(my_float_1))  <span class="tok-com"># &lt;class 'float'&gt;</span></code></pre></div>
+      </div>
+      <div class="feature-content">
+        <div class="feature-number">04</div>
+        <p class="section-tag">Conversions</p>
+        <h2 class="section-title">How Do You <strong>Convert & Round Numbers?</strong></h2>
+        <p class="section-body">
+          Python provides built-in functions for converting numeric data or strings into integers or floats. The <strong>float()</strong> function returns a floating-point number constructed from the given number.
+        </p>
+      </div>
+    </div>
+
+    <div class="feature-content2">
+      <p class="section-body2">
+        The <strong style="color: #0e578c">int()</strong> function returns an integer constructed from the given number &mdash; it doesn't round, it simply drops everything after the decimal point.
+      </p>
+      <br>
+      <div class="code-block"><pre><code>my_float = <span class="tok-num">12.92563</span>
+my_int = <span class="tok-fn">int</span>(my_float)
+
+<span class="tok-fn">print</span>(my_int)        <span class="tok-com"># 12</span>
+<span class="tok-fn">print</span>(<span class="tok-fn">type</span>(my_int))  <span class="tok-com"># &lt;class 'int'&gt;</span></code></pre></div>
+
+      <br><br>
+      <p class="section-body2">
+        You can use the same functions to convert a string into either a float or an integer:
+      </p>
+      <br>
+      <div class="code-block"><pre><code>my_str_int = <span class="tok-str">'45'</span>
+my_str_float = <span class="tok-str">'7.8'</span>
+
+converted_int = <span class="tok-fn">int</span>(my_str_int)
+converted_float = <span class="tok-fn">float</span>(my_str_float)
+
+<span class="tok-fn">print</span>(converted_int, <span class="tok-fn">type</span>(converted_int))      <span class="tok-com"># 45 &lt;class 'int'&gt;</span>
+<span class="tok-fn">print</span>(converted_float, <span class="tok-fn">type</span>(converted_float))  <span class="tok-com"># 7.8 &lt;class 'float'&gt;</span></code></pre></div>
+
+      <br><br>
+      <p class="section-body2">
+        A few other useful built-ins: <strong style="color: #0e578c">round()</strong> rounds a number to a given number of decimal places (or to the nearest whole number by default), <strong style="color: #0e578c">abs()</strong> returns the absolute value of a number, and <strong style="color: #0e578c">pow()</strong> raises a number to a power &mdash; optionally with modular exponentiation.
+      </p>
+      <br>
+      <div class="code-block"><pre><code>rounded_int_1 = <span class="tok-fn">round</span>(<span class="tok-num">4.798</span>)
+rounded_int_2 = <span class="tok-fn">round</span>(<span class="tok-num">4.253</span>, <span class="tok-num">1</span>)
+
+<span class="tok-fn">print</span>(rounded_int_1)  <span class="tok-com"># 5</span>
+<span class="tok-fn">print</span>(rounded_int_2)  <span class="tok-com"># 4.3</span>
+
+absolute_value = <span class="tok-fn">abs</span>(<span class="tok-num">-15</span>)
+<span class="tok-fn">print</span>(absolute_value)  <span class="tok-com"># 15</span>
+
+result_1 = <span class="tok-fn">pow</span>(<span class="tok-num">2</span>, <span class="tok-num">3</span>)     <span class="tok-com"># equivalent to 2 ** 3</span>
+result_2 = <span class="tok-fn">pow</span>(<span class="tok-num">2</span>, <span class="tok-num">3</span>, <span class="tok-num">5</span>)  <span class="tok-com"># (2 ** 3) % 5</span>
+
+<span class="tok-fn">print</span>(result_1)  <span class="tok-com"># 8</span>
+<span class="tok-fn">print</span>(result_2)  <span class="tok-com"># 3</span></code></pre></div>
+    </div>
+
+    <br><br><br><hr><br><br>
+
+    <div class="feature reveal" id="augmented">
+      <div class="feature-visual-code">
+        <div class="code-block"><pre><code>my_var = <span class="tok-num">10</span>
+my_var += <span class="tok-num">5</span>
+<span class="tok-fn">print</span>(my_var)  <span class="tok-com"># 15</span>
+
+<span class="tok-com"># the same thing, written out in full:</span>
+my_var = <span class="tok-num">10</span>
+my_var = my_var + <span class="tok-num">5</span>
+<span class="tok-fn">print</span>(my_var)  <span class="tok-com"># 15</span></code></pre></div>
+      </div>
+      <div class="feature-content">
+        <div class="feature-number">05</div>
+        <p class="section-tag">Augmented Assignment</p>
+        <h2 class="section-title">How Do <strong>Augmented Assignments Work?</strong></h2>
+        <p class="section-body">
+          An augmented assignment combines a binary operation with an assignment in one step. It takes a variable, applies an operation to it with another value, and stores the result back into the same variable, following the pattern <strong>variable &lt;operator&gt;= value</strong>.
+        </p>
+      </div>
+    </div>
+
+    <div class="feature-content2">
+      <p class="section-body2">
+        Every arithmetic operator has an augmented form. Here they are with subtraction, multiplication, division, floor division, modulo, and exponentiation:
+      </p>
+      <br>
+      <div class="code-block"><pre><code>count = <span class="tok-num">14</span>
+count -= <span class="tok-num">3</span>
+<span class="tok-fn">print</span>(count)  <span class="tok-com"># 11</span>
+
+product = <span class="tok-num">65</span>
+product *= <span class="tok-num">7</span>
+<span class="tok-fn">print</span>(product)  <span class="tok-com"># 455</span>
+
+price = <span class="tok-num">100</span>
+price /= <span class="tok-num">4</span>
+<span class="tok-fn">print</span>(price)  <span class="tok-com"># 25.0</span>
+
+total_pages = <span class="tok-num">23</span>
+total_pages //= <span class="tok-num">5</span>
+<span class="tok-fn">print</span>(total_pages)  <span class="tok-com"># 4</span>
+
+bits = <span class="tok-num">35</span>
+bits %= <span class="tok-num">2</span>
+<span class="tok-fn">print</span>(bits)  <span class="tok-com"># 1</span>
+
+power = <span class="tok-num">2</span>
+power **= <span class="tok-num">3</span>
+<span class="tok-fn">print</span>(power)  <span class="tok-com"># 8</span></code></pre></div>
+
+      <br><br>
+      <p class="section-body2">
+        A couple of augmented assignments also work with strings. Addition assignment concatenates, and multiplication assignment repeats:
+      </p>
+      <br>
+      <div class="code-block"><pre><code>greet = <span class="tok-str">'Hello'</span>
+greet += <span class="tok-str">' World'</span>
+<span class="tok-fn">print</span>(greet)  <span class="tok-com"># Hello World</span>
+
+greet = <span class="tok-str">'Hello'</span>
+greet *= <span class="tok-num">3</span>
+<span class="tok-fn">print</span>(greet)  <span class="tok-com"># HelloHelloHello</span></code></pre></div>
+
+      <br><br>
+      <p class="section-body2">
+        Other augmented assignments throw a <strong style="color: #0e578c">TypeError</strong> when used with strings:
+      </p>
+      <br>
+      <div class="code-block"><pre><code>greet = <span class="tok-str">'Hello'</span>
+greet -= <span class="tok-str">' World'</span>
+<span class="tok-fn">print</span>(greet)
+<span class="tok-com"># TypeError: unsupported operand type(s) for -=: 'str' and 'str'</span></code></pre></div>
+    </div>
+
+  </section>
+
+
+
+  <div class="silk-divider reveal"></div>
+
+  <!-- ═══ TESTIMONIALS ═══ -->
+  <section class="section section-center" id="testimonials">
+    <p class="section-tag reveal">Quote for YOU!</p>
+    <h2 class="section-title reveal reveal-d1">Keep Learning <strong>no matter how hard it is.</strong></h2>
+
+    <div class="testimonials-grid">
+      <div class="testimonial-card reveal reveal-d1">
+        <p class="testimonial-quote">
+          "It's not about how hard you can hit, it's about how much you can take, and keep moving forward anyway. 
+          That's how wining is done."
+        </p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">RB</div>
+          <div>
+            <div class="testimonial-name">Rocky Balboa</div>
+            <div class="testimonial-role">Rocky</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card reveal reveal-d2">
+        <p class="testimonial-quote">
+          "Do, or do not. There's no such thing as almost — commit fully, or don't start at all."
+        </p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">YD</div>
+          <div>
+            <div class="testimonial-name">Yoda</div>
+            <div class="testimonial-role">Star Wars</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card reveal reveal-d3">
+        <p class="testimonial-quote">
+          "It's not that I'm so smart, it's just that I stay with problems longer."
+        </p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">AE</div>
+          <div>
+            <div class="testimonial-name">Elbert Einstein</div>
+            <div class="testimonial-role">Father of Modern Physics, Theory of Relativity</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="silk-divider reveal">
+    <!-- From Uiverse.io by BHARGAVPATEL1244 --> 
+<!-- From Uiverse.io by Gaurav-WebDev --> 
+<button class="button type1" onclick="window.location.href='Week3_Conditions.html'">
+</button>
+  </div>
+
+ 
+
+ 
+
+  <!-- ═══ FOOTER CTA ═══ -->
+ <section class="footer-cta" id="cta">
+  <div class="footer-bar reveal reveal-d4" style="margin-top: 80px;">
+    <ul class="footer-links">
+      <li><a href="../../Variables.html">Week 1</a></li>
+      <li><a href="#">Week 2</a></li>
+      <li><a href="Week3_Conditions.html">Week 3</a></li>
+      <li><a href="Week4_Functions.html">Week 4</a></li>
+      <li><a href="Week5_Lists_Loops.html">Week 5</a></li>
+      <li><a href="Week6_Dictionaries_Errors.html">Week 6</a></li>
+      <li><a href="Week7_Classes_Objects.html">Week 7</a></li>
+      <li><a href="Week8_Inheritance.html">Week 8</a></li>
+      <li><a href="Week9_AI_Prompting.html">Week 9</a></li>
+    </ul>
+  </div>
+</section>
+
+</main>
+
+<script src="templatemo-621-luminary-script.js"></script>
+</body>
+</html>

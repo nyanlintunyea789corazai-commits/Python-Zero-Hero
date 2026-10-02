@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 4 — Reusable Code with Functions</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="templatemo-621-luminary-style.css">
+<!--
+TemplateMo 621 Luminary
+https://templatemo.com/tm-621-luminary
+-->
+</head>
+<style>
+  /* From Uiverse.io by Gaurav-WebDev */ 
+.button {
+  height: 50px;
+  width: 150px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.5s ease-in-out;
+}
+
+.button:hover {
+  box-shadow: .5px .5px 150px #252525;
+}
+
+.type1::after {
+  content: "Chapter";
+  height: 50px;
+  width: 150px;
+  background-color: #008080;
+  color: #fff;
+  position: absolute;
+  top: 0%;
+  left: 0%;
+  transform: translateY(50px);
+  font-size: 1.2rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.5s ease-in-out;
+}
+
+.type1::before {
+  content: "Next";
+  height: 50px;
+  width: 150px;
+  background-color: #fff;
+  color: #008080;
+  position: absolute;
+  top: 0%;
+  left: 0%;
+  transform: translateY(0px) scale(1.2);
+  font-size: 1.2rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.5s ease-in-out;
+}
+
+.type1:hover::after {
+  transform: translateY(0) scale(1.2);
+}
+
+.type1:hover::before {
+  transform: translateY(-50px) scale(0) rotate(120deg);
+}
+</style>
+<body>
+
+<svg class="grain" width="100%" height="100%">
+  <filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="5" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter>
+  <rect width="100%" height="100%" filter="url(#n)"/>
+</svg>
+<div class="atmosphere"></div>
+
+<!-- Nav -->
+<nav class="top-nav" id="topNav">
+  <a href="../../../index.html" class="nav-brand">Reusable<span> Code</span></a>
+  <ul class="nav-links">
+    <li><a href="#functions-intro">Functions</a></li>
+    <li><a href="#parameters">Parameters</a></li>
+    <li><a href="#defaults">Defaults</a></li>
+    <li><a href="#return-values">Return Values</a></li>
+    <li><a href="#putting-together">Putting It Together</a></li>
+  </ul>
+  <a href="#functions-intro" class="nav-cta">Get Started</a>
+  <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+    <span class="toggle-bar"></span><span class="toggle-bar"></span>
+  </button>
+</nav>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <div class="mobile-menu-inner">
+    <div class="mobile-menu-links">
+      <a href="#functions-intro" class="mobile-menu-link" data-index="01">Functions</a>
+      <a href="#parameters" class="mobile-menu-link" data-index="02">Parameters</a>
+      <a href="#defaults" class="mobile-menu-link" data-index="03">Defaults</a>
+      <a href="#return-values" class="mobile-menu-link" data-index="04">Return Values</a>
+      <a href="#putting-together" class="mobile-menu-link" data-index="05">Putting It Together</a>
+    </div>
+  </div>
+</div>
+
+<!-- Side Panels -->
+<nav class="side-panel left" aria-label="Scroll indicators">
+  <span class="side-label">Scroll</span>
+  <div class="side-track"><div class="side-track-fill" id="leftTrack"></div></div>
+  <div class="side-dot active"></div>
+  <div class="side-dot"></div>
+  <div class="side-dot"></div>
+  <div class="side-dot"></div>
+  <div class="side-dot"></div>
+  <div class="side-dot"></div>
+  <div class="side-readout" id="scrollPct">00</div>
+</nav>
+
+<nav class="side-panel right" aria-label="Status indicators">
+  <span class="side-label">Python</span>
+  <div class="side-track"><div class="side-track-fill" id="rightTrack"></div></div>
+  <div class="side-dot"></div>
+  <div class="side-dot"></div>
+  <div class="side-dot active"></div>
+  <div class="side-dot"></div>
+  <div class="side-dot"></div>
+  <div class="side-dot"></div>
+  <div class="side-readout">Python</div>
+</nav>
+
+<main class="main">
+
+  <!-- ═══ HERO ═══ -->
+  <section class="hero" id="hero">
+    <div class="hero-grid"></div>
+    <div class="hero-badge">
+      <div class="hero-badge-dot"></div>
+      <span>Build Once, Use Everywhere!</span>
+    </div>
+    <h1>Reusable Code<br><em>with Functions</em></h1>
+    <p class="hero-sub">
+      In this lesson, you'll learn how to build your own <strong>functions</strong> &mdash; reusable pieces of code. You'll learn how to send information into a function with <strong>parameters</strong>, and how to get a result back out using <strong>return</strong>.
+    </p>
+    <div class="hero-ctas">
+      <a href="#functions-intro" class="btn-primary">Get Start</a>
+    </div>
+    <div class="hero-metrics">
+      <div class="metric">
+        <div class="metric-value"><span class="counter" data-target="3" data-decimals="0">0</span></div>
+        <div class="metric-label">Core Concepts This Week</div>
+      </div>
+      <div class="metric">
+        <div class="metric-value"><span class="counter" data-target="2" data-decimals="0">0</span></div>
+        <div class="metric-label">Ways to Pass Arguments</div>
+      </div>
+      <div class="metric">
+        <div class="metric-value"><span class="counter" data-target="1" data-decimals="0">0</span></div>
+        <div class="metric-label">Value Returned Per Call</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ LOGO TICKER ═══ -->
+  <div class="logo-ticker reveal">
+    <div class="logo-ticker-label">Function Building Blocks</div>
+    <div class="ticker-track" id="tickerTrack">
+      <span class="ticker-item">def</span><span class="ticker-dot"></span>
+      <span class="ticker-item">return</span><span class="ticker-dot"></span>
+      <span class="ticker-item">parameters</span><span class="ticker-dot"></span>
+      <span class="ticker-item">arguments</span><span class="ticker-dot"></span>
+      <span class="ticker-item">default values</span><span class="ticker-dot"></span>
+      <span class="ticker-item">None</span><span class="ticker-dot"></span>
+      <!-- Duplicated for seamless loop -->
+      <span class="ticker-item">def</span><span class="ticker-dot"></span>
+      <span class="ticker-item">return</span><span class="ticker-dot"></span>
+      <span class="ticker-item">parameters</span><span class="ticker-dot"></span>
+      <span class="ticker-item">arguments</span><span class="ticker-dot"></span>
+      <span class="ticker-item">default values</span><span class="ticker-dot"></span>
+      <span class="ticker-item">None</span><span class="ticker-dot"></span>
+    </div>
+  </div><br>
+
+  <!-- ═══ FEATURES ═══ -->
+  <section class="section" id="functions-intro">
+
+    <div class="feature reveal">
+      <div class="feature-visual-code">
+        <div class="code-block"><pre><code><span class="tok-fn">def</span> greet():
+    <span class="tok-fn">print</span>(<span class="tok-str">'Hello there!'</span>)
+
+greet()  <span class="tok-com"># Hello there!</span></code></pre></div>
+      </div>
+      <div class="feature-content">
+        <div class="feature-number">01</div>
+        <p class="section-tag">Functions</p>
+        <h2 class="section-title">What Is a <strong>Function?</strong></h2>
+        <p class="section-body">
+          A function is a piece of code that you give a name to, so you can use it again and again. You create it once using the word <strong>def</strong>. After that, you can run it anytime just by typing its name followed by parentheses <strong>( )</strong>.
+        </p>
+        <p class="section-body">
+          Just like an <strong>if</strong> block, a function needs a colon <strong>( : )</strong> and indented lines below it. But here's the important part: writing the function does not run it. Python only runs the code inside when you actually <em>call</em> the function by its name.
+        </p>
+      </div>
+    </div>
+
+    <div class="feature-content2">
+      <p class="section-body2">
+        This is what makes functions so useful. You write the code one time. Then you can use it again and again, anywhere in your program, without typing it out every time.
+      </p>
+      <br>
+      <div class="code-block"><pre><code><span class="tok-fn">def</span> greet():
+    <span class="tok-fn">print</span>(<span class="tok-str">'Hello there!'</span>)
+
+greet()  <span class="tok-com"># Hello there!</span>
+greet()  <span class="tok-com"># Hello there!</span></code></pre></div>
+      <br>
+      <p class="section-body2">
+        Every time you call <strong style="color: #0e578c">greet()</strong>, Python runs those same two lines again from the top.
+      </p>
+    </div>
+
+    <br><br><br><hr><br><br>
+
+    <div class="feature reverse reveal" id="parameters">
+      <div class="feature-visual-code">
+        <div class="code-block"><pre><code><span class="tok-fn">def</span> greet(name):
+    <span class="tok-fn">print</span>(<span class="tok-str">'Hello, '</span> + name + <span class="tok-str">'!'</span>)
+
+greet(<span class="tok-str">'Maria'</span>)  <span class="tok-com"># Hello, Maria!</span>
+greet(<span class="tok-str">'Sam'</span>)    <span class="tok-com"># Hello, Sam!</span></code></pre></div>
+      </div>
+      <div class="feature-content">
+        <div class="feature-number">02</div>
+        <p class="section-tag">Passing Inputs</p>
+        <h2 class="section-title">How Do You Pass <strong>Inputs with Parameters?</strong></h2>
+        <p class="section-body">
+          A <strong>parameter</strong> is like an empty box inside the function's parentheses, waiting for a value. When you call the function, you put a real value into that box &mdash; this value is called an <strong>argument</strong>. Python uses that value only while the function is running.
+        </p>
+      </div>
+    </div>
+
+    <div class="feature-content2">
+      <p class="section-body2">
+        A function can have more than one parameter &mdash; just separate them with commas. Python fills them in order: the first value you give becomes the first parameter, the second value becomes the second parameter, and so on.
+      </p>
+      <br>
+      <div class="code-block"><pre><code><span class="tok-fn">def</span> add(a, b):
+    <span class="tok-fn">print</span>(a + b)
+
+add(<span class="tok-num">3</span>, <span class="tok-num">4</span>)   <span class="tok-com"># 7</span>
+add(<span class="tok-num">10</span>, <span class="tok-num">5</span>)  <span class="tok-com"># 15</span></code></pre></div>
+    </div>
+
+    <br><br><br><hr><br><br>
+
+    <div class="feature reveal" id="defaults">
+      <div class="feature-visual-code">
+        <div class="code-block"><pre><code><span class="tok-fn">def</span> greet(name, greeting=<span class="tok-str">'Hello'</span>):
+    <span class="tok-fn">print</span>(greeting + <span class="tok-str">', '</span> + name + <span class="tok-str">'!'</span>)
+
+greet(<span class="tok-str">'Maria'</span>)         <span class="tok-com"># Hello, Maria!</span>
+greet(<span class="tok-str">'Sam'</span>, <span class="tok-str">'Hey'</span>)    <span class="tok-com"># Hey, Sam!</span></code></pre></div>
+      </div>
+      <div class="feature-content">
+        <div class="feature-number">03</div>
+        <p class="section-tag">Optional Inputs</p>
+        <h2 class="section-title">What Are <strong>Default Parameter Values?</strong></h2>
+        <p class="section-body">
+          Writing <strong>greeting='Hello'</strong> gives that parameter a starting value, called a <strong>default value</strong>. If you don't give your own value when calling the function, Python automatically uses 'Hello' instead. This makes that parameter optional &mdash; you can skip it if you want.
+        </p>
+      </div>
+    </div>
+
+    <div class="feature-content2">
+      <p class="section-body2">
+        You can also call a function by writing <strong style="color: #0e578c">name=value</strong>, like <strong style="color: #0e578c">greeting='Yo'</strong>. These are called <strong style="color: #0e578c">keyword arguments</strong>. You can write them in any order you like, because Python matches them by name, not by position. This makes your code easier to read, especially when a function has several parameters.
+      </p>
+      <br>
+      <div class="code-block"><pre><code><span class="tok-fn">def</span> greet(name, greeting=<span class="tok-str">'Hello'</span>):
+    <span class="tok-fn">print</span>(greeting + <span class="tok-str">', '</span> + name + <span class="tok-str">'!'</span>)
+
+greet(name=<span class="tok-str">'Alex'</span>, greeting=<span class="tok-str">'Yo'</span>)  <span class="tok-com"># Yo, Alex!</span>
+greet(greeting=<span class="tok-str">'Yo'</span>, name=<span class="tok-str">'Alex'</span>)  <span class="tok-com"># Yo, Alex! (order doesn't matter here)</span></code></pre></div>
+    </div>
+
+    <br><br><br><hr><br><br>
+
+    <div class="feature reverse reveal" id="return-values">
+      <div class="feature-visual-code">
+        <div class="code-block"><pre><code><span class="tok-fn">def</span> add(a, b):
+    <span class="tok-fn">return</span> a + b
+
+result = add(<span class="tok-num">3</span>, <span class="tok-num">4</span>)
+<span class="tok-fn">print</span>(result)  <span class="tok-com"># 7</span></code></pre></div>
+      </div>
+      <div class="feature-content">
+        <div class="feature-number">04</div>
+        <p class="section-tag">Sending Results Back</p>
+        <h2 class="section-title">How Do You <strong>Return a Value?</strong></h2>
+        <p class="section-body">
+          <strong>print()</strong> only shows a value on the screen &mdash; it does not give that value back to your program to use later. <strong>return</strong> is different: it sends the value back to wherever you called the function, so you can save it in a variable and use it again.
+        </p>
+      </div>
+    </div>
+
+    <div class="feature-content2">
+      <p class="section-body2">
+        Here's a clear example of the difference. If a function has no <strong style="color: #0e578c">return</strong> line at all, Python gives you back a special empty value called <strong style="color: #0e578c">None</strong> &mdash; even if the function printed something while it was running.
+      </p>
+      <br>
+      <div class="code-block"><pre><code><span class="tok-fn">def</span> add_print(a, b):
+    <span class="tok-fn">print</span>(a + b)
+
+<span class="tok-fn">def</span> add_return(a, b):
+    <span class="tok-fn">return</span> a + b
+
+output_print = add_print(<span class="tok-num">3</span>, <span class="tok-num">4</span>)    <span class="tok-com"># prints 7 immediately</span>
+output_return = add_return(<span class="tok-num">3</span>, <span class="tok-num">4</span>)  <span class="tok-com"># prints nothing here</span>
+
+<span class="tok-fn">print</span>(output_print)   <span class="tok-com"># None</span>
+<span class="tok-fn">print</span>(output_return)  <span class="tok-com"># 7</span></code></pre></div>
+      <br>
+      <p class="section-body2">
+        A function can also send back more than one value at the same time. Python groups those values together into something called a <strong style="color: #0e578c">tuple</strong>. You can then split that tuple into separate variables, right when you call the function.
+      </p>
+      <br>
+      <div class="code-block"><pre><code><span class="tok-fn">def</span> get_min_max(numbers):
+    <span class="tok-fn">return</span> <span class="tok-fn">min</span>(numbers), <span class="tok-fn">max</span>(numbers)
+
+lowest, highest = get_min_max([<span class="tok-num">4</span>, <span class="tok-num">9</span>, <span class="tok-num">1</span>, <span class="tok-num">7</span>])
+
+<span class="tok-fn">print</span>(lowest)   <span class="tok-com"># 1</span>
+<span class="tok-fn">print</span>(highest)  <span class="tok-com"># 9</span></code></pre></div>
+    </div>
+
+    <br><br><br><hr><br><br>
+
+    <div class="feature reveal" id="putting-together">
+      <div class="feature-visual-code">
+        <div class="code-block"><pre><code><span class="tok-fn">def</span> check_grade(score):
+    <span class="tok-fn">if</span> score &gt;= <span class="tok-num">90</span>:
+        <span class="tok-fn">return</span> <span class="tok-str">'A'</span>
+    <span class="tok-fn">elif</span> score &gt;= <span class="tok-num">80</span>:
+        <span class="tok-fn">return</span> <span class="tok-str">'B'</span>
+    <span class="tok-fn">elif</span> score &gt;= <span class="tok-num">70</span>:
+        <span class="tok-fn">return</span> <span class="tok-str">'C'</span>
+    <span class="tok-fn">else</span>:
+        <span class="tok-fn">return</span> <span class="tok-str">'F'</span>
+
+grade = check_grade(<span class="tok-num">85</span>)
+<span class="tok-fn">print</span>(grade)  <span class="tok-com"># B</span></code></pre></div>
+      </div>
+      <div class="feature-content">
+        <div class="feature-number">05</div>
+        <p class="section-tag">Putting It Together</p>
+        <h2 class="section-title">Combining <strong>Functions, Parameters & Conditions</strong></h2>
+        <p class="section-body">
+          This function takes <strong>score</strong> as a parameter. Inside, it uses the same <strong>if / elif / else</strong> steps from Week 3 to check the score. Instead of printing the grade right away, it <strong>returns</strong> the grade &mdash; so whoever calls the function gets to decide what to do with the result: print it, save it, or use it somewhere else.
+        </p>
+      </div>
+    </div>
+
+    <div class="feature-content2">
+      <p class="section-body2">
+        Now let's use it with real <strong style="color: #0e578c">input()</strong> from Week 3. We turn the text the user types into a number, then pass that number into the function as an argument:
+      </p>
+      <br>
+      <div class="code-block"><pre><code><span class="tok-fn">def</span> check_grade(score):
+    <span class="tok-fn">if</span> score &gt;= <span class="tok-num">90</span>:
+        <span class="tok-fn">return</span> <span class="tok-str">'A'</span>
+    <span class="tok-fn">elif</span> score &gt;= <span class="tok-num">80</span>:
+        <span class="tok-fn">return</span> <span class="tok-str">'B'</span>
+    <span class="tok-fn">elif</span> score &gt;= <span class="tok-num">70</span>:
+        <span class="tok-fn">return</span> <span class="tok-str">'C'</span>
+    <span class="tok-fn">else</span>:
+        <span class="tok-fn">return</span> <span class="tok-str">'F'</span>
+
+score_input = <span class="tok-fn">input</span>(<span class="tok-str">'Enter your test score: '</span>)
+grade = check_grade(<span class="tok-fn">int</span>(score_input))
+<span class="tok-fn">print</span>(<span class="tok-str">'Grade:'</span>, grade)
+
+<span class="tok-com"># Example run:</span>
+<span class="tok-com"># Enter your test score: 85</span>
+<span class="tok-com"># Grade: B</span></code></pre></div>
+    </div>
+
+  </section>
+
+
+
+  <div class="silk-divider reveal"></div>
+
+  <!-- ═══ TESTIMONIALS ═══ -->
+  <section class="section section-center" id="testimonials">
+    <p class="section-tag reveal">Quote for YOU!</p>
+    <h2 class="section-title reveal reveal-d1">Keep Learning <strong>no matter how hard it is.</strong></h2>
+
+    <div class="testimonials-grid">
+      <div class="testimonial-card reveal reveal-d1">
+        <p class="testimonial-quote">
+          "It's not about how hard you can hit, it's about how much you can take, and keep moving forward anyway. 
+          That's how wining is done."
+        </p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">RB</div>
+          <div>
+            <div class="testimonial-name">Rocky Balboa</div>
+            <div class="testimonial-role">Rocky</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card reveal reveal-d2">
+        <p class="testimonial-quote">
+          "Do, or do not. There's no such thing as almost — commit fully, or don't start at all."
+        </p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">YD</div>
+          <div>
+            <div class="testimonial-name">Yoda</div>
+            <div class="testimonial-role">Star Wars</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card reveal reveal-d3">
+        <p class="testimonial-quote">
+          "It's not that I'm so smart, it's just that I stay with problems longer."
+        </p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">AE</div>
+          <div>
+            <div class="testimonial-name">Elbert Einstein</div>
+            <div class="testimonial-role">Father of Modern Physics, Theory of Relativity</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="silk-divider reveal">
+    <!-- From Uiverse.io by BHARGAVPATEL1244 --> 
+<!-- From Uiverse.io by Gaurav-WebDev --> 
+<button class="button type1" onclick="window.location.href='Week5_Lists_Loops.html'">
+</button>
+  </div>
+
+  <!-- ═══ FOOTER CTA ═══ -->
+  <section class="footer-cta" id="cta">
+  <div class="footer-bar reveal reveal-d4" style="margin-top: 80px;">
+    <ul class="footer-links">
+      <li><a href="../../Variables.html">Week 1</a></li>
+      <li><a href="Number&Math_Operations.html">Week 2</a></li>
+      <li><a href="Week3_Conditions.html">Week 3</a></li>
+      <li><a href="#">Week 4</a></li>
+      <li><a href="Week5_Lists_Loops.html">Week 5</a></li>
+      <li><a href="Week6_Dictionaries_Errors.html">Week 6</a></li>
+      <li><a href="Week7_Classes_Objects.html">Week 7</a></li>
+      <li><a href="Week8_Inheritance.html">Week 8</a></li>
+      <li><a href="Week9_AI_Prompting.html">Week 9</a></li>
+    </ul>
+  </div>
+</section>
+
+</main>
+
+<script src="templatemo-621-luminary-script.js"></script>
+</body>
+</html>

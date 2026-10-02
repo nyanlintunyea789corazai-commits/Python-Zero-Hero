@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 7 — Introduction to Classes & Objects</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="templatemo-621-luminary-style.css">
+<!--
+TemplateMo 621 Luminary
+https://templatemo.com/tm-621-luminary
+-->
+</head>
+<style>
+  /* From Uiverse.io by Gaurav-WebDev */ 
+.button {
+  height: 50px;
+  width: 150px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.5s ease-in-out;
+}
+
+.button:hover {
+  box-shadow: .5px .5px 150px #252525;
+}
+
+.type1::after {
+  content: "Chapter";
+  height: 50px;
+  width: 150px;
+  background-color: #008080;
+  color: #fff;
+  position: absolute;
+  top: 0%;
+  left: 0%;
+  transform: translateY(50px);
+  font-size: 1.2rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.5s ease-in-out;
+}
+
+.type1::before {
+  content: "Next";
+  height: 50px;
+  width: 150px;
+  background-color: #fff;
+  color: #008080;
+  position: absolute;
+  top: 0%;
+  left: 0%;
+  transform: translateY(0px) scale(1.2);
+  font-size: 1.2rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.5s ease-in-out;
+}
+
+.type1:hover::after {
+  transform: translateY(0) scale(1.2);
+}
+
+.type1:hover::before {
+  transform: translateY(-50px) scale(0) rotate(120deg);
+}
+</style>
+<body>
+
+<svg class="grain" width="100%" height="100%">
+  <filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="5" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter>
+  <rect width="100%" height="100%" filter="url(#n)"/>
+</svg>
+<div class="atmosphere"></div>
+
+<!-- Nav -->
+<nav class="top-nav" id="topNav">
+  <a href="#" class="nav-brand">Week 7 &<span>Classes & Objects</span></a>
+  <ul class="nav-links">
+    <li><a href="#classes-intro">Classes</a></li>
+    <li><a href="#init-method">__init__</a></li>
+    <li><a href="#multiple-objects">Objects</a></li>
+    <li><a href="#methods">Methods</a></li>
+    <li><a href="#putting-together">Putting It Together</a></li>
+  </ul>
+  <a href="#classes-intro" class="nav-cta">Get Started</a>
+  <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+    <span class="toggle-bar"></span><span class="toggle-bar"></span>
+  </button>
+</nav>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <div class="mobile-menu-inner">
+    <div class="mobile-menu-links">
+      <a href="#classes-intro" class="mobile-menu-link" data-index="01">Classes</a>
+      <a href="#init-method" class="mobile-menu-link" data-index="02">__init__</a>
+      <a href="#multiple-objects" class="mobile-menu-link" data-index="03">Objects</a>
+      <a href="#methods" class="mobile-menu-link" data-index="04">Methods</a>
+      <a href="#putting-together" class="mobile-menu-link" data-index="05">Putting It Together</a>
+    </div>
+  </div>
+</div>
+
+<!-- Side Panels -->
+<nav class="side-panel left" aria-label="Scroll indicators">
+  <span class="side-label">Scroll</span>
+  <div class="side-track"><div class="side-track-fill" id="leftTrack"></div></div>
+  <div class="side-dot active"></div>
+  <div class="side-dot"></div>
+  <div class="side-dot"></div>
+  <div class="side-dot"></div>
+  <div class="side-dot"></div>
+  <div class="side-dot"></div>
+  <div class="side-readout" id="scrollPct">00</div>
+</nav>
+
+<nav class="side-panel right" aria-label="Status indicators">
+  <span class="side-label">Python</span>
+  <div class="side-track"><div class="side-track-fill" id="rightTrack"></div></div>
+  <div class="side-dot"></div>
+  <div class="side-dot"></div>
+  <div class="side-dot active"></div>
+  <div class="side-dot"></div>
+  <div class="side-dot"></div>
+  <div class="side-dot"></div>
+  <div class="side-readout">Python</div>
+</nav>
+
+<main class="main">
+
+  <!-- ═══ HERO ═══ -->
+  <section class="hero" id="hero">
+    <div class="hero-grid"></div>
+    <div class="hero-badge">
+      <div class="hero-badge-dot"></div>
+      <span>Blueprints for Code!</span>
+    </div>
+    <h1>Classes<br><em>& Objects</em></h1>
+    <p class="hero-sub">
+      In this lesson, you'll learn how to model real-world things in code using <strong>classes</strong>. You'll build a blueprint with the <strong>__init__</strong> method, give it <strong>attributes</strong> to hold data, and give it <strong>methods</strong> to perform actions.
+    </p>
+    <div class="hero-ctas">
+      <a href="#classes-intro" class="btn-primary">Get Start</a>
+    </div>
+    <div class="hero-metrics">
+      <div class="metric">
+        <div class="metric-value"><span class="counter" data-target="1" data-decimals="0">0</span></div>
+        <div class="metric-label">Blueprint, Many Objects</div>
+      </div>
+      <div class="metric">
+        <div class="metric-value"><span class="counter" data-target="1" data-decimals="0">0</span></div>
+        <div class="metric-label">Method That Runs Automatically</div>
+      </div>
+      <div class="metric">
+        <div class="metric-value"><span class="counter" data-target="4" data-decimals="0">0</span></div>
+        <div class="metric-label">Letters in self</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ LOGO TICKER ═══ -->
+  <div class="logo-ticker reveal">
+    <div class="logo-ticker-label">Classes & Objects Toolkit</div>
+    <div class="ticker-track" id="tickerTrack">
+      <span class="ticker-item">class</span><span class="ticker-dot"></span>
+      <span class="ticker-item">__init__</span><span class="ticker-dot"></span>
+      <span class="ticker-item">self</span><span class="ticker-dot"></span>
+      <span class="ticker-item">attribute</span><span class="ticker-dot"></span>
+      <span class="ticker-item">method</span><span class="ticker-dot"></span>
+      <span class="ticker-item">object</span><span class="ticker-dot"></span>
+      <!-- Duplicated for seamless loop -->
+      <span class="ticker-item">class</span><span class="ticker-dot"></span>
+      <span class="ticker-item">__init__</span><span class="ticker-dot"></span>
+      <span class="ticker-item">self</span><span class="ticker-dot"></span>
+      <span class="ticker-item">attribute</span><span class="ticker-dot"></span>
+      <span class="ticker-item">method</span><span class="ticker-dot"></span>
+      <span class="ticker-item">object</span><span class="ticker-dot"></span>
+    </div>
+  </div><br>
+
+  <!-- ═══ FEATURES ═══ -->
+  <section class="section" id="classes-intro">
+
+    <div class="feature reveal">
+      <div class="feature-visual-code">
+        <div class="code-block"><pre><code><span class="tok-fn">class</span> Dog:
+    <span class="tok-fn">pass</span>
+
+my_dog = Dog()
+
+<span class="tok-fn">print</span>(<span class="tok-fn">type</span>(my_dog))  <span class="tok-com"># &lt;class '__main__.Dog'&gt;</span></code></pre></div>
+      </div>
+      <div class="feature-content">
+        <div class="feature-number">01</div>
+        <p class="section-tag">Classes</p>
+        <h2 class="section-title">What Is a <strong>Class?</strong></h2>
+        <p class="section-body">
+          A class is a blueprint for creating things. It doesn't hold any real data on its own &mdash; it just describes what every thing made from it will look like.
+        </p>
+        <p class="section-body">
+          Think of a cookie cutter shaped like a dog. The cutter itself isn't a cookie &mdash; but you can use it to stamp out as many dog-shaped cookies as you like. A class works the same way: you define it once with the <strong>class</strong> keyword, then use it to create real objects.
+        </p>
+      </div>
+    </div>
+
+    <div class="feature-content2">
+      <p class="section-body2">
+        Here, <strong style="color: #0e578c">class Dog:</strong> creates the blueprint. Writing <strong>pass</strong> just means "there's nothing here yet" &mdash; it's a placeholder so the class has a body. Then <strong style="color: #0e578c">Dog()</strong> uses that blueprint to create an actual object, which we save in the variable <strong>my_dog</strong>.
+      </p>
+      <br>
+      <p class="section-body2">
+        Notice the class name, <strong style="color: #0e578c">Dog</strong>, starts with a capital letter. That's a Python convention &mdash; not a rule, but nearly every Python programmer follows it, so class names are easy to spot at a glance.
+      </p>
+    </div>
+
+    <br><br><br><hr><br><br>
+
+    <div class="feature reverse reveal" id="init-method">
+      <div class="feature-visual-code">
+        <div class="code-block"><pre><code><span class="tok-fn">class</span> Dog:
+    <span class="tok-fn">def</span> __init__(self, name, breed):
+        self.name = name
+        self.breed = breed
+
+my_dog = Dog(<span class="tok-str">'Rex'</span>, <span class="tok-str">'Labrador'</span>)
+
+<span class="tok-fn">print</span>(my_dog.name)   <span class="tok-com"># Rex</span>
+<span class="tok-fn">print</span>(my_dog.breed)  <span class="tok-com"># Labrador</span></code></pre></div>
+      </div>
+      <div class="feature-content">
+        <div class="feature-number">02</div>
+        <p class="section-tag">The Constructor</p>
+        <h2 class="section-title">What Does <strong>__init__ Do?</strong></h2>
+        <p class="section-body">
+          <strong>__init__</strong> is a special method that runs automatically every time you create a new object from a class. It's the perfect place to set up the object's starting data, called its <strong>attributes</strong>.
+        </p>
+        <p class="section-body">
+          Inside, <strong>self.name = name</strong> stores the value on the object itself, as an attribute. Once it's stored, you can read it anytime with dot notation, like <strong>my_dog.name</strong>.
+        </p>
+      </div>
+    </div>
+
+    <div class="feature-content2">
+      <p class="section-body2">
+        <strong style="color: #0e578c">self</strong> always refers to "this particular object" &mdash; the one being created or used right now. Every method inside a class starts with <strong style="color: #0e578c">self</strong> as its first parameter, but you never type it in yourself when calling the method. Python fills it in automatically.
+      </p>
+      <br>
+      <p class="section-body2">
+        That's why <strong style="color: #0e578c">__init__(self, name, breed)</strong> takes three parameters, but <strong style="color: #0e578c">Dog('Rex', 'Labrador')</strong> is only called with two values. Python quietly passes the new object in as <strong>self</strong> &mdash; you only supply <strong>name</strong> and <strong>breed</strong>.
+      </p>
+    </div>
+
+    <br><br><br><hr><br><br>
+
+    <div class="feature reveal" id="multiple-objects">
+      <div class="feature-visual-code">
+        <div class="code-block"><pre><code><span class="tok-fn">class</span> Dog:
+    <span class="tok-fn">def</span> __init__(self, name, breed):
+        self.name = name
+        self.breed = breed
+
+dog1 = Dog(<span class="tok-str">'Rex'</span>, <span class="tok-str">'Labrador'</span>)
+dog2 = Dog(<span class="tok-str">'Bella'</span>, <span class="tok-str">'Poodle'</span>)
+
+<span class="tok-fn">print</span>(dog1.name)  <span class="tok-com"># Rex</span>
+<span class="tok-fn">print</span>(dog2.name)  <span class="tok-com"># Bella</span></code></pre></div>
+      </div>
+      <div class="feature-content">
+        <div class="feature-number">03</div>
+        <p class="section-tag">One Blueprint, Many Objects</p>
+        <h2 class="section-title">How Do You <strong>Create Multiple Objects?</strong></h2>
+        <p class="section-body">
+          Every time you call <strong>Dog(...)</strong>, Python builds a brand new object with its own separate set of attributes. <strong>dog1</strong> and <strong>dog2</strong> are two completely different objects, even though they came from the exact same class.
+        </p>
+      </div>
+    </div>
+
+    <div class="feature-content2">
+      <p class="section-body2">
+        You can also change an attribute after the object already exists, using dot notation and <strong style="color: #0e578c">=</strong> &mdash; just like updating a value in a dictionary.
+      </p>
+      <br>
+      <div class="code-block"><pre><code><span class="tok-fn">class</span> Dog:
+    <span class="tok-fn">def</span> __init__(self, name, breed):
+        self.name = name
+        self.breed = breed
+
+dog1 = Dog(<span class="tok-str">'Rex'</span>, <span class="tok-str">'Labrador'</span>)
+dog2 = Dog(<span class="tok-str">'Bella'</span>, <span class="tok-str">'Poodle'</span>)
+
+dog1.name = <span class="tok-str">'Max'</span>
+
+<span class="tok-fn">print</span>(dog1.name)  <span class="tok-com"># Max</span>
+<span class="tok-fn">print</span>(dog2.name)  <span class="tok-com"># Bella</span></code></pre></div>
+      <br>
+      <p class="section-body2">
+        Changing <strong style="color: #0e578c">dog1.name</strong> only affects <strong>dog1</strong>. <strong>dog2</strong> is a separate object with its own <strong>name</strong> attribute, so it's completely unaffected.
+      </p>
+    </div>
+
+    <br><br><br><hr><br><br>
+
+    <div class="feature reverse reveal" id="methods">
+      <div class="feature-visual-code">
+        <div class="code-block"><pre><code><span class="tok-fn">class</span> Dog:
+    <span class="tok-fn">def</span> __init__(self, name, breed):
+        self.name = name
+        self.breed = breed
+
+    <span class="tok-fn">def</span> bark(self):
+        <span class="tok-fn">print</span>(self.name + <span class="tok-str">' says Woof!'</span>)
+
+my_dog = Dog(<span class="tok-str">'Rex'</span>, <span class="tok-str">'Labrador'</span>)
+my_dog.bark()  <span class="tok-com"># Rex says Woof!</span></code></pre></div>
+      </div>
+      <div class="feature-content">
+        <div class="feature-number">04</div>
+        <p class="section-tag">Basic Actions</p>
+        <h2 class="section-title">How Do You Give an Object <strong>Actions?</strong></h2>
+        <p class="section-body">
+          A <strong>method</strong> is simply a function defined inside a class. Like <strong>__init__</strong>, every method automatically receives <strong>self</strong> as its first parameter, which is how it reaches the object's own attributes &mdash; here, <strong>self.name</strong>.
+        </p>
+        <p class="section-body">
+          You call a method the same way you access an attribute, with a dot, followed by parentheses: <strong>my_dog.bark()</strong>.
+        </p>
+      </div>
+    </div>
+
+    <div class="feature-content2">
+      <p class="section-body2">
+        A method can also change an object's attributes, not just read them. Here, <strong style="color: #0e578c">have_birthday()</strong> updates <strong style="color: #0e578c">self.age</strong> using <strong>+=</strong> (from Week 2), and uses <strong>str()</strong> (from Week 1) to turn that number into text so it can be joined into a sentence.
+      </p>
+      <br>
+      <div class="code-block"><pre><code><span class="tok-fn">class</span> Dog:
+    <span class="tok-fn">def</span> __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+    <span class="tok-fn">def</span> have_birthday(self):
+        self.age += <span class="tok-num">1</span>
+        <span class="tok-fn">print</span>(self.name + <span class="tok-str">' is now '</span> + <span class="tok-fn">str</span>(self.age) + <span class="tok-str">' years old.'</span>)
+
+my_dog = Dog(<span class="tok-str">'Rex'</span>, <span class="tok-num">3</span>)
+my_dog.have_birthday()  <span class="tok-com"># Rex is now 4 years old.</span></code></pre></div>
+      <br>
+      <p class="section-body2">
+        Each time you call <strong style="color: #0e578c">my_dog.have_birthday()</strong>, <strong>self.age</strong> permanently increases by one on that object &mdash; the change sticks around for as long as the object exists.
+      </p>
+    </div>
+
+    <br><br><br><hr><br><br>
+
+    <div class="feature reveal" id="putting-together">
+      <div class="feature-visual-code">
+        <div class="code-block"><pre><code><span class="tok-fn">class</span> Dog:
+    <span class="tok-fn">def</span> __init__(self, name, breed):
+        self.name = name
+        self.breed = breed
+
+    <span class="tok-fn">def</span> bark(self):
+        <span class="tok-fn">print</span>(self.name + <span class="tok-str">' says Woof!'</span>)
+
+dogs = [Dog(<span class="tok-str">'Rex'</span>, <span class="tok-str">'Labrador'</span>), Dog(<span class="tok-str">'Bella'</span>, <span class="tok-str">'Poodle'</span>), Dog(<span class="tok-str">'Max'</span>, <span class="tok-str">'Beagle'</span>)]
+
+<span class="tok-fn">for</span> dog <span class="tok-fn">in</span> dogs:
+    dog.bark()
+
+<span class="tok-com"># Rex says Woof!</span>
+<span class="tok-com"># Bella says Woof!</span>
+<span class="tok-com"># Max says Woof!</span></code></pre></div>
+      </div>
+      <div class="feature-content">
+        <div class="feature-number">05</div>
+        <p class="section-tag">Putting It Together</p>
+        <h2 class="section-title">Combining <strong>Classes with Lists & Loops</strong></h2>
+        <p class="section-body">
+          Objects can live inside a <strong>list</strong>, just like numbers or text (from Week 5). Here, <strong>dogs</strong> holds three separate <strong>Dog</strong> objects. The <strong>for</strong> loop visits each one and calls <strong>.bark()</strong> on it, so every dog gets to bark in turn.
+        </p>
+      </div>
+    </div>
+
+    <div class="feature-content2">
+      <p class="section-body2">
+        Let's combine attributes, a method, a list, and a loop into one final example &mdash; a class with three attributes and a method that describes the object using all of them:
+      </p>
+      <br>
+      <div class="code-block"><pre><code><span class="tok-fn">class</span> Dog:
+    <span class="tok-fn">def</span> __init__(self, name, breed, age):
+        self.name = name
+        self.breed = breed
+        self.age = age
+
+    <span class="tok-fn">def</span> describe(self):
+        <span class="tok-fn">print</span>(self.name + <span class="tok-str">' is a '</span> + <span class="tok-fn">str</span>(self.age) + <span class="tok-str">'-year-old '</span> + self.breed + <span class="tok-str">'.'</span>)
+
+dogs = [Dog(<span class="tok-str">'Rex'</span>, <span class="tok-str">'Labrador'</span>, <span class="tok-num">3</span>), Dog(<span class="tok-str">'Bella'</span>, <span class="tok-str">'Poodle'</span>, <span class="tok-num">5</span>)]
+
+<span class="tok-fn">for</span> dog <span class="tok-fn">in</span> dogs:
+    dog.describe()
+
+<span class="tok-com"># Rex is a 3-year-old Labrador.</span>
+<span class="tok-com"># Bella is a 5-year-old Poodle.</span></code></pre></div>
+      <br>
+      <p class="section-body2">
+        Each <strong style="color: #0e578c">Dog</strong> object keeps track of its own <strong>name</strong>, <strong>breed</strong>, and <strong>age</strong>. The loop doesn't need to know any of those details in advance &mdash; it just asks each object to describe itself, and every object knows how.
+      </p>
+    </div>
+
+  </section>
+
+
+
+  <div class="silk-divider reveal"></div>
+
+  <!-- ═══ TESTIMONIALS ═══ -->
+  <section class="section section-center" id="testimonials">
+    <p class="section-tag reveal">Quote for YOU!</p>
+    <h2 class="section-title reveal reveal-d1">Keep Learning <strong>no matter how hard it is.</strong></h2>
+
+    <div class="testimonials-grid">
+      <div class="testimonial-card reveal reveal-d1">
+        <p class="testimonial-quote">
+          "It's not about how hard you can hit, it's about how much you can take, and keep moving forward anyway. 
+          That's how wining is done."
+        </p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">RB</div>
+          <div>
+            <div class="testimonial-name">Rocky Balboa</div>
+            <div class="testimonial-role">Rocky</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card reveal reveal-d2">
+        <p class="testimonial-quote">
+          "Do, or do not. There's no such thing as almost — commit fully, or don't start at all."
+        </p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">YD</div>
+          <div>
+            <div class="testimonial-name">Yoda</div>
+            <div class="testimonial-role">Star Wars</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card reveal reveal-d3">
+        <p class="testimonial-quote">
+          "It's not that I'm so smart, it's just that I stay with problems longer."
+        </p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">AE</div>
+          <div>
+            <div class="testimonial-name">Elbert Einstein</div>
+            <div class="testimonial-role">Father of Modern Physics, Theory of Relativity</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="silk-divider reveal">
+    <!-- From Uiverse.io by BHARGAVPATEL1244 --> 
+<!-- From Uiverse.io by Gaurav-WebDev --> 
+<button class="button type1" onclick="window.location.href='2107_new_spot/index.html'">
+</button>
+  </div>
+
+  <!-- ═══ FOOTER CTA ═══ -->
+  <section class="footer-cta" id="cta">
+  <div class="footer-bar reveal reveal-d4" style="margin-top: 80px;">
+    <ul class="footer-links">
+      <li><a href="../../Variables.html">Week 1</a></li>
+      <li><a href="Number&Math_Operations.html">Week 2</a></li>
+      <li><a href="Week3_Conditions.html">Week 3</a></li>
+      <li><a href="Week4_Functions.html">Week 4</a></li>
+      <li><a href="Week5_Lists_Loops.html">Week 5</a></li>
+      <li><a href="Week6_Dictionaries_Errors.html">Week 6</a></li>
+      <li><a href="#">Week 7</a></li>
+      <li><a href="Week8_Inheritance.html">Week 8</a></li>
+      <li><a href="Week9_AI_Prompting.html">Week 9</a></li>
+    </ul>
+  </div>
+</section>
+
+</main>
+
+<script src="templatemo-621-luminary-script.js"></script>
+</body>
+</html>

@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 8 — Building Flexible Systems with OOP</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="templatemo-621-luminary-style.css">
+<!--
+TemplateMo 621 Luminary
+https://templatemo.com/tm-621-luminary
+-->
+</head>
+<style>
+  /* From Uiverse.io by Gaurav-WebDev */ 
+.button {
+  height: 50px;
+  width: 150px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.5s ease-in-out;
+}
+
+.button:hover {
+  box-shadow: .5px .5px 150px #252525;
+}
+
+.type1::after {
+  content: "Chapter";
+  height: 50px;
+  width: 150px;
+  background-color: #008080;
+  color: #fff;
+  position: absolute;
+  top: 0%;
+  left: 0%;
+  transform: translateY(50px);
+  font-size: 1.2rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.5s ease-in-out;
+}
+
+.type1::before {
+  content: "Next";
+  height: 50px;
+  width: 150px;
+  background-color: #fff;
+  color: #008080;
+  position: absolute;
+  top: 0%;
+  left: 0%;
+  transform: translateY(0px) scale(1.2);
+  font-size: 1.2rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.5s ease-in-out;
+}
+
+.type1:hover::after {
+  transform: translateY(0) scale(1.2);
+}
+
+.type1:hover::before {
+  transform: translateY(-50px) scale(0) rotate(120deg);
+}
+</style>
+<body>
+
+<svg class="grain" width="100%" height="100%">
+  <filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="5" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter>
+  <rect width="100%" height="100%" filter="url(#n)"/>
+</svg>
+<div class="atmosphere"></div>
+
+<!-- Nav -->
+<nav class="top-nav" id="topNav">
+  <a href="#" class="nav-brand">Week 8 &<span>Flexible Systems</span></a>
+  <ul class="nav-links">
+    <li><a href="#inheritance-intro">Inheritance</a></li>
+    <li><a href="#overriding">Overriding</a></li>
+    <li><a href="#super-init">super()</a></li>
+    <li><a href="#combining-classes">Combining Classes</a></li>
+    <li><a href="#putting-together">Putting It Together</a></li>
+  </ul>
+  <a href="#inheritance-intro" class="nav-cta">Get Started</a>
+  <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+    <span class="toggle-bar"></span><span class="toggle-bar"></span>
+  </button>
+</nav>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <div class="mobile-menu-inner">
+    <div class="mobile-menu-links">
+      <a href="#inheritance-intro" class="mobile-menu-link" data-index="01">Inheritance</a>
+      <a href="#overriding" class="mobile-menu-link" data-index="02">Overriding</a>
+      <a href="#super-init" class="mobile-menu-link" data-index="03">super()</a>
+      <a href="#combining-classes" class="mobile-menu-link" data-index="04">Combining Classes</a>
+      <a href="#putting-together" class="mobile-menu-link" data-index="05">Putting It Together</a>
+    </div>
+  </div>
+</div>
+
+<!-- Side Panels -->
+<nav class="side-panel left" aria-label="Scroll indicators">
+  <span class="side-label">Scroll</span>
+  <div class="side-track"><div class="side-track-fill" id="leftTrack"></div></div>
+  <div class="side-dot active"></div>
+  <div class="side-dot"></div>
+  <div class="side-dot"></div>
+  <div class="side-dot"></div>
+  <div class="side-dot"></div>
+  <div class="side-dot"></div>
+  <div class="side-readout" id="scrollPct">00</div>
+</nav>
+
+<nav class="side-panel right" aria-label="Status indicators">
+  <span class="side-label">Python</span>
+  <div class="side-track"><div class="side-track-fill" id="rightTrack"></div></div>
+  <div class="side-dot"></div>
+  <div class="side-dot"></div>
+  <div class="side-dot active"></div>
+  <div class="side-dot"></div>
+  <div class="side-dot"></div>
+  <div class="side-dot"></div>
+  <div class="side-readout">Python</div>
+</nav>
+
+<main class="main">
+
+  <!-- ═══ HERO ═══ -->
+  <section class="hero" id="hero">
+    <div class="hero-grid"></div>
+    <div class="hero-badge">
+      <div class="hero-badge-dot"></div>
+      <span>Write Once, Reuse Often!</span>
+    </div>
+    <h1>Building Flexible<br><em>Systems with OOP</em></h1>
+    <p class="hero-sub">
+      In this lesson, you'll learn how classes can share code with each other using <strong>inheritance</strong>, how a child class can change what it inherits, and how to <strong>combine classes</strong> so that one object can hold other objects.
+    </p>
+    <div class="hero-ctas">
+      <a href="#inheritance-intro" class="btn-primary">Get Start</a>
+    </div>
+    <div class="hero-metrics">
+      <div class="metric">
+        <div class="metric-value"><span class="counter" data-target="2" data-decimals="0">0</span></div>
+        <div class="metric-label">Roles: Parent and Child</div>
+      </div>
+      <div class="metric">
+        <div class="metric-value"><span class="counter" data-target="1" data-decimals="0">0</span></div>
+        <div class="metric-label">Line Needed to Inherit</div>
+      </div>
+      <div class="metric">
+        <div class="metric-value"><span class="counter" data-target="0" data-decimals="0">0</span></div>
+        <div class="metric-label">Lines of Parent Code to Copy</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ LOGO TICKER ═══ -->
+  <div class="logo-ticker reveal">
+    <div class="logo-ticker-label">Flexible Systems Toolkit</div>
+    <div class="ticker-track" id="tickerTrack">
+      <span class="ticker-item">inheritance</span><span class="ticker-dot"></span>
+      <span class="ticker-item">parent class</span><span class="ticker-dot"></span>
+      <span class="ticker-item">child class</span><span class="ticker-dot"></span>
+      <span class="ticker-item">super()</span><span class="ticker-dot"></span>
+      <span class="ticker-item">overriding</span><span class="ticker-dot"></span>
+      <span class="ticker-item">is-a</span><span class="ticker-dot"></span>
+      <span class="ticker-item">has-a</span><span class="ticker-dot"></span>
+      <!-- Duplicated for seamless loop -->
+      <span class="ticker-item">inheritance</span><span class="ticker-dot"></span>
+      <span class="ticker-item">parent class</span><span class="ticker-dot"></span>
+      <span class="ticker-item">child class</span><span class="ticker-dot"></span>
+      <span class="ticker-item">super()</span><span class="ticker-dot"></span>
+      <span class="ticker-item">overriding</span><span class="ticker-dot"></span>
+      <span class="ticker-item">is-a</span><span class="ticker-dot"></span>
+      <span class="ticker-item">has-a</span><span class="ticker-dot"></span>
+    </div>
+  </div><br>
+
+  <!-- ═══ FEATURES ═══ -->
+  <section class="section" id="inheritance-intro">
+
+    <div class="feature reveal">
+      <div class="feature-visual-code">
+        <div class="code-block"><pre><code><span class="tok-fn">class</span> Animal:
+    <span class="tok-fn">def</span> __init__(self, name):
+        self.name = name
+
+    <span class="tok-fn">def</span> eat(self):
+        <span class="tok-fn">print</span>(self.name + <span class="tok-str">' is eating.'</span>)
+
+<span class="tok-fn">class</span> Dog(Animal):
+    <span class="tok-fn">pass</span>
+
+my_dog = Dog(<span class="tok-str">'Rex'</span>)
+
+<span class="tok-fn">print</span>(my_dog.name)  <span class="tok-com"># Rex</span>
+my_dog.eat()        <span class="tok-com"># Rex is eating.</span></code></pre></div>
+      </div>
+      <div class="feature-content">
+        <div class="feature-number">01</div>
+        <p class="section-tag">Inheritance</p>
+        <h2 class="section-title">What Is <strong>Inheritance?</strong></h2>
+        <p class="section-body">
+          Inheritance lets one class reuse the code of another class. The class you take code from is called the <strong>parent class</strong>. The new class is called the <strong>child class</strong>. The child gets everything the parent has &mdash; its attributes and its methods &mdash; without you writing them again.
+        </p>
+        <p class="section-body">
+          To make a child class, write the parent's name in parentheses after the child's name: <strong>class Dog(Animal):</strong>. The <strong>Dog</strong> class here is completely empty (<strong>pass</strong>, from Week 7), yet it can still use <strong>__init__</strong> and <strong>eat()</strong> from <strong>Animal</strong>.
+        </p>
+      </div>
+    </div>
+
+    <div class="feature-content2">
+      <p class="section-body2">
+        A dog is an animal, and so is a cat. Every animal has a name and can eat. So instead of writing that code again for each kind of animal, you write it <strong style="color: #0e578c">once</strong> in <strong style="color: #0e578c">Animal</strong>, and let every child class inherit it.
+      </p>
+      <br>
+      <div class="code-block"><pre><code><span class="tok-fn">class</span> Animal:
+    <span class="tok-fn">def</span> __init__(self, name):
+        self.name = name
+
+    <span class="tok-fn">def</span> eat(self):
+        <span class="tok-fn">print</span>(self.name + <span class="tok-str">' is eating.'</span>)
+
+<span class="tok-fn">class</span> Dog(Animal):
+    <span class="tok-fn">pass</span>
+
+<span class="tok-fn">class</span> Cat(Animal):
+    <span class="tok-fn">pass</span>
+
+dog = Dog(<span class="tok-str">'Rex'</span>)
+cat = Cat(<span class="tok-str">'Luna'</span>)
+
+dog.eat()  <span class="tok-com"># Rex is eating.</span>
+cat.eat()  <span class="tok-com"># Luna is eating.</span></code></pre></div>
+      <br>
+      <p class="section-body2">
+        This is the same idea as functions in Week 4 &mdash; write the code one time, then use it again and again &mdash; but now it works for whole classes.
+      </p>
+    </div>
+
+    <br><br><br><hr><br><br>
+
+    <div class="feature reverse reveal" id="overriding">
+      <div class="feature-visual-code">
+        <div class="code-block"><pre><code><span class="tok-fn">class</span> Animal:
+    <span class="tok-fn">def</span> __init__(self, name):
+        self.name = name
+
+    <span class="tok-fn">def</span> speak(self):
+        <span class="tok-fn">print</span>(self.name + <span class="tok-str">' makes a sound.'</span>)
+
+<span class="tok-fn">class</span> Dog(Animal):
+    <span class="tok-fn">def</span> speak(self):
+        <span class="tok-fn">print</span>(self.name + <span class="tok-str">' says Woof!'</span>)
+
+<span class="tok-fn">class</span> Cat(Animal):
+    <span class="tok-fn">def</span> speak(self):
+        <span class="tok-fn">print</span>(self.name + <span class="tok-str">' says Meow!'</span>)
+
+animal = Animal(<span class="tok-str">'Generic'</span>)
+dog = Dog(<span class="tok-str">'Rex'</span>)
+cat = Cat(<span class="tok-str">'Luna'</span>)
+
+animal.speak()  <span class="tok-com"># Generic makes a sound.</span>
+dog.speak()     <span class="tok-com"># Rex says Woof!</span>
+cat.speak()     <span class="tok-com"># Luna says Meow!</span></code></pre></div>
+      </div>
+      <div class="feature-content">
+        <div class="feature-number">02</div>
+        <p class="section-tag">Changing What You Inherit</p>
+        <h2 class="section-title">How Do You <strong>Override a Method?</strong></h2>
+        <p class="section-body">
+          Sometimes a child class needs to do something differently from its parent. If you write a method in the child class with the <strong>same name</strong> as a method in the parent, Python uses the child's version. This is called <strong>overriding</strong>.
+        </p>
+        <p class="section-body">
+          When you call <strong>dog.speak()</strong>, Python looks in <strong>Dog</strong> first. It finds <strong>speak()</strong> there, so it stops looking and runs that one. The plain <strong>Animal</strong> object has no child version, so it uses the parent's.
+        </p>
+      </div>
+    </div>
+
+    <div class="feature-content2">
+      <p class="section-body2">
+        A child only needs to override what it wants to change. Everything else is still inherited. Here, <strong style="color: #0e578c">Cat</strong> overrides <strong style="color: #0e578c">speak()</strong>, but <strong style="color: #0e578c">eat()</strong> still comes from <strong style="color: #0e578c">Animal</strong>.
+      </p>
+      <br>
+      <div class="code-block"><pre><code><span class="tok-fn">class</span> Animal:
+    <span class="tok-fn">def</span> __init__(self, name):
+        self.name = name
+
+    <span class="tok-fn">def</span> speak(self):
+        <span class="tok-fn">print</span>(self.name + <span class="tok-str">' makes a sound.'</span>)
+
+    <span class="tok-fn">def</span> eat(self):
+        <span class="tok-fn">print</span>(self.name + <span class="tok-str">' is eating.'</span>)
+
+<span class="tok-fn">class</span> Cat(Animal):
+    <span class="tok-fn">def</span> speak(self):
+        <span class="tok-fn">print</span>(self.name + <span class="tok-str">' says Meow!'</span>)
+
+cat = Cat(<span class="tok-str">'Luna'</span>)
+
+cat.speak()  <span class="tok-com"># Luna says Meow!</span>
+cat.eat()    <span class="tok-com"># Luna is eating.</span></code></pre></div>
+    </div>
+
+    <br><br><br><hr><br><br>
+
+    <div class="feature reveal" id="super-init">
+      <div class="feature-visual-code">
+        <div class="code-block"><pre><code><span class="tok-fn">class</span> Animal:
+    <span class="tok-fn">def</span> __init__(self, name):
+        self.name = name
+
+<span class="tok-fn">class</span> Dog(Animal):
+    <span class="tok-fn">def</span> __init__(self, name, breed):
+        <span class="tok-fn">super</span>().__init__(name)
+        self.breed = breed
+
+my_dog = Dog(<span class="tok-str">'Rex'</span>, <span class="tok-str">'Labrador'</span>)
+
+<span class="tok-fn">print</span>(my_dog.name)   <span class="tok-com"># Rex</span>
+<span class="tok-fn">print</span>(my_dog.breed)  <span class="tok-com"># Labrador</span></code></pre></div>
+      </div>
+      <div class="feature-content">
+        <div class="feature-number">03</div>
+        <p class="section-tag">Adding New Attributes</p>
+        <h2 class="section-title">What Does <strong>super() Do?</strong></h2>
+        <p class="section-body">
+          What if a child class needs an extra attribute, like <strong>breed</strong>? Then it needs its own <strong>__init__</strong>. But a child's <strong>__init__</strong> <em>replaces</em> the parent's, just like overriding &mdash; so the parent's <strong>__init__</strong> no longer runs by itself.
+        </p>
+        <p class="section-body">
+          <strong>super()</strong> gives you a way to reach the parent class. Writing <strong>super().__init__(name)</strong> runs the parent's <strong>__init__</strong>, so you don't have to repeat <strong>self.name = name</strong>.
+        </p>
+      </div>
+    </div>
+
+    <div class="feature-content2">
+      <p class="section-body2">
+        Now every <strong style="color: #0e578c">Dog</strong> has both a <strong style="color: #0e578c">name</strong> (set by the parent) and a <strong style="color: #0e578c">breed</strong> (set by the child). Notice you don't type <strong>self</strong> inside <strong>super().__init__(name)</strong> &mdash; Python passes it for you, just like it does everywhere else.
+      </p>
+      <br>
+      <div class="code-block"><pre><code><span class="tok-fn">class</span> Animal:
+    <span class="tok-fn">def</span> __init__(self, name):
+        self.name = name
+
+<span class="tok-fn">class</span> Dog(Animal):
+    <span class="tok-fn">def</span> __init__(self, name, breed):
+        <span class="tok-fn">super</span>().__init__(name)
+        self.breed = breed
+
+    <span class="tok-fn">def</span> describe(self):
+        <span class="tok-fn">print</span>(self.name + <span class="tok-str">' is a '</span> + self.breed + <span class="tok-str">'.'</span>)
+
+my_dog = Dog(<span class="tok-str">'Rex'</span>, <span class="tok-str">'Labrador'</span>)
+my_dog.describe()  <span class="tok-com"># Rex is a Labrador.</span></code></pre></div>
+    </div>
+
+    <br><br><br><hr><br><br>
+
+    <div class="feature reverse reveal" id="combining-classes">
+      <div class="feature-visual-code">
+        <div class="code-block"><pre><code><span class="tok-fn">class</span> Dog:
+    <span class="tok-fn">def</span> __init__(self, name):
+        self.name = name
+
+<span class="tok-fn">class</span> Owner:
+    <span class="tok-fn">def</span> __init__(self, name, dog):
+        self.name = name
+        self.dog = dog
+
+    <span class="tok-fn">def</span> introduce(self):
+        <span class="tok-fn">print</span>(self.name + <span class="tok-str">' has a dog named '</span> + self.dog.name + <span class="tok-str">'.'</span>)
+
+rex = Dog(<span class="tok-str">'Rex'</span>)
+maria = Owner(<span class="tok-str">'Maria'</span>, rex)
+
+maria.introduce()  <span class="tok-com"># Maria has a dog named Rex.</span></code></pre></div>
+      </div>
+      <div class="feature-content">
+        <div class="feature-number">04</div>
+        <p class="section-tag">Objects Inside Objects</p>
+        <h2 class="section-title">How Do You <strong>Combine Classes?</strong></h2>
+        <p class="section-body">
+          Inheritance describes an <strong>"is-a"</strong> link: a Dog <em>is an</em> Animal. But sometimes two classes have a <strong>"has-a"</strong> link instead: an Owner <em>has a</em> Dog. In that case, you don't inherit. You store one object inside the other, as an attribute.
+        </p>
+        <p class="section-body">
+          Here, <strong>rex</strong> is a <strong>Dog</strong> object. We pass it into <strong>Owner</strong>, which saves it as <strong>self.dog</strong>. Later, <strong>self.dog.name</strong> reaches through the owner to the dog's own name.
+        </p>
+      </div>
+    </div>
+
+    <div class="feature-content2">
+      <p class="section-body2">
+        An object can also hold a whole <strong style="color: #0e578c">list</strong> of other objects (Week 5). This <strong style="color: #0e578c">Shelter</strong> starts with an empty list of animals. Its <strong style="color: #0e578c">add()</strong> method appends an animal, and <strong style="color: #0e578c">list_animals()</strong> loops through them all.
+      </p>
+      <br>
+      <div class="code-block"><pre><code><span class="tok-fn">class</span> Animal:
+    <span class="tok-fn">def</span> __init__(self, name):
+        self.name = name
+
+<span class="tok-fn">class</span> Shelter:
+    <span class="tok-fn">def</span> __init__(self):
+        self.animals = []
+
+    <span class="tok-fn">def</span> add(self, animal):
+        self.animals.append(animal)
+
+    <span class="tok-fn">def</span> list_animals(self):
+        <span class="tok-fn">for</span> animal <span class="tok-fn">in</span> self.animals:
+            <span class="tok-fn">print</span>(animal.name)
+
+shelter = Shelter()
+shelter.add(Animal(<span class="tok-str">'Rex'</span>))
+shelter.add(Animal(<span class="tok-str">'Luna'</span>))
+
+shelter.list_animals()
+
+<span class="tok-com"># Rex</span>
+<span class="tok-com"># Luna</span></code></pre></div>
+      <br>
+      <p class="section-body2">
+        Notice that <strong style="color: #0e578c">Shelter</strong> has no need for parameters in its <strong>__init__</strong> other than <strong>self</strong>. It just creates an empty list to start with, and animals are added later.
+      </p>
+    </div>
+
+    <br><br><br><hr><br><br>
+
+    <div class="feature reveal" id="putting-together">
+      <div class="feature-visual-code">
+        <div class="code-block"><pre><code><span class="tok-fn">class</span> Animal:
+    <span class="tok-fn">def</span> __init__(self, name):
+        self.name = name
+
+    <span class="tok-fn">def</span> speak(self):
+        <span class="tok-fn">print</span>(self.name + <span class="tok-str">' makes a sound.'</span>)
+
+<span class="tok-fn">class</span> Dog(Animal):
+    <span class="tok-fn">def</span> speak(self):
+        <span class="tok-fn">print</span>(self.name + <span class="tok-str">' says Woof!'</span>)
+
+<span class="tok-fn">class</span> Cat(Animal):
+    <span class="tok-fn">def</span> speak(self):
+        <span class="tok-fn">print</span>(self.name + <span class="tok-str">' says Meow!'</span>)
+
+<span class="tok-fn">class</span> Shelter:
+    <span class="tok-fn">def</span> __init__(self):
+        self.animals = []
+
+    <span class="tok-fn">def</span> add(self, animal):
+        self.animals.append(animal)
+
+    <span class="tok-fn">def</span> all_speak(self):
+        <span class="tok-fn">for</span> animal <span class="tok-fn">in</span> self.animals:
+            animal.speak()
+
+shelter = Shelter()
+shelter.add(Dog(<span class="tok-str">'Rex'</span>))
+shelter.add(Cat(<span class="tok-str">'Luna'</span>))
+shelter.add(Animal(<span class="tok-str">'Mystery'</span>))
+
+shelter.all_speak()
+
+<span class="tok-com"># Rex says Woof!</span>
+<span class="tok-com"># Luna says Meow!</span>
+<span class="tok-com"># Mystery makes a sound.</span></code></pre></div>
+      </div>
+      <div class="feature-content">
+        <div class="feature-number">05</div>
+        <p class="section-tag">Putting It Together</p>
+        <h2 class="section-title">Combining <strong>Inheritance & Classes</strong></h2>
+        <p class="section-body">
+          This program uses both ideas at once. <strong>Dog</strong> and <strong>Cat</strong> inherit from <strong>Animal</strong> and override <strong>speak()</strong>. The <strong>Shelter</strong> holds all of them in one list.
+        </p>
+        <p class="section-body">
+          Look at <strong>all_speak()</strong>: the loop just says <strong>animal.speak()</strong> for every animal. It doesn't check what kind of animal it is. Each object automatically uses its own version of <strong>speak()</strong>. That is what makes the system flexible &mdash; you can add a new kind of animal later without changing the <strong>Shelter</strong> at all.
+        </p>
+      </div>
+    </div>
+
+    <div class="feature-content2">
+      <p class="section-body2">
+        Let's add one more layer: a parent with two attributes, a child that uses <strong style="color: #0e578c">super()</strong> to add a third, and a <strong style="color: #0e578c">describe()</strong> method that the child overrides. <strong style="color: #0e578c">Cat</strong> doesn't override anything, so it just inherits the parent's version.
+      </p>
+      <br>
+      <div class="code-block"><pre><code><span class="tok-fn">class</span> Animal:
+    <span class="tok-fn">def</span> __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+    <span class="tok-fn">def</span> describe(self):
+        <span class="tok-fn">print</span>(self.name + <span class="tok-str">' is '</span> + <span class="tok-fn">str</span>(self.age) + <span class="tok-str">' years old.'</span>)
+
+<span class="tok-fn">class</span> Dog(Animal):
+    <span class="tok-fn">def</span> __init__(self, name, age, breed):
+        <span class="tok-fn">super</span>().__init__(name, age)
+        self.breed = breed
+
+    <span class="tok-fn">def</span> describe(self):
+        <span class="tok-fn">print</span>(self.name + <span class="tok-str">' is a '</span> + <span class="tok-fn">str</span>(self.age) + <span class="tok-str">'-year-old '</span> + self.breed + <span class="tok-str">'.'</span>)
+
+<span class="tok-fn">class</span> Cat(Animal):
+    <span class="tok-fn">pass</span>
+
+pets = [Dog(<span class="tok-str">'Rex'</span>, <span class="tok-num">3</span>, <span class="tok-str">'Labrador'</span>), Cat(<span class="tok-str">'Luna'</span>, <span class="tok-num">5</span>)]
+
+<span class="tok-fn">for</span> pet <span class="tok-fn">in</span> pets:
+    pet.describe()
+
+<span class="tok-com"># Rex is a 3-year-old Labrador.</span>
+<span class="tok-com"># Luna is 5 years old.</span></code></pre></div>
+      <br>
+      <p class="section-body2">
+        The same loop and the same <strong style="color: #0e578c">pet.describe()</strong> call give two different results. <strong>Rex</strong> is a <strong>Dog</strong>, so Python uses the child's <strong>describe()</strong>. <strong>Luna</strong> is a <strong>Cat</strong> with no version of her own, so Python falls back to the parent's.
+      </p>
+    </div>
+
+  </section>
+
+
+
+  <div class="silk-divider reveal"></div>
+
+  <!-- ═══ TESTIMONIALS ═══ -->
+  <section class="section section-center" id="testimonials">
+    <p class="section-tag reveal">Quote for YOU!</p>
+    <h2 class="section-title reveal reveal-d1">Keep Learning <strong>no matter how hard it is.</strong></h2>
+
+    <div class="testimonials-grid">
+      <div class="testimonial-card reveal reveal-d1">
+        <p class="testimonial-quote">
+          "It's not about how hard you can hit, it's about how much you can take, and keep moving forward anyway. 
+          That's how wining is done."
+        </p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">RB</div>
+          <div>
+            <div class="testimonial-name">Rocky Balboa</div>
+            <div class="testimonial-role">Rocky</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card reveal reveal-d2">
+        <p class="testimonial-quote">
+          "Do, or do not. There's no such thing as almost — commit fully, or don't start at all."
+        </p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">YD</div>
+          <div>
+            <div class="testimonial-name">Yoda</div>
+            <div class="testimonial-role">Star Wars</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card reveal reveal-d3">
+        <p class="testimonial-quote">
+          "It's not that I'm so smart, it's just that I stay with problems longer."
+        </p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">AE</div>
+          <div>
+            <div class="testimonial-name">Elbert Einstein</div>
+            <div class="testimonial-role">Father of Modern Physics, Theory of Relativity</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="silk-divider reveal">
+    <!-- From Uiverse.io by BHARGAVPATEL1244 --> 
+<!-- From Uiverse.io by Gaurav-WebDev --> 
+<button class="button type1" onclick="window.location.href='2107_new_spot/index.html'">
+</button>
+  </div>
+
+  <!-- ═══ FOOTER CTA ═══ -->
+  <section class="footer-cta" id="cta">
+  <div class="footer-bar reveal reveal-d4" style="margin-top: 80px;">
+    <ul class="footer-links">
+      <li><a href="../../Variables.html">Week 1</a></li>
+      <li><a href="Number&Math_Operations.html">Week 2</a></li>
+      <li><a href="Week3_Conditions.html">Week 3</a></li>
+      <li><a href="Week4_Functions.html">Week 4</a></li>
+      <li><a href="Week5_Lists_Loops.html">Week 5</a></li>
+      <li><a href="Week6_Dictionaries_Errors.html">Week 6</a></li>
+      <li><a href="Week7_Classes_Objects.html">Week 7</a></li>
+      <li><a href="#">Week 8</a></li>
+      <li><a href="Week9_AI_Prompting.html">Week 9</a></li>
+    </ul>
+  </div>
+</section>
+
+</main>
+
+<script src="templatemo-621-luminary-script.js"></script>
+</body>
+</html>

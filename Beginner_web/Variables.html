@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Luminary — Intelligent Workflow Platform</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="templatemo-621-luminary-style.css">
+<!--
+TemplateMo 621 Luminary
+https://templatemo.com/tm-621-luminary
+-->
+</head>
+<style>
+  /* From Uiverse.io by Gaurav-WebDev */ 
+.button {
+  height: 50px;
+  width: 150px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.5s ease-in-out;
+}
+
+.button:hover {
+  box-shadow: .5px .5px 150px #252525;
+}
+
+.type1::after {
+  content: "Chapter";
+  height: 50px;
+  width: 150px;
+  background-color: #008080;
+  color: #fff;
+  position: absolute;
+  top: 0%;
+  left: 0%;
+  transform: translateY(50px);
+  font-size: 1.2rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.5s ease-in-out;
+}
+
+.type1::before {
+  content: "Next";
+  height: 50px;
+  width: 150px;
+  background-color: #fff;
+  color: #008080;
+  position: absolute;
+  top: 0%;
+  left: 0%;
+  transform: translateY(0px) scale(1.2);
+  font-size: 1.2rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.5s ease-in-out;
+}
+
+.type1:hover::after {
+  transform: translateY(0) scale(1.2);
+}
+
+.type1:hover::before {
+  transform: translateY(-50px) scale(0) rotate(120deg);
+}
+</style>
+<body>
+
+<svg class="grain" width="100%" height="100%">
+  <filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="5" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter>
+  <rect width="100%" height="100%" filter="url(#n)"/>
+</svg>
+<div class="atmosphere"></div>
+
+<!-- Nav -->
+<nav class="top-nav" id="topNav">
+  <a href="#" class="nav-brand">Variables &<span>Data Types</span></a>
+  <ul class="nav-links">
+    <li><a href="#Naming">Naming</a></li>
+    <li><a href="#printing">Print</a></li>
+    <li><a href="#data-types">Common Data Types</a></li>
+    <li><a href="#type&isinstance">type() & isinstance()</a></li>
+   
+  </ul>
+  <a href="#Naming" class="nav-cta">Get Started</a>
+  <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+    <span class="toggle-bar"></span><span class="toggle-bar"></span>
+  </button>
+</nav>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <div class="mobile-menu-inner">
+    <div class="mobile-menu-links">
+      <a href="#Naming" class="mobile-menu-link" data-index="01">Naming</a>
+      <a href="#printing" class="mobile-menu-link" data-index="02">Print</a>
+      <a href="#data-types" class="mobile-menu-link" data-index="03">Common Data Types</a>
+      <a href="#type&isinstance" class="mobile-menu-link" data-index="04">type() & isinstance()</a>
+      <a href="#Naming" class="mobile-menu-link" data-index="07">Get Started</a>
+    </div>
+    
+  </div>
+</div>
+
+<!-- Side Panels -->
+<nav class="side-panel left" aria-label="Scroll indicators">
+  <span class="side-label">Scroll</span>
+  <div class="side-track"><div class="side-track-fill" id="leftTrack"></div></div>
+  <div class="side-dot active"></div>
+  <div class="side-dot"></div>
+  <div class="side-dot"></div>
+  <div class="side-dot"></div>
+  <div class="side-dot"></div>
+  <div class="side-dot"></div>
+  <div class="side-readout" id="scrollPct">00</div>
+</nav>
+
+<nav class="side-panel right" aria-label="Status indicators">
+  <span class="side-label">Python</span>
+  <div class="side-track"><div class="side-track-fill" id="rightTrack"></div></div>
+  <div class="side-dot"></div>
+  <div class="side-dot"></div>
+  <div class="side-dot active"></div>
+  <div class="side-dot"></div>
+  <div class="side-dot"></div>
+  <div class="side-dot"></div>
+  <div class="side-readout">Python</div>
+</nav>
+
+<main class="main">
+
+  <!-- ═══ HERO ═══ -->
+  <section class="hero" id="hero">
+    <div class="hero-grid"></div>
+    <div class="hero-badge">
+      <div class="hero-badge-dot"></div>
+      <span>Solo-Leveling Begins!</span>
+    </div>
+    <h1>Understanding Variables<br><em>and Data Types</em></h1>
+    <p class="hero-sub">
+      In this particular course, we are going to explore what are Variables, how to name them, how do variables work, what is print function, what are common data types that we should know, what are the difference between type() & isinstance(). 
+      So, if you are ready you can click Get Start button or scroll, GOOD LUCK!
+    </p>
+    <div class="hero-ctas">
+      <a href="#Naming" class="btn-primary">Get Start</a>
+    </div>
+    <div class="hero-metrics">
+      <div class="metric">
+        <div class="metric-value"><span class="counter" data-target="57.9%" data-decimals="1">0.0</span><span>%</span></div>
+        <div class="metric-label">World Wide Usage</div>
+      </div>
+      <div class="metric">
+        <div class="metric-value"><span class="counter" data-target="34%" data-decimals="0">0</span><span>+</span></div>
+        <div class="metric-label">Primary Language</div>
+      </div>
+      <div class="metric">
+        <div class="metric-value"><span class="counter" data-target="100" data-decimals="0">0</span><span>%</span></div>
+        <div class="metric-label">Complicated Thought</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ LOGO TICKER ═══ -->
+  <div class="logo-ticker reveal">
+    <div class="logo-ticker-label">Python Usage Fields</div>
+    <div class="ticker-track" id="tickerTrack">
+      <span class="ticker-item">Web Development</span><span class="ticker-dot"></span>
+      <span class="ticker-item">Data Science and Analysis</span><span class="ticker-dot"></span>
+      <span class="ticker-item">Artificial Intelligence </span><span class="ticker-dot"></span>
+      <span class="ticker-item">Machine Learning</span><span class="ticker-dot"></span>
+      <span class="ticker-item">Automation</span><span class="ticker-dot"></span>
+      <span class="ticker-item">Cybersecurity</span><span class="ticker-dot"></span>
+      <span class="ticker-item">Scripting</span><span class="ticker-dot"></span>
+      <span class="ticker-item">Scientific Computing</span><span class="ticker-dot"></span>
+      <!-- Duplicated for seamless loop -->
+      <span class="ticker-item">Web Development</span><span class="ticker-dot"></span>
+      <span class="ticker-item">Data Science and Analysis</span><span class="ticker-dot"></span>
+      <span class="ticker-item">Artificial Intelligence </span><span class="ticker-dot"></span>
+      <span class="ticker-item">Machine Learning</span><span class="ticker-dot"></span>
+      <span class="ticker-item">Automation</span><span class="ticker-dot"></span>
+      <span class="ticker-item">Cybersecurity</span><span class="ticker-dot"></span>
+      <span class="ticker-item">Scripting</span><span class="ticker-dot"></span>
+      <span class="ticker-item">Scientific Computing</span><span class="ticker-dot"></span>
+    </div>
+  </div><br>
+
+  <!-- ═══ FEATURES ═══ -->
+  <section class="section" id="Naming">
+
+    <div class="feature reveal">
+      <div class="feature-visual">
+        <img src="images/Question.jpg" alt="How do you declare variables and what are naming conventions to name variables?">
+      </div>
+      <div class="feature-content">
+        <div class="feature-number">01</div>
+        <p class="section-tag">Naming and Declaring the Variables</p>
+        <h2 class="section-title">How do you declare variables and what are naming conventions to name variables?</h2>
+        <p class="section-body">
+          In Python, variables are like a labelled box for storing and referencing data of different types. 
+          To declare variables in Python, you assign a value to an identifier with the assignment <strong> (=)</strong> operator. 
+          You don't need to use special keywords like <strong>let</strong> or <strong>const</strong> in JavaScript, or in C#.
+        </p>
+        <p class="section-body">
+          In Python, you just write the name of the variable on the left, followed by the assignment operator, and the value you want to assign on the right.
+          Here's an example of how to declare <strong>name</strong> and <strong>age</strong> variables: 
+        </p>
+      </div>
+
+      
+    </div>
+    <div class="feature-visual2">
+      <img style="border-radius: 20px;" src="images/Name_&_Age.png" alt=""> <br><br>
+
+      <p class="section-body2" style="font-weight: none;">
+        In the example above, the variable <strong>name</strong> holds the value <strong>'Nyan'</strong>. <br> 
+        This is a string, which is a series of characters used to represent text. 
+        Strings are written with single or double quotes, for example <strong>'Hello'</strong> or <strong>"Hello"</strong>.
+        In future lessons, you'll learn more about working with strings in Python. 
+      </p>
+      <br><br>
+      <p class="section-body2">
+        When naming variables in Python, there are some important rules you should keep in mind: <br>
+         
+          <li>
+            Variable names can only start with a letter or an underscore <strong>(_)</strong>, not a number.
+          </li><br>
+          <li>
+            Variable names can only contain alphanumeric characters <strong>( a-z, A-Z, 0-9 )</strong> and underscores <strong>( _ )</strong>
+          
+          </li><br>
+          <li>
+            Variable names are case-sensitive <strong>age, Age,</strong> and <strong>AGE</strong> are all considered unique. 
+            They are different, not the same.
+          </li><br>
+          <li>
+            Variable names cannot be one of Python's reserved keywords such as <strong>if, class,</strong> or <strong>def</strong>
+          </li><br>
+         If you break any of those rules, your Python program will throw <strong>SyntaxError:</strong><br><br>
+         <img class="SyntaxError" src="images/SyntaxError_Example.png" alt="">
+         <br><br>
+
+         <p class="section-body2">
+            Now let's go over some common naming convections for variables in Python. <br> <br>
+            First, variable names should be in lowercase, with separate words separated by an underscore. 
+            This is called snake case: <br><br>
+            <img src="images/my_variable_name.png" alt="Example of Code"><br><br>
+            Next, you should use descriptive names for variables. 
+            For example, if you want to save a user’s age as a variable, <strong>user_age</strong> is better than <strong>age</strong> or an abbreviation like <strong>ua</strong>. <br><br>
+            <img src="images/age_Example.png" alt="Age Example Code"><br><br>
+            This way, you can easily communicate the purpose of a variable to other team members (or to your future self) in a large codebase. 
+            <br><br>
+            Another convention is to avoid using single-letter variable names. 
+            This is very common in Python, but should be avoided because variable names with a single letter communicate no purpose or meaning:
+            <br><br>
+            <img src="images/X=56.png" alt="Example Code"><br><br>
+            The pound symbol <strong>( # )</strong> and the text that follows in the example above is called a comment.
+            You might already be familiar with comments, so let's go over them quickly and explain how they work. 
+            <br><br>
+            In Python, comments start with a pound symbol <strong>( # )</strong>, and the language ignores everything the # symbol on that like: <br><br>
+            <img src="images/Single_line_comment.png" alt="Single-Line Comment Code Example"><br><br>
+            Multi-line commetns can be created by using consecutive single-line comments: <br><br>
+            <img src="images/Multi_line_comment.png" alt="Example of Multi-line comment"> <br><br>
+            You can use comments to explain your code, leave reminders for yourself, or clarify why a line exists.
+            Comments are especially helpful when you're learning or working in teams. 
+            <br><br>
+            However, you shouldn't use comments to explain what your variable names mean. 
+            Instead the names you choose for your variables should be descriptive and communicate what they're for, and follow the other naming rules mentioned earlier to prevent syntax errors. 
+            <br><br><br>
+            Now, to be able to continue to section 02, I would like you to take a quiz in here. 
+            I would be very appreciate for this, Thanks. <br><br><br>
+            <a  class="btn" href="Python_Quiz_Variables.html" target="_blank">Quiz</a>
+         </p>
+      </p>
+    </div><br><br><br>
+    <hr>
+
+    <div class="feature reverse reveal" id="printing">
+      <div class="feature-visual">
+        <img src="images/Python-print-.png" alt="Predictive analytics visualization">
+      </div>
+      <div class="feature-content">
+        <div class="feature-number">02</div>
+        <p class="section-tag">Print Function</p>
+        <h2 class="section-title">How does the <strong>Print Function work?</strong></h2>
+        <p class="section-body">
+          Every programming language has some way to output data to the terminal with a built-in method, function, property, or keyword.
+          In Python, you can use the <strong>print</strong> function to print data to the terminal. 
+          (a text-based window where you talk directly to your computer using typed commands instead of clicking on icons.)
+          Let's take a closer look at the <strong>print</strong> functions so you can start using it with the confidence. 
+          <br><br>
+          One of the first things you do when you're learning any programming language is to write a simple <strong>Hello world!</strong> Program. 
+          You can do that easily in Python with just the <strong>print</strong> function. 
+          <br><br>
+          <img src="images/Hello_world!.png" alt="Example code of Hello world!">
+          <br><br>
+          
+          
+        </p>
+      </div>
+
+      
+    </div>
+    <div class="feature-visual2">
+        <p class="section-body2">
+          You will learn more about strings and functions in Python in future lessons.
+          For now, just consider strings as a sequence of characters surrounded by either single <strong>( ' )</strong> or double <strong>( " )</strong> quotation marks. 
+          <br><br>
+          In the <strong>print('Hello world!')</strong> example, the string <strong>'Hello world!'</strong> is an argument passed to the <strong>print</strong> function. 
+          You can also use the <strong>print</strong> functions to show multiple values, or arguments, at once by separating them with commas. 
+          For example:
+          <br><br>
+          <img src="images/Favorite_Colors.png" alt="Example code of how commas is useful as a space"><br><br>
+          Python automatically adds a space between each item when you separate them with commas. 
+          This is helpful when you want to print several pieces or words of information together. 
+
+        </p>
+        <br><br>
+        <a  class="btn" href="Python_Quiz_Print.html" target="_blank">Quiz</a>
+      </div><br><br><br>
+      <hr>
+
+    <div class="feature reveal" id="data-types">
+      <div class="feature-visual">
+        <img src="images/Python-Data-Types.png" alt="Common Data Types">
+      </div>
+      <div class="feature-content">
+        <div class="feature-number">03</div>
+        <p class="section-tag">Data Types</p>
+        <h2 class="section-title">What are Common <strong>Data Types in Python?</strong></h2>
+        <p class="section-body">
+          Before working with Python variables, it’s important to understand data types. 
+           A data type describes the kind of value a variable holds.
+           For example, a number, a piece of text, or a list of items.
+          Programming languages use data types so they know how to store and work with different kinds of information. <br><br>
+
+          Python is a dynamically-typed language like JavaScript, meaning you don’t need to clearly declare types for variables.
+          The language knows what data type a variable is based on what you assign to it. 
+          Here are some examples: 
+          <br><br>
+          <img src="images/Some_examples.png" alt="Exmple of Code">
+        </p>
+      </div>
+    </div>
+    <hr><br><br>
+    <div class="feature-content2">
+      <p class="section-body2">
+        This is in contrast to some statically-typed languages like C#, Java, and C++, where you have to declare types with variables, like this: 
+        <br><br>
+        <img src="images/In_other_Languages.png" alt="Example of Code in other languages">
+        <br><br>
+        The dynamic-typing nature of Python makes coding really fast and more flexible, but it can lead to unexpected bugs because type errors are detected only when a program runs, not when the program compiles. 
+        <br><br>
+        Since Python determines data types while your program is running, typerelated mistakes are only discovered at that movement. 
+        When a program runs, Python executes your code line by line.
+        If it reaches a line where a certain object is expected to behave in a way it’t not able to, Python will stop and show error. 
+        <br><br>
+        In contrast, some languages compile your program before it runs.
+        Compiling means the computer checks your code in advance and prepares it to run.
+        During this step, those languages can catch type errors before the program even starts. 
+        <br><br>
+        You don’t need to know those languages yet. The important idae is simply: <br><br>
+        <li>
+          In Python type errors can reveal themselves during execution, when the program is actually running and using your code. 
+
+        </li><br>
+        <li>
+          Compiled languages catch type errors during the compile step, before the program is allowed to run. 
+
+        </li><br><br>
+        Because of this, you might not learn about a type mistake in Python until the program reaches that specific line of code while running.
+        Here are the most common data types you'll use in Python: <br><br>
+        
+        <img src="images/Integer_data_types.png" alt="Integer Data Type"> 
+        <br><br>
+        <img src="images/Float_Data_Types.png" alt="Float Data Type">
+        <br><br>
+        <img src="images/String_Data_Type.png" alt="String Data Type">
+        <br><br>
+        <img src="images/Boolean_Data_Type.png" alt="Boolean Data Type">
+        <br><br><br><hr><br>
+        <h1>
+          Set
+        </h1><br>
+        <p class="section-body2">
+          Set data type is like a bag of unique items. It automatically removes any duplicates. 
+          The order inside a set does not matter. 
+        </p><br>
+        <img src="images/Set_Data_type.png" alt="Set Data Type">
+        <br><br>
+        <p>
+          Here is an example that it ignores about the duplicate numbers:
+
+        </p><br>
+        <img src="images/Set_Explanation_more.png" alt="">
+        <br><br><br><hr><br><br>
+        <h1>
+          Dictionary
+        </h1>
+        <br>
+        <p>
+          Dictionary is like a real-world phonebook. It pairs a Key(a name) with a Value(a phone number or detail) so you can look things up instantly.
+
+        </p>
+        <br>
+        <img src="images/Dictionary_Data_type.png" alt="Dictionary Data Type">
+        <br>
+        <p>
+          Here is an example of how dictionary data type work:
+        </p>
+        <br>
+        <img src="images/Bob's_age.png" alt="">
+        <br><br><br><hr><br><br>
+        <h1>
+          Tuple
+        </h1><br>
+        <p>
+          A tuple is like a locked list. Once you create it, you cannot change it, add items, or delete items. It is permanent. 
+        </p>
+        <br>
+        <img src="images/Tuple_Data_Type.png" alt="Tuple Data Type">
+        <br><br>
+        <p>
+          Here is an example of how tuple data type work:
+        </p><br>
+        <img src="images/Tuple_Example.png" alt="">
+        <br><br><br><hr><br><br>
+        <h1>
+          Range
+        </h1>
+        <br>
+        <p>
+          A range is a number generator. 
+          Instead of writing out a long list of numbers and wasting memory, a range generates them on the spot when you need them.
+        </p>
+        <br>
+        <img src="images/Range_Data_Type.png" alt="Range Data Type">
+        <br><br>
+        <p>
+          Here is an example of how range data type work:
+        </p>
+        <br><br>
+        <img src="images/Range_example.png" alt="">
+        <br><br><br><hr><br><br>
+        <h1>
+          List
+        </h1><br>
+        <p>
+          A list is like a shopping list.
+          You can add items, remove items, and change the order.
+          Items can also repeat. 
+        </p><br>
+        <img src="images/List_Data_Type.png" alt="List Data Type">
+        <br><br>
+        <p>
+          Here is an example of how list data type work:
+        </p>
+        <br>
+        <img src="images/List_example.png" alt="">
+        <br><br>
+
+        <img src="images/None_Data_type.png" alt="None">
+        <br><br>
+        In future lessons, you will learn more about how to work with all of these data types.
+        <br><br>
+        <a  class="btn" href="Python_Quiz_DataTypes.html" target="_blank">Quiz</a>
+        <br><br><br><hr>
+
+
+      </p>
+    </div>
+
+    <div class="feature reverse reveal" id="type&isinstance">
+      <div class="feature-visual">
+        <img src="images/type()_and_isinstance()_Functions.webp" alt="type() and isinstance() Functions">
+      </div>
+      <div class="feature-content">
+        <div class="feature-number">04</div>
+        <p class="section-tag">Functions</p>
+        <h2 class="section-title">How do the type()<strong>isinstance() Functions Work?</strong></h2>
+        <p class="section-body">
+          In the prior lesson, you learned about common data types in Python including the string, integer, and float types.
+          As you build out your programs, you will need to learn how to view the type for a variable.
+          Here is an example variable: 
+          <br><br>
+          <img src="images/developer.png" alt="Developer">
+          <br><br>
+          To see what type <strong style="color: #0e578c">developer</strong> is, you can use the <strong style="color: #0e578c">type( )</strong> function like this:
+          <br><br>
+          <img src="images/class_str.png" alt="Class String">
+          <br><br>
+
+          <strong style="color: #0e578c">The output of</strong> that means <strong style="color: #0e578c">developer</strong> is a string type.
+          <br><br>
+          If you fall to provide any arguments to the <strong>type( )</strong> function, then you will receive the following error message.
+
+          <br><br>
+          <img src="images/Trace_Error.png" alt="Example of Error">
+          
+          <br><br>
+        </p>
+      </div>
+
+      
+    </div>
+    <div class="feature-content2">
+      <p class="section-body2">
+          There will be times in your program where you will need to verify that a praticular variable is a specific type before performing operations on it.
+          This is where the <strong style="color: #0e578c">isinstance( )</strong> function comes in. 
+          <br>
+          <br>
+          Here is an example variable with a string assigned to it:
+          <br><br>
+          <strong style="color: #0e578c">account_balance = '12'</strong>   <br><br>
+          If you try to do mathematical expressions like division using the <strong style="color: #0e578c">account_balance</strong> variable, then you will receive an error message like this.
+          <br><br>
+          <img src="images/Trace_Error_for_Isinstance.png" alt="">
+          <br><br>
+          To see if <strong style="color: #0e578c">account_balance</strong> is an integer, you can check using <strong style="color: #0e578c">isinstance( )</strong> function like this:
+
+          <br><br>
+          <strong style="color: #0e578c">
+            account_balance = '12'<br>
+            isinstance(account_balance,int) # Flase
+
+          </strong>
+          <br><br>
+          The built-in <strong style="color: #0e578c">isinstance( )</strong> functions lets you check if a variable matches a specific data type.
+          It takes in an object and the type you want to check it against, then returns a boolean. 
+          In this case, since <strong>account_balance</strong> is a string, it will return <strong>False</strong>.
+          <br><br>
+          The <strong style="color: #0e578c">isinstance( )</strong> function allows you to check for multiple types at once. <br>
+          Here is an exmple checking if <strong style="color: #0e578c">account_balance</strong> is an <strong style="color: #0e578c">int</strong> or <strong style="color: #0e578c">float</strong>:
+          <br><br>
+          <strong style="color: #0e578c">
+          account_balance = 12 <br>
+          isinstance(account_balance, (int,float)) # True
+          </strong>
+          <br><br>
+          In this example, <strong style="color: #0e578c">account_balance</strong> is an integer so <strong style="color: #0e578c">isinstance( )</strong> returns <strong style="color: #0e578c">True</strong>.
+          If <strong style="color: #0e578c">account_balance</strong> were <strong style="color: #0e578c">12.0</strong>, <strong style="color: #0e578c">isinstance( )</strong> would still return <strong style="color: #0e578c">True</strong> because you are checking for integer or floats.
+          <br>
+          <br>
+          In future workshops and labs, you will use the <strong style="color: #0e578c">type( )</strong> and <strong style="color: #0e578c">isinstance( )</strong> functions to ensure your variables contain the correct data types before performing operations on them.
+          <br><br>
+          <a  class="btn" href="Python_Quiz_TypeIsinstance.html" target="_blank">Quiz</a>
+      </p> 
+    </div>
+
+  </section>
+
+
+
+  <div class="silk-divider reveal"></div>
+
+  <!-- ═══ TESTIMONIALS ═══ -->
+  <section class="section section-center" id="testimonials">
+    <p class="section-tag reveal">Quote for YOU!</p>
+    <h2 class="section-title reveal reveal-d1">Keep Learning <strong>no matter how hard it is.</strong></h2>
+
+    <div class="testimonials-grid">
+      <div class="testimonial-card reveal reveal-d1">
+        <p class="testimonial-quote">
+          "It's not about how hard you can hit, it's about how much you can take, and keep moving forward anyway. 
+          That's how wining is done."
+        </p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">RB</div>
+          <div>
+            <div class="testimonial-name">Rocky Balboa</div>
+            <div class="testimonial-role">Rocky</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card reveal reveal-d2">
+        <p class="testimonial-quote">
+          "Do, or do not. There's no such thing as almost — commit fully, or don't start at all."
+        </p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">YD</div>
+          <div>
+            <div class="testimonial-name">Yoda</div>
+            <div class="testimonial-role">Star Wars</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card reveal reveal-d3">
+        <p class="testimonial-quote">
+          "It's not that I'm so smart, it's just that I stay with problems longer."
+        </p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">AE</div>
+          <div>
+            <div class="testimonial-name">Elbert Einstein</div>
+            <div class="testimonial-role">Father of Modern Physics, Theory of Relativity</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="silk-divider reveal">
+    <!-- From Uiverse.io by BHARGAVPATEL1244 --> 
+<!-- From Uiverse.io by Gaurav-WebDev --> 
+<button class="button type1" onclick="window.location.href='Beginner_2/files/Number&Math_Operations.html'">
+</button>
+  </div>
+
+ 
+
+ 
+
+  <!-- ═══ FOOTER CTA ═══ -->
+  <section class="footer-cta" id="cta">
+  <div class="footer-bar reveal reveal-d4" style="margin-top: 80px;">
+    <ul class="footer-links">
+      <li><a href="#">Week 1</a></li>
+      <li><a href="Beginner_2/files/Number&Math_Operations.html">Week 2</a></li>
+      <li><a href="Beginner_2/files/Week3_Conditions.html">Week 3</a></li>
+      <li><a href="Beginner_2/files/Week4_Functions.html">Week 4</a></li>
+      <li><a href="Beginner_2/files/Week5_Lists_Loops.html">Week 5</a></li>
+      <li><a href="Beginner_2/files/Week6_Dictionaries_Errors.html">Week 6</a></li>
+      <li><a href="Beginner_2/files/Week7_Classes_Objects.html">Week 7</a></li>
+      <li><a href="Beginner_2/files/Week8_Inheritance.html">Week 8</a></li>
+      <li><a href="Beginner_2/files/Week9_AI_Prompting.html">Week 9</a></li>
+    </ul>
+  </div>
+</section>
+
+</main>
+
+<script src="templatemo-621-luminary-script.js"></script>
+</body>
+</html>

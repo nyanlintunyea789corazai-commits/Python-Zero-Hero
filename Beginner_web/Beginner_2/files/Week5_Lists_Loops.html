@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 5 — Working with Lists & Loops</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="templatemo-621-luminary-style.css">
+<!--
+TemplateMo 621 Luminary
+https://templatemo.com/tm-621-luminary
+-->
+</head>
+<style>
+  /* From Uiverse.io by Gaurav-WebDev */ 
+.button {
+  height: 50px;
+  width: 150px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.5s ease-in-out;
+}
+
+.button:hover {
+  box-shadow: .5px .5px 150px #252525;
+}
+
+.type1::after {
+  content: "Chapter";
+  height: 50px;
+  width: 150px;
+  background-color: #008080;
+  color: #fff;
+  position: absolute;
+  top: 0%;
+  left: 0%;
+  transform: translateY(50px);
+  font-size: 1.2rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.5s ease-in-out;
+}
+
+.type1::before {
+  content: "Next";
+  height: 50px;
+  width: 150px;
+  background-color: #fff;
+  color: #008080;
+  position: absolute;
+  top: 0%;
+  left: 0%;
+  transform: translateY(0px) scale(1.2);
+  font-size: 1.2rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.5s ease-in-out;
+}
+
+.type1:hover::after {
+  transform: translateY(0) scale(1.2);
+}
+
+.type1:hover::before {
+  transform: translateY(-50px) scale(0) rotate(120deg);
+}
+</style>
+<body>
+
+<svg class="grain" width="100%" height="100%">
+  <filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="5" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter>
+  <rect width="100%" height="100%" filter="url(#n)"/>
+</svg>
+<div class="atmosphere"></div>
+
+<!-- Nav -->
+<nav class="top-nav" id="topNav">
+  <a href="../../../index.html" class="nav-brand">Lists<span> & Loops</span></a>
+  <ul class="nav-links">
+    <li><a href="#lists-intro">Lists</a></li>
+    <li><a href="#list-operations">Changing Lists</a></li>
+    <li><a href="#for-loop">for Loop</a></li>
+    <li><a href="#while-loop">while Loop</a></li>
+    <li><a href="#putting-together">Putting It Together</a></li>
+  </ul>
+  <a href="#lists-intro" class="nav-cta">Get Started</a>
+  <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+    <span class="toggle-bar"></span><span class="toggle-bar"></span>
+  </button>
+</nav>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <div class="mobile-menu-inner">
+    <div class="mobile-menu-links">
+      <a href="#lists-intro" class="mobile-menu-link" data-index="01">Lists</a>
+      <a href="#list-operations" class="mobile-menu-link" data-index="02">Changing Lists</a>
+      <a href="#for-loop" class="mobile-menu-link" data-index="03">for Loop</a>
+      <a href="#while-loop" class="mobile-menu-link" data-index="04">while Loop</a>
+      <a href="#putting-together" class="mobile-menu-link" data-index="05">Putting It Together</a>
+    </div>
+  </div>
+</div>
+
+<!-- Side Panels -->
+<nav class="side-panel left" aria-label="Scroll indicators">
+  <span class="side-label">Scroll</span>
+  <div class="side-track"><div class="side-track-fill" id="leftTrack"></div></div>
+  <div class="side-dot active"></div>
+  <div class="side-dot"></div>
+  <div class="side-dot"></div>
+  <div class="side-dot"></div>
+  <div class="side-dot"></div>
+  <div class="side-dot"></div>
+  <div class="side-readout" id="scrollPct">00</div>
+</nav>
+
+<nav class="side-panel right" aria-label="Status indicators">
+  <span class="side-label">Python</span>
+  <div class="side-track"><div class="side-track-fill" id="rightTrack"></div></div>
+  <div class="side-dot"></div>
+  <div class="side-dot"></div>
+  <div class="side-dot active"></div>
+  <div class="side-dot"></div>
+  <div class="side-dot"></div>
+  <div class="side-dot"></div>
+  <div class="side-readout">Python</div>
+</nav>
+
+<main class="main">
+
+  <!-- ═══ HERO ═══ -->
+  <section class="hero" id="hero">
+    <div class="hero-grid"></div>
+    <div class="hero-badge">
+      <div class="hero-badge-dot"></div>
+      <span>Round and Round We Go!</span>
+    </div>
+    <h1>Working with<br><em>Lists & Loops</em></h1>
+    <p class="hero-sub">
+      In this lesson, you'll learn how to store many values together in one <strong>list</strong>, and how to use <strong>loops</strong> to repeat a task automatically &mdash; a <strong>for</strong> loop when you know how many times, and a <strong>while</strong> loop when you don't.
+    </p>
+    <div class="hero-ctas">
+      <a href="#lists-intro" class="btn-primary">Get Start</a>
+    </div>
+    <div class="hero-metrics">
+      <div class="metric">
+        <div class="metric-value"><span class="counter" data-target="2" data-decimals="0">0</span></div>
+        <div class="metric-label">Types of Loops</div>
+      </div>
+      <div class="metric">
+        <div class="metric-value"><span class="counter" data-target="0" data-decimals="0">0</span></div>
+        <div class="metric-label">Index of a List's First Item</div>
+      </div>
+      <div class="metric">
+        <div class="metric-value"><span class="counter" data-target="1" data-decimals="0">0</span></div>
+        <div class="metric-label">New List Method You'll Use</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ LOGO TICKER ═══ -->
+  <div class="logo-ticker reveal">
+    <div class="logo-ticker-label">Lists & Loops Toolkit</div>
+    <div class="ticker-track" id="tickerTrack">
+      <span class="ticker-item">for</span><span class="ticker-dot"></span>
+      <span class="ticker-item">while</span><span class="ticker-dot"></span>
+      <span class="ticker-item">in</span><span class="ticker-dot"></span>
+      <span class="ticker-item">range()</span><span class="ticker-dot"></span>
+      <span class="ticker-item">append()</span><span class="ticker-dot"></span>
+      <span class="ticker-item">len()</span><span class="ticker-dot"></span>
+      <!-- Duplicated for seamless loop -->
+      <span class="ticker-item">for</span><span class="ticker-dot"></span>
+      <span class="ticker-item">while</span><span class="ticker-dot"></span>
+      <span class="ticker-item">in</span><span class="ticker-dot"></span>
+      <span class="ticker-item">range()</span><span class="ticker-dot"></span>
+      <span class="ticker-item">append()</span><span class="ticker-dot"></span>
+      <span class="ticker-item">len()</span><span class="ticker-dot"></span>
+    </div>
+  </div><br>
+
+  <!-- ═══ FEATURES ═══ -->
+  <section class="section" id="lists-intro">
+
+    <div class="feature reveal">
+      <div class="feature-visual-code">
+        <div class="code-block"><pre><code>fruits = [<span class="tok-str">'apple'</span>, <span class="tok-str">'banana'</span>, <span class="tok-str">'cherry'</span>]
+
+<span class="tok-fn">print</span>(fruits)        <span class="tok-com"># ['apple', 'banana', 'cherry']</span>
+<span class="tok-fn">print</span>(<span class="tok-fn">type</span>(fruits))  <span class="tok-com"># &lt;class 'list'&gt;</span></code></pre></div>
+      </div>
+      <div class="feature-content">
+        <div class="feature-number">01</div>
+        <p class="section-tag">Lists</p>
+        <h2 class="section-title">What Is a <strong>List?</strong></h2>
+        <p class="section-body">
+          A list is a way to store many values together in one variable, in a specific order. You create one with square brackets <strong>[ ]</strong>, and separate each value with a comma.
+        </p>
+        <p class="section-body">
+          Here, <strong>fruits</strong> is a single variable, but it holds three separate pieces of text. That's the whole point of a list &mdash; one name, many values.
+        </p>
+      </div>
+    </div>
+
+    <div class="feature-content2">
+      <p class="section-body2">
+        Every value in a list has a position number, called an <strong style="color: #0e578c">index</strong>. Python starts counting from <strong style="color: #0e578c">0</strong>, not 1. You can grab any single value by writing the list's name followed by its index in square brackets.
+      </p>
+      <br>
+      <div class="code-block"><pre><code>fruits = [<span class="tok-str">'apple'</span>, <span class="tok-str">'banana'</span>, <span class="tok-str">'cherry'</span>]
+
+<span class="tok-fn">print</span>(fruits[<span class="tok-num">0</span>])   <span class="tok-com"># apple</span>
+<span class="tok-fn">print</span>(fruits[<span class="tok-num">1</span>])   <span class="tok-com"># banana</span>
+<span class="tok-fn">print</span>(fruits[<span class="tok-num">2</span>])   <span class="tok-com"># cherry</span>
+<span class="tok-fn">print</span>(fruits[<span class="tok-num">-1</span>])  <span class="tok-com"># cherry (the last item)</span></code></pre></div>
+      <br>
+      <p class="section-body2">
+        Notice that <strong style="color: #0e578c">'apple'</strong> is at index <strong style="color: #0e578c">0</strong>, not index 1. And <strong style="color: #0e578c">-1</strong> is a shortcut Python gives you for "the last item" &mdash; handy when you don't know exactly how many items are in the list.
+      </p>
+    </div>
+
+    <br><br><br><hr><br><br>
+
+    <div class="feature reverse reveal" id="list-operations">
+      <div class="feature-visual-code">
+        <div class="code-block"><pre><code>fruits = [<span class="tok-str">'apple'</span>, <span class="tok-str">'banana'</span>, <span class="tok-str">'cherry'</span>]
+fruits[<span class="tok-num">1</span>] = <span class="tok-str">'blueberry'</span>
+
+<span class="tok-fn">print</span>(fruits)  <span class="tok-com"># ['apple', 'blueberry', 'cherry']</span></code></pre></div>
+      </div>
+      <div class="feature-content">
+        <div class="feature-number">02</div>
+        <p class="section-tag">Changing Lists</p>
+        <h2 class="section-title">How Do You <strong>Change What's in a List?</strong></h2>
+        <p class="section-body">
+          Unlike a number or a string, a list can be changed after you create it. To replace one value, point to it by its index and assign a new value, just like you would with a normal variable.
+        </p>
+        <p class="section-body">
+          Here, <strong>fruits[1]</strong> was <strong>'banana'</strong>. Setting <strong>fruits[1] = 'blueberry'</strong> replaces just that one item &mdash; the rest of the list stays the same.
+        </p>
+      </div>
+    </div>
+
+    <div class="feature-content2">
+      <p class="section-body2">
+        You don't have to know an index to add something new. The <strong style="color: #0e578c">.append()</strong> method adds a value to the <em>end</em> of a list. And <strong style="color: #0e578c">len()</strong>, a function you've already seen with strings, tells you how many items are in a list.
+      </p>
+      <br>
+      <div class="code-block"><pre><code>fruits = [<span class="tok-str">'apple'</span>, <span class="tok-str">'banana'</span>, <span class="tok-str">'cherry'</span>]
+fruits.append(<span class="tok-str">'date'</span>)
+
+<span class="tok-fn">print</span>(fruits)        <span class="tok-com"># ['apple', 'banana', 'cherry', 'date']</span>
+<span class="tok-fn">print</span>(<span class="tok-fn">len</span>(fruits))  <span class="tok-com"># 4</span></code></pre></div>
+    </div>
+
+    <br><br><br><hr><br><br>
+
+    <div class="feature reveal" id="for-loop">
+      <div class="feature-visual-code">
+        <div class="code-block"><pre><code>fruits = [<span class="tok-str">'apple'</span>, <span class="tok-str">'banana'</span>, <span class="tok-str">'cherry'</span>]
+
+<span class="tok-fn">for</span> fruit <span class="tok-fn">in</span> fruits:
+    <span class="tok-fn">print</span>(fruit)
+
+<span class="tok-com"># apple</span>
+<span class="tok-com"># banana</span>
+<span class="tok-com"># cherry</span></code></pre></div>
+      </div>
+      <div class="feature-content">
+        <div class="feature-number">03</div>
+        <p class="section-tag">Repeating Tasks</p>
+        <h2 class="section-title">How Does a <strong>for Loop Work?</strong></h2>
+        <p class="section-body">
+          A <strong>for</strong> loop lets you go through a list one item at a time, and run the same code for each one. Here, <strong>fruit</strong> is a new, temporary variable &mdash; on each pass through the loop, it holds the next value from <strong>fruits</strong>.
+        </p>
+        <p class="section-body">
+          Just like <strong>if</strong> and functions, the code that belongs to the loop is marked with a colon <strong>( : )</strong> and indentation.
+        </p>
+      </div>
+    </div>
+
+    <div class="feature-content2">
+      <p class="section-body2">
+        Sometimes you want to repeat something a set number of times, without looping over a list at all. The built-in <strong style="color: #0e578c">range()</strong> function gives you a sequence of numbers to loop through instead.
+      </p>
+      <br>
+      <div class="code-block"><pre><code><span class="tok-fn">for</span> number <span class="tok-fn">in</span> <span class="tok-fn">range</span>(<span class="tok-num">5</span>):
+    <span class="tok-fn">print</span>(number)
+
+<span class="tok-com"># 0</span>
+<span class="tok-com"># 1</span>
+<span class="tok-com"># 2</span>
+<span class="tok-com"># 3</span>
+<span class="tok-com"># 4</span></code></pre></div>
+      <br>
+      <p class="section-body2">
+        Careful here: <strong style="color: #0e578c">range(5)</strong> counts <strong>five</strong> numbers, starting at <strong>0</strong> and stopping right before <strong>5</strong>. It never actually reaches the number 5. This matches how list indexes work, which is why <strong style="color: #0e578c">range()</strong> is so often used with lists.
+      </p>
+    </div>
+
+    <br><br><br><hr><br><br>
+
+    <div class="feature reverse reveal" id="while-loop">
+      <div class="feature-visual-code">
+        <div class="code-block"><pre><code>count = <span class="tok-num">1</span>
+
+<span class="tok-fn">while</span> count &lt;= <span class="tok-num">5</span>:
+    <span class="tok-fn">print</span>(count)
+    count += <span class="tok-num">1</span>
+
+<span class="tok-com"># 1</span>
+<span class="tok-com"># 2</span>
+<span class="tok-com"># 3</span>
+<span class="tok-com"># 4</span>
+<span class="tok-com"># 5</span></code></pre></div>
+      </div>
+      <div class="feature-content">
+        <div class="feature-number">04</div>
+        <p class="section-tag">Looping Until Done</p>
+        <h2 class="section-title">How Does a <strong>while Loop Work?</strong></h2>
+        <p class="section-body">
+          A <strong>while</strong> loop keeps repeating its code for as long as a condition stays <strong>True</strong>. Unlike a <strong>for</strong> loop, you don't decide in advance how many times it runs &mdash; that depends on when the condition finally becomes <strong>False</strong>.
+        </p>
+        <p class="section-body">
+          Here, <strong>count</strong> starts at 1 and goes up by 1 each time, using <strong>count += 1</strong> (from Week 2). Once <strong>count</strong> reaches 6, <strong>count &lt;= 5</strong> becomes <strong>False</strong>, and the loop stops.
+        </p>
+      </div>
+    </div>
+
+    <div class="feature-content2">
+      <p class="section-body2">
+        Be careful with <strong style="color: #0e578c">while</strong> loops: if the condition never becomes <strong>False</strong>, the loop will never stop. This is called an <strong style="color: #0e578c">infinite loop</strong>. Always make sure something inside the loop is working toward ending it, like <strong style="color: #0e578c">count += 1</strong> did above.
+      </p>
+      <br>
+      <p class="section-body2">
+        A <strong style="color: #0e578c">while</strong> loop is a great fit when you don't know how many times something needs to repeat &mdash; like waiting for a person to type a specific word:
+      </p>
+      <br>
+      <div class="code-block"><pre><code>answer = <span class="tok-str">''</span>
+
+<span class="tok-fn">while</span> answer != <span class="tok-str">'quit'</span>:
+    answer = <span class="tok-fn">input</span>(<span class="tok-str">'Type quit to stop: '</span>)
+
+<span class="tok-fn">print</span>(<span class="tok-str">'You stopped the loop!'</span>)
+
+<span class="tok-com"># Example run:</span>
+<span class="tok-com"># Type quit to stop: hello</span>
+<span class="tok-com"># Type quit to stop: quit</span>
+<span class="tok-com"># You stopped the loop!</span></code></pre></div>
+      <br>
+      <p class="section-body2">
+        <strong style="color: #0e578c">answer</strong> starts as an empty string, which is not equal to <strong>'quit'</strong>, so the loop begins. Each time through, it asks the person to type something. As soon as they type <strong>'quit'</strong>, the condition becomes <strong>False</strong> and the loop ends.
+      </p>
+    </div>
+
+    <br><br><br><hr><br><br>
+
+    <div class="feature reveal" id="putting-together">
+      <div class="feature-visual-code">
+        <div class="code-block"><pre><code><span class="tok-fn">def</span> check_grade(score):
+    <span class="tok-fn">if</span> score &gt;= <span class="tok-num">90</span>:
+        <span class="tok-fn">return</span> <span class="tok-str">'A'</span>
+    <span class="tok-fn">elif</span> score &gt;= <span class="tok-num">80</span>:
+        <span class="tok-fn">return</span> <span class="tok-str">'B'</span>
+    <span class="tok-fn">elif</span> score &gt;= <span class="tok-num">70</span>:
+        <span class="tok-fn">return</span> <span class="tok-str">'C'</span>
+    <span class="tok-fn">else</span>:
+        <span class="tok-fn">return</span> <span class="tok-str">'F'</span>
+
+scores = [<span class="tok-num">95</span>, <span class="tok-num">82</span>, <span class="tok-num">67</span>, <span class="tok-num">74</span>, <span class="tok-num">58</span>]
+
+<span class="tok-fn">for</span> score <span class="tok-fn">in</span> scores:
+    grade = check_grade(score)
+    <span class="tok-fn">print</span>(score, <span class="tok-str">'-&gt;'</span>, grade)
+
+<span class="tok-com"># 95 -&gt; A</span>
+<span class="tok-com"># 82 -&gt; B</span>
+<span class="tok-com"># 67 -&gt; F</span>
+<span class="tok-com"># 74 -&gt; C</span>
+<span class="tok-com"># 58 -&gt; F</span></code></pre></div>
+      </div>
+      <div class="feature-content">
+        <div class="feature-number">05</div>
+        <p class="section-tag">Putting It Together</p>
+        <h2 class="section-title">Combining <strong>Lists, Loops & Functions</strong></h2>
+        <p class="section-body">
+          Here, <strong>scores</strong> is a list of five test scores. The <strong>for</strong> loop visits each one, and for every score it calls <strong>check_grade()</strong> &mdash; the same function from Week 4 &mdash; to work out the letter grade, then prints the result.
+        </p>
+      </div>
+    </div>
+
+    <div class="feature-content2">
+      <p class="section-body2">
+        You can also build a brand-new list while you loop. Here, we use an <strong style="color: #0e578c">if</strong> condition inside the loop to collect only the scores that passed, using <strong style="color: #0e578c">.append()</strong> to add each one to a new list:
+      </p>
+      <br>
+      <div class="code-block"><pre><code><span class="tok-fn">def</span> check_grade(score):
+    <span class="tok-fn">if</span> score &gt;= <span class="tok-num">90</span>:
+        <span class="tok-fn">return</span> <span class="tok-str">'A'</span>
+    <span class="tok-fn">elif</span> score &gt;= <span class="tok-num">80</span>:
+        <span class="tok-fn">return</span> <span class="tok-str">'B'</span>
+    <span class="tok-fn">elif</span> score &gt;= <span class="tok-num">70</span>:
+        <span class="tok-fn">return</span> <span class="tok-str">'C'</span>
+    <span class="tok-fn">else</span>:
+        <span class="tok-fn">return</span> <span class="tok-str">'F'</span>
+
+scores = [<span class="tok-num">95</span>, <span class="tok-num">82</span>, <span class="tok-num">67</span>, <span class="tok-num">74</span>, <span class="tok-num">58</span>]
+passing_scores = []
+
+<span class="tok-fn">for</span> score <span class="tok-fn">in</span> scores:
+    grade = check_grade(score)
+    <span class="tok-fn">if</span> grade != <span class="tok-str">'F'</span>:
+        passing_scores.append(score)
+
+<span class="tok-fn">print</span>(passing_scores)  <span class="tok-com"># [95, 82, 74]</span></code></pre></div>
+      <br>
+      <p class="section-body2">
+        <strong style="color: #0e578c">passing_scores</strong> starts as an empty list <strong>[ ]</strong>. Every time the loop finds a score that isn't an <strong>'F'</strong>, it adds that score to the end of the list. By the time the loop finishes, <strong>passing_scores</strong> holds only the scores of 70 or above.
+      </p>
+    </div>
+
+  </section>
+
+
+
+  <div class="silk-divider reveal"></div>
+
+  <!-- ═══ TESTIMONIALS ═══ -->
+  <section class="section section-center" id="testimonials">
+    <p class="section-tag reveal">Quote for YOU!</p>
+    <h2 class="section-title reveal reveal-d1">Keep Learning <strong>no matter how hard it is.</strong></h2>
+
+    <div class="testimonials-grid">
+      <div class="testimonial-card reveal reveal-d1">
+        <p class="testimonial-quote">
+          "It's not about how hard you can hit, it's about how much you can take, and keep moving forward anyway. 
+          That's how wining is done."
+        </p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">RB</div>
+          <div>
+            <div class="testimonial-name">Rocky Balboa</div>
+            <div class="testimonial-role">Rocky</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card reveal reveal-d2">
+        <p class="testimonial-quote">
+          "Do, or do not. There's no such thing as almost — commit fully, or don't start at all."
+        </p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">YD</div>
+          <div>
+            <div class="testimonial-name">Yoda</div>
+            <div class="testimonial-role">Star Wars</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card reveal reveal-d3">
+        <p class="testimonial-quote">
+          "It's not that I'm so smart, it's just that I stay with problems longer."
+        </p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">AE</div>
+          <div>
+            <div class="testimonial-name">Elbert Einstein</div>
+            <div class="testimonial-role">Father of Modern Physics, Theory of Relativity</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="silk-divider reveal">
+    <!-- From Uiverse.io by BHARGAVPATEL1244 --> 
+<!-- From Uiverse.io by Gaurav-WebDev --> 
+<button class="button type1" onclick="window.location.href='Week6_Dictionaries_Errors.html'">
+</button>
+  </div>
+
+  <!-- ═══ FOOTER CTA ═══ -->
+  <section class="footer-cta" id="cta">
+  <div class="footer-bar reveal reveal-d4" style="margin-top: 80px;">
+    <ul class="footer-links">
+      <li><a href="../../Variables.html">Week 1</a></li>
+      <li><a href="Number&Math_Operations.html">Week 2</a></li>
+      <li><a href="Week3_Conditions.html">Week 3</a></li>
+      <li><a href="Week4_Functions.html">Week 4</a></li>
+      <li><a href="#">Week 5</a></li>
+      <li><a href="Week6_Dictionaries_Errors.html">Week 6</a></li>
+      <li><a href="Week7_Classes_Objects.html">Week 7</a></li>
+      <li><a href="Week8_Inheritance.html">Week 8</a></li>
+      <li><a href="Week9_AI_Prompting.html">Week 9</a></li>
+    </ul>
+  </div>
+</section>
+
+
+</main>
+
+<script src="templatemo-621-luminary-script.js"></script>
+</body>
+</html>

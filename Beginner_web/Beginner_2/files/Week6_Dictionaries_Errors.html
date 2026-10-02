@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 6 — Storing Records & Handling Errors</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="templatemo-621-luminary-style.css">
+<!--
+TemplateMo 621 Luminary
+https://templatemo.com/tm-621-luminary
+-->
+</head>
+<style>
+  /* From Uiverse.io by Gaurav-WebDev */ 
+.button {
+  height: 50px;
+  width: 150px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.5s ease-in-out;
+}
+
+.button:hover {
+  box-shadow: .5px .5px 150px #252525;
+}
+
+.type1::after {
+  content: "Chapter";
+  height: 50px;
+  width: 150px;
+  background-color: #008080;
+  color: #fff;
+  position: absolute;
+  top: 0%;
+  left: 0%;
+  transform: translateY(50px);
+  font-size: 1.2rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.5s ease-in-out;
+}
+
+.type1::before {
+  content: "Next";
+  height: 50px;
+  width: 150px;
+  background-color: #fff;
+  color: #008080;
+  position: absolute;
+  top: 0%;
+  left: 0%;
+  transform: translateY(0px) scale(1.2);
+  font-size: 1.2rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.5s ease-in-out;
+}
+
+.type1:hover::after {
+  transform: translateY(0) scale(1.2);
+}
+
+.type1:hover::before {
+  transform: translateY(-50px) scale(0) rotate(120deg);
+}
+</style>
+<body>
+
+<svg class="grain" width="100%" height="100%">
+  <filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="5" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter>
+  <rect width="100%" height="100%" filter="url(#n)"/>
+</svg>
+<div class="atmosphere"></div>
+
+<!-- Nav -->
+<nav class="top-nav" id="topNav">
+  <a href="../../../index.html" class="nav-brand">Records &<span> Errors</span></a>
+  <ul class="nav-links">
+    <li><a href="#dict-intro">Dictionaries</a></li>
+    <li><a href="#dict-operations">Changing Dictionaries</a></li>
+    <li><a href="#dict-loop">Looping Dictionaries</a></li>
+    <li><a href="#try-except">try / except</a></li>
+    <li><a href="#putting-together">Putting It Together</a></li>
+  </ul>
+  <a href="#dict-intro" class="nav-cta">Get Started</a>
+  <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+    <span class="toggle-bar"></span><span class="toggle-bar"></span>
+  </button>
+</nav>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <div class="mobile-menu-inner">
+    <div class="mobile-menu-links">
+      <a href="#dict-intro" class="mobile-menu-link" data-index="01">Dictionaries</a>
+      <a href="#dict-operations" class="mobile-menu-link" data-index="02">Changing Dictionaries</a>
+      <a href="#dict-loop" class="mobile-menu-link" data-index="03">Looping Dictionaries</a>
+      <a href="#try-except" class="mobile-menu-link" data-index="04">try / except</a>
+      <a href="#putting-together" class="mobile-menu-link" data-index="05">Putting It Together</a>
+    </div>
+  </div>
+</div>
+
+<!-- Side Panels -->
+<nav class="side-panel left" aria-label="Scroll indicators">
+  <span class="side-label">Scroll</span>
+  <div class="side-track"><div class="side-track-fill" id="leftTrack"></div></div>
+  <div class="side-dot active"></div>
+  <div class="side-dot"></div>
+  <div class="side-dot"></div>
+  <div class="side-dot"></div>
+  <div class="side-dot"></div>
+  <div class="side-dot"></div>
+  <div class="side-readout" id="scrollPct">00</div>
+</nav>
+
+<nav class="side-panel right" aria-label="Status indicators">
+  <span class="side-label">Python</span>
+  <div class="side-track"><div class="side-track-fill" id="rightTrack"></div></div>
+  <div class="side-dot"></div>
+  <div class="side-dot"></div>
+  <div class="side-dot active"></div>
+  <div class="side-dot"></div>
+  <div class="side-dot"></div>
+  <div class="side-dot"></div>
+  <div class="side-readout">Python</div>
+</nav>
+
+<main class="main">
+
+  <!-- ═══ HERO ═══ -->
+  <section class="hero" id="hero">
+    <div class="hero-grid"></div>
+    <div class="hero-badge">
+      <div class="hero-badge-dot"></div>
+      <span>Expect the Unexpected!</span>
+    </div>
+    <h1>Storing Records<br><em>& Handling Errors</em></h1>
+    <p class="hero-sub">
+      In this lesson, you'll learn how to store labeled data with <strong>dictionaries</strong> &mdash; pairs of keys and values &mdash; and how to keep your program running smoothly with <strong>try</strong> and <strong>except</strong>, even when something goes wrong.
+    </p>
+    <div class="hero-ctas">
+      <a href="#dict-intro" class="btn-primary">Get Start</a>
+    </div>
+    <div class="hero-metrics">
+      <div class="metric">
+        <div class="metric-value"><span class="counter" data-target="2" data-decimals="0">0</span></div>
+        <div class="metric-label">Parts of Every Dictionary Entry</div>
+      </div>
+      <div class="metric">
+        <div class="metric-value"><span class="counter" data-target="2" data-decimals="0">0</span></div>
+        <div class="metric-label">Keywords: try and except</div>
+      </div>
+      <div class="metric">
+        <div class="metric-value"><span class="counter" data-target="0" data-decimals="0">0</span></div>
+        <div class="metric-label">Crashes When You Handle Errors</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ LOGO TICKER ═══ -->
+  <div class="logo-ticker reveal">
+    <div class="logo-ticker-label">Records & Errors Toolkit</div>
+    <div class="ticker-track" id="tickerTrack">
+      <span class="ticker-item">key</span><span class="ticker-dot"></span>
+      <span class="ticker-item">value</span><span class="ticker-dot"></span>
+      <span class="ticker-item">.items()</span><span class="ticker-dot"></span>
+      <span class="ticker-item">try</span><span class="ticker-dot"></span>
+      <span class="ticker-item">except</span><span class="ticker-dot"></span>
+      <span class="ticker-item">ValueError</span><span class="ticker-dot"></span>
+      <span class="ticker-item">KeyError</span><span class="ticker-dot"></span>
+      <!-- Duplicated for seamless loop -->
+      <span class="ticker-item">key</span><span class="ticker-dot"></span>
+      <span class="ticker-item">value</span><span class="ticker-dot"></span>
+      <span class="ticker-item">.items()</span><span class="ticker-dot"></span>
+      <span class="ticker-item">try</span><span class="ticker-dot"></span>
+      <span class="ticker-item">except</span><span class="ticker-dot"></span>
+      <span class="ticker-item">ValueError</span><span class="ticker-dot"></span>
+      <span class="ticker-item">KeyError</span><span class="ticker-dot"></span>
+    </div>
+  </div><br>
+
+  <!-- ═══ FEATURES ═══ -->
+  <section class="section" id="dict-intro">
+
+    <div class="feature reveal">
+      <div class="feature-visual-code">
+        <div class="code-block"><pre><code>student = {<span class="tok-str">'name'</span>: <span class="tok-str">'Maria'</span>, <span class="tok-str">'age'</span>: <span class="tok-num">21</span>, <span class="tok-str">'major'</span>: <span class="tok-str">'Computer Science'</span>}
+
+<span class="tok-fn">print</span>(student)        <span class="tok-com"># {'name': 'Maria', 'age': 21, 'major': 'Computer Science'}</span>
+<span class="tok-fn">print</span>(<span class="tok-fn">type</span>(student))  <span class="tok-com"># &lt;class 'dict'&gt;</span></code></pre></div>
+      </div>
+      <div class="feature-content">
+        <div class="feature-number">01</div>
+        <p class="section-tag">Dictionaries</p>
+        <h2 class="section-title">What Is a <strong>Dictionary?</strong></h2>
+        <p class="section-body">
+          A dictionary stores data as labeled pairs. Each pair has a <strong>key</strong> (the label) and a <strong>value</strong> (the data). You create one with curly braces <strong>{ }</strong>, writing each pair as <strong>key: value</strong>, separated by commas.
+        </p>
+        <p class="section-body">
+          Think of a real dictionary: you look up a word (the key) to find its meaning (the value). A Python dictionary works the same way &mdash; you look things up by name, not by position like you do with a list.
+        </p>
+      </div>
+    </div>
+
+    <div class="feature-content2">
+      <p class="section-body2">
+        To get a value out of a dictionary, write the dictionary's name followed by the key in square brackets &mdash; not the position number you used with lists, but the actual key you gave it.
+      </p>
+      <br>
+      <div class="code-block"><pre><code>student = {<span class="tok-str">'name'</span>: <span class="tok-str">'Maria'</span>, <span class="tok-str">'age'</span>: <span class="tok-num">21</span>, <span class="tok-str">'major'</span>: <span class="tok-str">'Computer Science'</span>}
+
+<span class="tok-fn">print</span>(student[<span class="tok-str">'name'</span>])  <span class="tok-com"># Maria</span>
+<span class="tok-fn">print</span>(student[<span class="tok-str">'age'</span>])   <span class="tok-com"># 21</span></code></pre></div>
+      <br>
+      <p class="section-body2">
+        Each key in a dictionary must be unique, but the values can repeat or be any type &mdash; text, numbers, even lists.
+      </p>
+    </div>
+
+    <br><br><br><hr><br><br>
+
+    <div class="feature reverse reveal" id="dict-operations">
+      <div class="feature-visual-code">
+        <div class="code-block"><pre><code>student = {<span class="tok-str">'name'</span>: <span class="tok-str">'Maria'</span>, <span class="tok-str">'age'</span>: <span class="tok-num">21</span>}
+student[<span class="tok-str">'age'</span>] = <span class="tok-num">22</span>
+student[<span class="tok-str">'major'</span>] = <span class="tok-str">'Computer Science'</span>
+
+<span class="tok-fn">print</span>(student)  <span class="tok-com"># {'name': 'Maria', 'age': 22, 'major': 'Computer Science'}</span></code></pre></div>
+      </div>
+      <div class="feature-content">
+        <div class="feature-number">02</div>
+        <p class="section-tag">Changing Dictionaries</p>
+        <h2 class="section-title">How Do You <strong>Add or Update Data?</strong></h2>
+        <p class="section-body">
+          You use the same <strong>dict[key] = value</strong> pattern for both jobs. If the key already exists, Python updates its value. If the key is new, Python adds it as a brand new pair.
+        </p>
+        <p class="section-body">
+          Here, <strong>'age'</strong> already existed, so it gets updated to 22. <strong>'major'</strong> did not exist yet, so it gets added as a new key.
+        </p>
+      </div>
+    </div>
+
+    <div class="feature-content2">
+      <p class="section-body2">
+        Before looking up a key, it's often useful to check whether it exists at all. The <strong style="color: #0e578c">in</strong> keyword (from Week 3) checks a dictionary too, and gives you back <strong>True</strong> or <strong>False</strong>.
+      </p>
+      <br>
+      <div class="code-block"><pre><code>student = {<span class="tok-str">'name'</span>: <span class="tok-str">'Maria'</span>, <span class="tok-str">'age'</span>: <span class="tok-num">22</span>}
+
+<span class="tok-fn">print</span>(<span class="tok-str">'name'</span> <span class="tok-fn">in</span> student)   <span class="tok-com"># True</span>
+<span class="tok-fn">print</span>(<span class="tok-str">'email'</span> <span class="tok-fn">in</span> student)  <span class="tok-com"># False</span></code></pre></div>
+      <br>
+      <p class="section-body2">
+        This matters because looking up a key that doesn't exist, like <strong style="color: #0e578c">student['email']</strong>, doesn't just give you nothing back &mdash; it stops your program with an error. You'll learn how to handle that safely later in this lesson.
+      </p>
+    </div>
+
+    <br><br><br><hr><br><br>
+
+    <div class="feature reveal" id="dict-loop">
+      <div class="feature-visual-code">
+        <div class="code-block"><pre><code>student = {<span class="tok-str">'name'</span>: <span class="tok-str">'Maria'</span>, <span class="tok-str">'age'</span>: <span class="tok-num">22</span>, <span class="tok-str">'major'</span>: <span class="tok-str">'Computer Science'</span>}
+
+<span class="tok-fn">for</span> key <span class="tok-fn">in</span> student:
+    <span class="tok-fn">print</span>(key)
+
+<span class="tok-com"># name</span>
+<span class="tok-com"># age</span>
+<span class="tok-com"># major</span></code></pre></div>
+      </div>
+      <div class="feature-content">
+        <div class="feature-number">03</div>
+        <p class="section-tag">Looping Dictionaries</p>
+        <h2 class="section-title">How Do You <strong>Loop Through a Dictionary?</strong></h2>
+        <p class="section-body">
+          You can use a <strong>for</strong> loop (from Week 5) on a dictionary too. By default, it hands you each <strong>key</strong>, one at a time &mdash; not the value.
+        </p>
+      </div>
+    </div>
+
+    <div class="feature-content2">
+      <p class="section-body2">
+        Most of the time, you want both the key and its value together. The <strong style="color: #0e578c">.items()</strong> method gives you exactly that, so you can grab both in one loop.
+      </p>
+      <br>
+      <div class="code-block"><pre><code>student = {<span class="tok-str">'name'</span>: <span class="tok-str">'Maria'</span>, <span class="tok-str">'age'</span>: <span class="tok-num">22</span>, <span class="tok-str">'major'</span>: <span class="tok-str">'Computer Science'</span>}
+
+<span class="tok-fn">for</span> key, value <span class="tok-fn">in</span> student.items():
+    <span class="tok-fn">print</span>(key, <span class="tok-str">':'</span>, value)
+
+<span class="tok-com"># name : Maria</span>
+<span class="tok-com"># age : 22</span>
+<span class="tok-com"># major : Computer Science</span></code></pre></div>
+      <br>
+      <p class="section-body2">
+        Notice there are now <strong style="color: #0e578c">two</strong> loop variables, <strong>key</strong> and <strong>value</strong>, instead of one. On each pass, Python fills them in with the next pair from the dictionary.
+      </p>
+    </div>
+
+    <br><br><br><hr><br><br>
+
+    <div class="feature reverse reveal" id="try-except">
+      <div class="feature-visual-code">
+        <div class="code-block"><pre><code><span class="tok-fn">try</span>:
+    number = <span class="tok-fn">int</span>(<span class="tok-str">'abc'</span>)
+    <span class="tok-fn">print</span>(number)
+<span class="tok-fn">except</span> ValueError:
+    <span class="tok-fn">print</span>(<span class="tok-str">'That is not a valid number.'</span>)
+
+<span class="tok-com"># That is not a valid number.</span></code></pre></div>
+      </div>
+      <div class="feature-content">
+        <div class="feature-number">04</div>
+        <p class="section-tag">Handling Errors</p>
+        <h2 class="section-title">What Do <strong>try and except Do?</strong></h2>
+        <p class="section-body">
+          Sometimes code fails while it's running &mdash; like trying to turn the text <strong>'abc'</strong> into a number. Python calls this an <strong>error</strong>. Without any help, an error stops your whole program immediately.
+        </p>
+        <p class="section-body">
+          <strong>try</strong> lets you attempt some risky code. If it fails, Python jumps straight to <strong>except</strong> instead of crashing, and your program keeps running.
+        </p>
+      </div>
+    </div>
+
+    <div class="feature-content2">
+      <p class="section-body2">
+        Python has different names for different kinds of errors, so you can catch the exact one you expect. <strong style="color: #0e578c">ValueError</strong> happens when a value is the wrong "shape" for what you're asking &mdash; like text that isn't really a number. This is especially useful with <strong style="color: #0e578c">input()</strong>, since you can never fully trust what a person types.
+      </p>
+      <br>
+      <div class="code-block"><pre><code><span class="tok-fn">try</span>:
+    age = <span class="tok-fn">int</span>(<span class="tok-fn">input</span>(<span class="tok-str">'Enter your age: '</span>))
+    <span class="tok-fn">print</span>(<span class="tok-str">'Next year you will be'</span>, age + <span class="tok-num">1</span>)
+<span class="tok-fn">except</span> ValueError:
+    <span class="tok-fn">print</span>(<span class="tok-str">'Please enter a whole number.'</span>)
+
+<span class="tok-com"># Example run:</span>
+<span class="tok-com"># Enter your age: twenty</span>
+<span class="tok-com"># Please enter a whole number.</span></code></pre></div>
+      <br>
+      <p class="section-body2">
+        Here, the person typed <strong style="color: #0e578c">'twenty'</strong> instead of a number. <strong>int()</strong> can't turn that into a number, so it raises a <strong>ValueError</strong>. Instead of crashing, the <strong>except</strong> block catches it and shows a friendly message.
+      </p>
+    </div>
+
+    <br><br><br><hr><br><br>
+
+    <div class="feature reveal" id="putting-together">
+      <div class="feature-visual-code">
+        <div class="code-block"><pre><code>prices = {<span class="tok-str">'apple'</span>: <span class="tok-num">1.50</span>, <span class="tok-str">'banana'</span>: <span class="tok-num">0.75</span>, <span class="tok-str">'cherry'</span>: <span class="tok-num">3.00</span>}
+
+item = <span class="tok-fn">input</span>(<span class="tok-str">'Which item do you want the price for? '</span>)
+
+<span class="tok-fn">try</span>:
+    <span class="tok-fn">print</span>(<span class="tok-str">'Price:'</span>, prices[item])
+<span class="tok-fn">except</span> KeyError:
+    <span class="tok-fn">print</span>(<span class="tok-str">'Sorry, that item is not in stock.'</span>)
+
+<span class="tok-com"># Example run:</span>
+<span class="tok-com"># Which item do you want the price for? banana</span>
+<span class="tok-com"># Price: 0.75</span></code></pre></div>
+      </div>
+      <div class="feature-content">
+        <div class="feature-number">05</div>
+        <p class="section-tag">Putting It Together</p>
+        <h2 class="section-title">Combining <strong>Dictionaries & try/except</strong></h2>
+        <p class="section-body">
+          This program looks up a price by name in the <strong>prices</strong> dictionary. If the item the person typed isn't a key in the dictionary, Python would normally raise a <strong>KeyError</strong> &mdash; but the <strong>try/except</strong> block catches it and shows a friendly message instead of crashing.
+        </p>
+      </div>
+    </div>
+
+    <div class="feature-content2">
+      <p class="section-body2">
+        Let's combine everything from this course so far: a <strong style="color: #0e578c">list</strong> of items to check (Week 5), a <strong style="color: #0e578c">for</strong> loop to go through them (Week 5), a <strong style="color: #0e578c">dictionary</strong> to look up prices (this lesson), and <strong style="color: #0e578c">try/except</strong> to handle any item that isn't in stock (this lesson):
+      </p>
+      <br>
+      <div class="code-block"><pre><code>prices = {<span class="tok-str">'apple'</span>: <span class="tok-num">1.50</span>, <span class="tok-str">'banana'</span>: <span class="tok-num">0.75</span>, <span class="tok-str">'cherry'</span>: <span class="tok-num">3.00</span>}
+shopping_list = [<span class="tok-str">'apple'</span>, <span class="tok-str">'cherry'</span>, <span class="tok-str">'mango'</span>]
+
+<span class="tok-fn">for</span> item <span class="tok-fn">in</span> shopping_list:
+    <span class="tok-fn">try</span>:
+        <span class="tok-fn">print</span>(item, <span class="tok-str">':'</span>, prices[item])
+    <span class="tok-fn">except</span> KeyError:
+        <span class="tok-fn">print</span>(item, <span class="tok-str">': not in stock'</span>)
+
+<span class="tok-com"># apple : 1.5</span>
+<span class="tok-com"># cherry : 3.0</span>
+<span class="tok-com"># mango : not in stock</span></code></pre></div>
+      <br>
+      <p class="section-body2">
+        The loop checks each item in <strong style="color: #0e578c">shopping_list</strong> one at a time. <strong>'apple'</strong> and <strong>'cherry'</strong> are both keys in <strong>prices</strong>, so their prices print normally. <strong>'mango'</strong> is not a key in <strong>prices</strong>, so it would normally crash the program &mdash; instead, <strong>except</strong> catches it, and the loop keeps going.
+      </p>
+    </div>
+
+  </section>
+
+
+
+  <div class="silk-divider reveal"></div>
+
+  <!-- ═══ TESTIMONIALS ═══ -->
+  <section class="section section-center" id="testimonials">
+    <p class="section-tag reveal">Quote for YOU!</p>
+    <h2 class="section-title reveal reveal-d1">Keep Learning <strong>no matter how hard it is.</strong></h2>
+
+    <div class="testimonials-grid">
+      <div class="testimonial-card reveal reveal-d1">
+        <p class="testimonial-quote">
+          "It's not about how hard you can hit, it's about how much you can take, and keep moving forward anyway. 
+          That's how wining is done."
+        </p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">RB</div>
+          <div>
+            <div class="testimonial-name">Rocky Balboa</div>
+            <div class="testimonial-role">Rocky</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card reveal reveal-d2">
+        <p class="testimonial-quote">
+          "Do, or do not. There's no such thing as almost — commit fully, or don't start at all."
+        </p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">YD</div>
+          <div>
+            <div class="testimonial-name">Yoda</div>
+            <div class="testimonial-role">Star Wars</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card reveal reveal-d3">
+        <p class="testimonial-quote">
+          "It's not that I'm so smart, it's just that I stay with problems longer."
+        </p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">AE</div>
+          <div>
+            <div class="testimonial-name">Elbert Einstein</div>
+            <div class="testimonial-role">Father of Modern Physics, Theory of Relativity</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="silk-divider reveal">
+    <!-- From Uiverse.io by BHARGAVPATEL1244 --> 
+<!-- From Uiverse.io by Gaurav-WebDev --> 
+<button class="button type1" onclick="window.location.href='Week7_Classes_Objects.html'">
+</button>
+  </div>
+
+  <!-- ═══ FOOTER CTA ═══ -->
+  <section class="footer-cta" id="cta">
+
+    <div class="footer-bar reveal reveal-d4" style="margin-top: 80px;">
+      <div class="footer-brand">Week 6 &mdash; Records & Errors</div>
+      <div class="footer-links">
+        <a href="#dict-intro">Dictionaries</a>
+        <a href="#dict-operations">Changing Dictionaries</a>
+        <a href="#dict-loop">Looping Dictionaries</a>
+        <a href="#try-except">try / except</a>
+        <a href="#putting-together">Putting It Together</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<script src="templatemo-621-luminary-script.js"></script>
+</body>
+</html>

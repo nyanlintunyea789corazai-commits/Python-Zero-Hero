@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Luminary — Intelligent Workflow Platform</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="templatemo-621-luminary-style.css">
+<!--
+TemplateMo 621 Luminary
+https://templatemo.com/tm-621-luminary
+-->
+</head>
+<style>
+  /* From Uiverse.io by Gaurav-WebDev */ 
+.button {
+  height: 50px;
+  width: 150px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.5s ease-in-out;
+}
+
+.button:hover {
+  box-shadow: .5px .5px 150px #252525;
+}
+
+.type1::after {
+  content: "Chapter";
+  height: 50px;
+  width: 150px;
+  background-color: #008080;
+  color: #fff;
+  position: absolute;
+  top: 0%;
+  left: 0%;
+  transform: translateY(50px);
+  font-size: 1.2rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.5s ease-in-out;
+}
+
+.type1::before {
+  content: "Next";
+  height: 50px;
+  width: 150px;
+  background-color: #fff;
+  color: #008080;
+  position: absolute;
+  top: 0%;
+  left: 0%;
+  transform: translateY(0px) scale(1.2);
+  font-size: 1.2rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.5s ease-in-out;
+}
+
+.type1:hover::after {
+  transform: translateY(0) scale(1.2);
+}
+
+.type1:hover::before {
+  transform: translateY(-50px) scale(0) rotate(120deg);
+}
+</style>
+<body>
+
+<svg class="grain" width="100%" height="100%">
+  <filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="5" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter>
+  <rect width="100%" height="100%" filter="url(#n)"/>
+</svg>
+<div class="atmosphere"></div>
+
+<!-- Nav -->
+<nav class="top-nav" id="topNav">
+  <a href="#" class="nav-brand">Workshop<span>Report Card Printer</span></a>
+  
+  <a href="#Naming" class="nav-cta">Get Started</a>
+  <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+    <span class="toggle-bar"></span><span class="toggle-bar"></span>
+  </button>
+</nav>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <div class="mobile-menu-inner">
+    <div class="mobile-menu-links">
+      <a href="#Naming" class="mobile-menu-link" data-index="01">Naming</a>
+      <a href="#printing" class="mobile-menu-link" data-index="02">Print</a>
+      <a href="#data-types" class="mobile-menu-link" data-index="03">Common Data Types</a>
+      <a href="#type&isinstance" class="mobile-menu-link" data-index="04">type() & isinstance()</a>
+      <a href="#Naming" class="mobile-menu-link" data-index="07">Get Started</a>
+    </div>
+    
+  </div>
+</div>
+
+<!-- Side Panels -->
+<nav class="side-panel left" aria-label="Scroll indicators">
+  <span class="side-label">Scroll</span>
+  <div class="side-track"><div class="side-track-fill" id="leftTrack"></div></div>
+  <div class="side-dot active"></div>
+  <div class="side-dot"></div>
+  <div class="side-dot"></div>
+  <div class="side-dot"></div>
+  <div class="side-dot"></div>
+  <div class="side-dot"></div>
+  <div class="side-readout" id="scrollPct">00</div>
+</nav>
+
+<nav class="side-panel right" aria-label="Status indicators">
+  <span class="side-label">Python</span>
+  <div class="side-track"><div class="side-track-fill" id="rightTrack"></div></div>
+  <div class="side-dot"></div>
+  <div class="side-dot"></div>
+  <div class="side-dot active"></div>
+  <div class="side-dot"></div>
+  <div class="side-dot"></div>
+  <div class="side-dot"></div>
+  <div class="side-readout">Python</div>
+</nav>
+
+<main class="main">
+
+  <!-- ═══ HERO ═══ -->
+  <section class="hero" id="hero">
+    <div class="hero-grid"></div>
+    <div class="hero-badge">
+      <div class="hero-badge-dot"></div>
+      <span>Solo-Leveling Begins!</span>
+    </div>
+    <h1>Build a Report Card Printer<br><em>(Workshop)</em></h1>
+    <p class="hero-sub">
+      In this particular course, we are going to review of the knowledge that we have learned in the previous web-page. 
+      So, this course will be a workshop for you to practice and review the knowledge that we have learned in the previous web-page.
+    </p>
+    <div class="hero-ctas">
+      <a href="#Naming" class="btn-primary">Get Start</a>
+    </div>
+    <div class="hero-metrics">
+      <div class="metric">
+        <div class="metric-value"><span class="counter" data-target="57.9%" data-decimals="1">0.0</span><span>%</span></div>
+        <div class="metric-label">World Wide Usage</div>
+      </div>
+      <div class="metric">
+        <div class="metric-value"><span class="counter" data-target="34%" data-decimals="0">0</span><span>+</span></div>
+        <div class="metric-label">Primary Language</div>
+      </div>
+      <div class="metric">
+        <div class="metric-value"><span class="counter" data-target="100" data-decimals="0">0</span><span>%</span></div>
+        <div class="metric-label">Complicated Thought</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ LOGO TICKER ═══ -->
+  <div class="logo-ticker reveal">
+    <div class="logo-ticker-label">Python Usage Fields</div>
+    <div class="ticker-track" id="tickerTrack">
+      <span class="ticker-item">Web Development</span><span class="ticker-dot"></span>
+      <span class="ticker-item">Data Science and Analysis</span><span class="ticker-dot"></span>
+      <span class="ticker-item">Artificial Intelligence </span><span class="ticker-dot"></span>
+      <span class="ticker-item">Machine Learning</span><span class="ticker-dot"></span>
+      <span class="ticker-item">Automation</span><span class="ticker-dot"></span>
+      <span class="ticker-item">Cybersecurity</span><span class="ticker-dot"></span>
+      <span class="ticker-item">Scripting</span><span class="ticker-dot"></span>
+      <span class="ticker-item">Scientific Computing</span><span class="ticker-dot"></span>
+      <!-- Duplicated for seamless loop -->
+      <span class="ticker-item">Web Development</span><span class="ticker-dot"></span>
+      <span class="ticker-item">Data Science and Analysis</span><span class="ticker-dot"></span>
+      <span class="ticker-item">Artificial Intelligence </span><span class="ticker-dot"></span>
+      <span class="ticker-item">Machine Learning</span><span class="ticker-dot"></span>
+      <span class="ticker-item">Automation</span><span class="ticker-dot"></span>
+      <span class="ticker-item">Cybersecurity</span><span class="ticker-dot"></span>
+      <span class="ticker-item">Scripting</span><span class="ticker-dot"></span>
+      <span class="ticker-item">Scientific Computing</span><span class="ticker-dot"></span>
+    </div>
+  </div><br>
+
+  <!-- ═══ FEATURES ═══ -->
+  <section class="section" id="Naming">
+
+    <div class="feature reveal">
+      <div class="feature-visual">
+        <img src="img/Name.jpg" alt="How do you declare variables and what are naming conventions to name variables?">
+      </div>
+      <div class="feature-content">
+        <div class="feature-number"> Step 01</div>
+        <p class="section-body">
+          In this workshop, you will practice Python data types by building a simple report card printer.
+          As you learned in previous lessons, variables are assigned in this way:
+          <br>
+          <br>
+          <strong>greeting = 'Hello, World!'</strong>
+          <br>
+          <br>
+          In the example above, the variable <strong>greeting</strong> has the value of a string, which is a sequence of characters surrounded by quotes.
+          <br>
+          <br>
+          Create a variable called <strong>name</strong> and assing it the string <strong>Your Name</strong>.
+          Remember to surround the value with either single or double quotes as shown in the example.
+        </p>
+       
+      </div>
+
+      
+    </div>
+    <div class="feature-visual2">
+      <img style="border-radius: 20px;" src="images/Name_&_Age.png" alt=""> <br><br>
+
+      
+    </div><br><br><br>
+    <hr>
+
+    <div class="feature reverse reveal" id="printing">
+      <div class="feature-visual">
+        <img src="img/Print.jpg" alt="Predictive analytics visualization">
+      </div>
+      <div class="feature-content">
+        <div class="feature-number">Step 02</div>
+        <p class="section-body">     
+          You can print the value of a variable using the <strong>print()</strong> function.
+          <br><br>
+          Example Code:
+          <br><br>
+          <strong>greeting = 'Hello World'</strong>
+          <br>
+          <strong>print(greeting)</strong>
+          <br><br>
+          You will learn more about functions in upcoming lessons. 
+          For now, know that a function use a reusable block of code that can be called, or invoked, to run its code, and arguments can be passed to it.
+          <br><br>
+          In the example above, <strong>print(greeting)</strong> us a function call, and <strong>greeitng</strong> is the argument of the function. 
+          Refer to the example and print the <strong>name</strong> variable. 
+          Check the output in the terminal. 
+        </p>
+      </div>
+
+      
+    </div>
+    
+      </div><br><br><br>
+      <hr>
+
+    <div class="feature reveal" id="data-types">
+      <div class="feature-visual">
+        <img src="img/Type.jpg" alt="Common Data Types">
+      </div>
+      <div class="feature-content">
+        <div class="feature-number">Step 03</div>
+        <p class="section-body">
+          You should now see the student name printed in the terminal.
+          Python provides a function named <strong>type()</strong> that can be used to check the type of a value.
+          <br><br>
+          Example Code:
+          <br><br>
+          platform = 'Python'
+          print(type(platform))
+          <br><br>
+          In the example above, the output <strong><class 'str'></strong> means that the variable passed to the <strong>type()</strong> function is a string type.
+          Use the <strong>type()</strong> function with the <strong>name</strong> as its argument and print out the output like the example.
+          Check the output in the terminal that shows <strong>name</strong> is of the type <strong>str</strong> (string).
+        </p>
+
+      </div>
+    </div>
+    
+        <br><br><br><hr>
+
+
+      </p>
+    </div>
+
+    <div class="feature reverse reveal" id="type&isinstance">
+      <div class="feature-visual">
+        <img src="img/Boolean.jpg" alt="type() and isinstance() Functions">
+      </div>
+      <div class="feature-content">
+        <div class="feature-number"> Step 04</div>
+        <p class="section-body">
+          The report card should also show whether the student is currently enrolled.
+          This can be represented using a boolean value. 
+          Boolean values represent a yes-or-no condition, and they are often used to make decisions in code.
+          There are only two boolean values: <strong>True</strong> and <strong>False</strong>.
+          Declare a variable named <strong>is_student</strong> and assign it the value <strong>True</strong>.
+
+        </p>
+      </div>
+
+      
+    </div>
+    
+    </div>
+
+        </div><br><br><br>
+      <hr>
+
+    <div class="feature reveal" id="data-types">
+      <div class="feature-visual">
+        <img src="img/Type.png" alt="Common Data Types">
+      </div>
+      <div class="feature-content">
+        <div class="feature-number">Step 05</div>
+        <p class="section-body">
+          The <strong>print()</strong> function can display more than one value at a time.
+          Separate values with a comma <strong>( , )</strong> to print them on the same line. 
+          <br><br>
+          Example Code:
+          <br><br>
+          subject = 'Python'
+          print(subject, type(subject))
+          <br><br>
+          Print both <strong>is_student</strong> and <strong>type(is_student)</strong> on the same line using a comma, as shown in the example.
+          Then check the output in the terminal that shows the value of <strong>is_student</strong>, and its type <strong>bool</strong> boolean.
+
+
+        </p>
+
+      </div>
+    </div>
+    <br><br><br>
+      <hr>
+
+    <div class="feature reverse reveal" id="type&isinstance">
+      <div class="feature-visual">
+        <img src="img/isinstance.png" alt="type() and isinstance() Functions">
+      </div>
+      <div class="feature-content">
+        <div class="feature-number"> Step 06</div>
+        <p class="section-body">
+          The student name should follow the same format as the other details. 
+          Remove the earlier outputs of the <strong>name</strong> variable. 
+          Then, print <strong>name</strong> and <strong>type(name)</strong> together on one line separated by a comma like the previous step.
+        </p>
+      </div>
+
+      
+    </div>
+    
+    </div>
+
+        </div><br><br><br>
+      <hr>
+
+    <div class="feature reveal" id="data-types">
+      <div class="feature-visual">
+        <img src="img/data_type.png" alt="Common Data Types">
+      </div>
+      <div class="feature-content">
+        <div class="feature-number">Step 07</div>
+        <p class="section-body">
+          Now you need to add the student's age to the report card.
+          For that you'll use an integer, one of the numeric data types in Python
+          Declare a variable named <strong>age</strong> and assign it the integer value <strong>20</strong>. Then, print the value and data type of <strong>age</strong> together separated by a comma.
+          Check the output in the terminal that shows the value of <strong>age</strong>, and its type as <strong>int</strong> (integer).
+          
+        </p>
+
+      </div>
+    </div>
+    <br><br><br>
+      <hr>
+
+    <div class="feature reverse reveal" id="type&isinstance">
+      <div class="feature-visual">
+        <img src="img/float.png" alt="type() and isinstance() Functions">
+      </div>
+      <div class="feature-content">
+        <div class="feature-number"> Step 08</div>
+        <p class="section-body">
+          Now, add the student's score.
+          Declare a variable named <strong>score</strong> and assign it the value <strong>80.5</strong>.
+          Although both <strong>age</strong> and <strong>score</strong> are numbers, they may not be the same kind.
+          Python provides a function called <strong>isinstance()</strong> to check this.
+          <br><br>
+          Example Code:
+          <br><br>
+          x = 10
+          print(isinstance(x, int))
+          <br><br>
+          Use <strong>isinstance()</strong> to check whether score is an <strong>int</strong>, and print the result to the terminal as shown in the example above.
+
+        </p>
+      </div>
+
+      
+    </div>
+    
+    </div>
+
+        </div><br><br><br>
+      <hr>
+    <div class="feature reveal" id="data-types">
+      <div class="feature-visual">
+        <img src="img/False.png" alt="Common Data Types">
+      </div>
+      <div class="feature-content">
+        <div class="feature-number">Step 09</div>
+        <p class="section-body">
+          The output is <strong>False</strong>, which shows that <strong>score</strong> is not an integer.
+          Another common kind of number in Python is <strong>float</strong>, which represents a number with decimals.
+          Replace <strong>int</strong> with <strong>float</strong> in the existing <strong>isinstance()</strong> call to confirm this.
+
+        </p>
+
+      </div>
+    </div>
+    <br><br><br>
+      <hr>
+
+    <div class="feature reverse reveal" id="type&isinstance">
+      <div class="feature-visual">
+        <img src="img/Good_job.jpg" alt="type() and isinstance() Functions">
+      </div>
+      <div class="feature-content">
+        <div class="feature-number"> Step 10</div>
+        <p class="section-body">
+          The output is <strong>True</strong>, confriming that <strong>score</strong> is a <strong>float</strong>.
+          Complete the report card by printing the <strong>score</strong> value along with its data using a single <strong>print()</strong> statement.
+        </p>
+      </div>
+
+      
+    </div>
+    
+    </div>
+
+        </div><br><br><br>
+      <hr>
+
+      
+
+  </section>
+
+
+
+  <div class="silk-divider reveal"></div>
+
+  <!-- ═══ TESTIMONIALS ═══ -->
+  <section class="section section-center" id="testimonials">
+    <p class="section-tag reveal">Quote for YOU!</p>
+    <h2 class="section-title reveal reveal-d1">Keep Learning <strong>no matter how hard it is.</strong></h2>
+
+    <div class="testimonials-grid">
+      <div class="testimonial-card reveal reveal-d1">
+        <p class="testimonial-quote">
+          "It's not about how hard you can hit, it's about how much you can take, and keep moving forward anyway. 
+          That's how wining is done."
+        </p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">RB</div>
+          <div>
+            <div class="testimonial-name">Rocky Balboa</div>
+            <div class="testimonial-role">Rocky</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card reveal reveal-d2">
+        <p class="testimonial-quote">
+          "Do, or do not. There's no such thing as almost — commit fully, or don't start at all."
+        </p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">YD</div>
+          <div>
+            <div class="testimonial-name">Yoda</div>
+            <div class="testimonial-role">Star Wars</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card reveal reveal-d3">
+        <p class="testimonial-quote">
+          "It's not that I'm so smart, it's just that I stay with problems longer."
+        </p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">AE</div>
+          <div>
+            <div class="testimonial-name">Elbert Einstein</div>
+            <div class="testimonial-role">Father of Modern Physics, Theory of Relativity</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="silk-divider reveal">
+    <!-- From Uiverse.io by BHARGAVPATEL1244 --> 
+<!-- From Uiverse.io by Gaurav-WebDev --> 
+<button class="button type1" onclick="window.location.href='files/Number&Math_Operations.html'">
+</button>
+  </div>
+
+ 
+
+ 
+
+  <!-- ═══ FOOTER CTA ═══ -->
+  <section class="footer-cta" id="cta">
+
+    <div class="footer-bar reveal reveal-d4" style="margin-top: 80px;">
+      <div class="footer-brand">variable  &mdash; Data Types</div>
+      <div class="footer-links">
+        <a href="#Naming">Naming</a>
+        <a href="#printing">Print</a>
+        <a href="#data-types">Common Data Types</a>
+        <a href="#type&isinstance">type( ) & isinstance( )</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<script src="templatemo-621-luminary-script.js"></script>
+</body>
+</html>

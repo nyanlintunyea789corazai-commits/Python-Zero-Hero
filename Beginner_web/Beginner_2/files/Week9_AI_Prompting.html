@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 9 — AI Prompting & Capstone Launch</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="templatemo-621-luminary-style.css">
+<!--
+TemplateMo 621 Luminary
+https://templatemo.com/tm-621-luminary
+-->
+</head>
+<style>
+  /* From Uiverse.io by Gaurav-WebDev */ 
+.button {
+  height: 50px;
+  width: 150px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.5s ease-in-out;
+}
+
+.button:hover {
+  box-shadow: .5px .5px 150px #252525;
+}
+
+.type1::after {
+  content: "Chapter";
+  height: 50px;
+  width: 150px;
+  background-color: #008080;
+  color: #fff;
+  position: absolute;
+  top: 0%;
+  left: 0%;
+  transform: translateY(50px);
+  font-size: 1.2rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.5s ease-in-out;
+}
+
+.type1::before {
+  content: "Next";
+  height: 50px;
+  width: 150px;
+  background-color: #fff;
+  color: #008080;
+  position: absolute;
+  top: 0%;
+  left: 0%;
+  transform: translateY(0px) scale(1.2);
+  font-size: 1.2rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.5s ease-in-out;
+}
+
+.type1:hover::after {
+  transform: translateY(0) scale(1.2);
+}
+
+.type1:hover::before {
+  transform: translateY(-50px) scale(0) rotate(120deg);
+}
+</style>
+<body>
+
+<svg class="grain" width="100%" height="100%">
+  <filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="5" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter>
+  <rect width="100%" height="100%" filter="url(#n)"/>
+</svg>
+<div class="atmosphere"></div>
+
+<!-- Nav -->
+<nav class="top-nav" id="topNav">
+  <a href="#" class="nav-brand">Week 9 &<span>AI & Capstone</span></a>
+  <ul class="nav-links">
+    <li><a href="#ai-basics">Good Prompts</a></li>
+    <li><a href="#learning-prompts">Learning</a></li>
+    <li><a href="#fixing-errors">Fixing Errors</a></li>
+    <li><a href="#planning-project">Planning</a></li>
+    <li><a href="#ai-wisely">Using AI Wisely</a></li>
+  </ul>
+  <a href="#ai-basics" class="nav-cta">Get Started</a>
+  <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+    <span class="toggle-bar"></span><span class="toggle-bar"></span>
+  </button>
+</nav>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <div class="mobile-menu-inner">
+    <div class="mobile-menu-links">
+      <a href="#ai-basics" class="mobile-menu-link" data-index="01">Good Prompts</a>
+      <a href="#learning-prompts" class="mobile-menu-link" data-index="02">Learning</a>
+      <a href="#fixing-errors" class="mobile-menu-link" data-index="03">Fixing Errors</a>
+      <a href="#planning-project" class="mobile-menu-link" data-index="04">Planning</a>
+      <a href="#ai-wisely" class="mobile-menu-link" data-index="05">Using AI Wisely</a>
+    </div>
+  </div>
+</div>
+
+<!-- Side Panels -->
+<nav class="side-panel left" aria-label="Scroll indicators">
+  <span class="side-label">Scroll</span>
+  <div class="side-track"><div class="side-track-fill" id="leftTrack"></div></div>
+  <div class="side-dot active"></div>
+  <div class="side-dot"></div>
+  <div class="side-dot"></div>
+  <div class="side-dot"></div>
+  <div class="side-dot"></div>
+  <div class="side-dot"></div>
+  <div class="side-readout" id="scrollPct">00</div>
+</nav>
+
+<nav class="side-panel right" aria-label="Status indicators">
+  <span class="side-label">Python</span>
+  <div class="side-track"><div class="side-track-fill" id="rightTrack"></div></div>
+  <div class="side-dot"></div>
+  <div class="side-dot"></div>
+  <div class="side-dot active"></div>
+  <div class="side-dot"></div>
+  <div class="side-dot"></div>
+  <div class="side-dot"></div>
+  <div class="side-readout">Python</div>
+</nav>
+
+<main class="main">
+
+  <!-- ═══ HERO ═══ -->
+  <section class="hero" id="hero">
+    <div class="hero-grid"></div>
+    <div class="hero-badge">
+      <div class="hero-badge-dot"></div>
+      <span>Your Capstone Starts Here!</span>
+    </div>
+    <h1>AI Prompting<br><em>& Capstone Launch</em></h1>
+    <p class="hero-sub">
+      In this lesson, you'll learn how to use free AI tools like <strong>ChatGPT</strong> or <strong>Gemini</strong> as a helper. You'll learn how to ask clear questions, how to get help fixing code errors, and how to plan a small project &mdash; and how to use AI safely, so you keep learning for yourself.
+    </p>
+    <div class="hero-ctas">
+      <a href="#ai-basics" class="btn-primary">Get Start</a>
+    </div>
+    <div class="hero-metrics">
+      <div class="metric">
+        <div class="metric-value"><span class="counter" data-target="3" data-decimals="0">0</span></div>
+        <div class="metric-label">Parts of a Good Prompt</div>
+      </div>
+      <div class="metric">
+        <div class="metric-value"><span class="counter" data-target="1" data-decimals="0">0</span></div>
+        <div class="metric-label">Golden Rule: Test Every Answer</div>
+      </div>
+      <div class="metric">
+        <div class="metric-value"><span class="counter" data-target="0" data-decimals="0">0</span></div>
+        <div class="metric-label">Passwords You Should Share</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ LOGO TICKER ═══ -->
+  <div class="logo-ticker reveal">
+    <div class="logo-ticker-label">AI Helper Toolkit</div>
+    <div class="ticker-track" id="tickerTrack">
+      <span class="ticker-item">prompt</span><span class="ticker-dot"></span>
+      <span class="ticker-item">context</span><span class="ticker-dot"></span>
+      <span class="ticker-item">error message</span><span class="ticker-dot"></span>
+      <span class="ticker-item">plan</span><span class="ticker-dot"></span>
+      <span class="ticker-item">hint</span><span class="ticker-dot"></span>
+      <span class="ticker-item">test</span><span class="ticker-dot"></span>
+      <!-- Duplicated for seamless loop -->
+      <span class="ticker-item">prompt</span><span class="ticker-dot"></span>
+      <span class="ticker-item">context</span><span class="ticker-dot"></span>
+      <span class="ticker-item">error message</span><span class="ticker-dot"></span>
+      <span class="ticker-item">plan</span><span class="ticker-dot"></span>
+      <span class="ticker-item">hint</span><span class="ticker-dot"></span>
+      <span class="ticker-item">test</span><span class="ticker-dot"></span>
+    </div>
+  </div><br>
+
+  <!-- ═══ FEATURES ═══ -->
+  <section class="section" id="ai-basics">
+
+    <div class="feature reveal">
+      <div class="feature-visual-code">
+        <div class="code-block"><pre style="white-space: pre-wrap;"><code class="prompt"><span class="tok-fn">I'm a complete beginner learning Python.</span>
+<span class="tok-str">Please explain what a dictionary is.</span>
+<span class="tok-num">Use simple words, one everyday comparison, and one short code example.</span></code></pre></div>
+      </div>
+      <div class="feature-content">
+        <div class="feature-number">01</div>
+        <p class="section-tag">Prompts</p>
+        <h2 class="section-title">How Do You Write a <strong>Good Prompt?</strong></h2>
+        <p class="section-body">
+          An AI tool like ChatGPT or Gemini is a chatbot: you type a message in plain English, and it types an answer back. The message you type is called a <strong>prompt</strong>. Both tools have free versions. You usually sign in with an account, and free versions have usage limits that can change &mdash; if you hit a limit, wait a while and try again.
+        </p>
+        <p class="section-body">
+          A good prompt has three parts. The first sentence above (purple) is the <strong>context</strong>: who you are. The second (green) is the <strong>task</strong>: what you want. The third (yellow) is the <strong>details</strong>: how you want the answer.
+        </p>
+      </div>
+    </div>
+
+    <div class="feature-content2">
+      <p class="section-body2">
+        The AI can't see your screen, and it doesn't know what you already understand. It only knows what you type. That's why a short, vague prompt gives a vague answer.
+      </p>
+      <br>
+      <div class="code-block"><pre style="white-space: pre-wrap;"><code class="prompt"><span class="tok-com">Weak prompt:</span>
+my code doesn't work
+
+<span class="tok-com">Better prompt:</span>
+I'm a beginner learning Python. My program should print a list of fruits, but I get an error. I will paste my code and the error message below. Can you explain what went wrong in simple words?</code></pre></div>
+      <br>
+      <p class="section-body2">
+        The weak prompt doesn't say which language, which code, or what went wrong. The better prompt gives all three parts. You can also keep asking follow-up questions in the same chat &mdash; the AI remembers what you said earlier in that conversation.
+      </p>
+    </div>
+
+    <br><br><br><hr><br><br>
+
+    <div class="feature reverse reveal" id="learning-prompts">
+      <div class="feature-visual-code">
+        <div class="code-block"><pre style="white-space: pre-wrap;"><code class="prompt"><span class="tok-fn">I'm a beginner learning Python.</span>
+<span class="tok-str">What is the difference between a list and a dictionary?</span>
+<span class="tok-num">Give me one everyday comparison for each, and show a short example of both.</span></code></pre></div>
+      </div>
+      <div class="feature-content">
+        <div class="feature-number">02</div>
+        <p class="section-tag">Learning</p>
+        <h2 class="section-title">How Do You <strong>Ask Questions to Learn?</strong></h2>
+        <p class="section-body">
+          Think of an AI tool as a patient tutor that is available any time. You can ask the same thing ten different ways, and it never gets tired of you.
+        </p>
+        <p class="section-body">
+          Here are useful things to ask for: an <strong>everyday comparison</strong>, a <strong>short example</strong>, the <strong>difference between two ideas</strong>, or the same answer <strong>in simpler words</strong>.
+        </p>
+      </div>
+    </div>
+
+    <div class="feature-content2">
+      <p class="section-body2">
+        One of the best ways to learn is to ask the AI to <strong style="color: #0e578c">quiz you</strong>. Asking for one question at a time makes you think and answer for yourself before you see the next one.
+      </p>
+      <br>
+      <div class="code-block"><pre style="white-space: pre-wrap;"><code class="prompt">I'm a beginner who just learned for loops and while loops in Python. Quiz me with 3 short questions. Ask one question at a time, wait for my answer, and then tell me if I was right before moving on.</code></pre></div>
+      <br>
+      <p class="section-body2">
+        And when part of an answer doesn't make sense, don't just move on. Copy the confusing part and ask again:
+      </p>
+      <br>
+      <div class="code-block"><pre style="white-space: pre-wrap;"><code class="prompt">I don't understand this part: [paste the part you don't understand here]. Please explain it again using simpler words and a different example.</code></pre></div>
+      <br>
+      <p class="section-body2">
+        The words in square brackets are a placeholder &mdash; replace them with your own text before you send the prompt.
+      </p>
+    </div>
+
+    <br><br><br><hr><br><br>
+
+    <div class="feature reveal" id="fixing-errors">
+      <div class="feature-visual-code">
+        <div class="code-block"><pre><code><span class="tok-com"># This code has a bug (on purpose!)</span>
+fruits = [<span class="tok-str">'apple'</span>, <span class="tok-str">'banana'</span>, <span class="tok-str">'cherry'</span>]
+
+<span class="tok-fn">print</span>(fruits[<span class="tok-num">3</span>])  <span class="tok-com"># IndexError: list index out of range</span></code></pre></div>
+      </div>
+      <div class="feature-content">
+        <div class="feature-number">03</div>
+        <p class="section-tag">Fixing Errors</p>
+        <h2 class="section-title">How Can AI Help You <strong>Fix Code Errors?</strong></h2>
+        <p class="section-body">
+          When Python can't run a line, it stops and prints an error message. Read the <strong>last line</strong> of that message first. It tells you the name of the error and the reason. Here, that's <strong>IndexError: list index out of range</strong>.
+        </p>
+        <p class="section-body">
+          That last line, plus your code, is exactly what an AI tool needs. A good fix-it prompt has three things: your <strong>code</strong>, the <strong>error message</strong>, and what you <strong>expected</strong> to happen.
+        </p>
+      </div>
+    </div>
+
+    <div class="feature-content2">
+      <p class="section-body2">
+        Here is a fix-it prompt for the bug above. It includes the context, the code, the error, and a request for a simple explanation:
+      </p>
+      <br>
+      <div class="code-block"><pre style="white-space: pre-wrap;"><code class="prompt">I'm a beginner learning Python. I want to print the last fruit in my list, but I get an error.
+
+My code:
+fruits = ['apple', 'banana', 'cherry']
+print(fruits[3])
+
+The error:
+IndexError: list index out of range
+
+What does this error mean, and how do I fix it? Please explain in simple words.</code></pre></div>
+      <br>
+      <p class="section-body2">
+        A good answer will explain that the list has three items, and Python counts from 0 (Week 5). So the valid positions are <strong style="color: #0e578c">0</strong>, <strong style="color: #0e578c">1</strong>, and <strong style="color: #0e578c">2</strong> &mdash; there is no position <strong style="color: #0e578c">3</strong>. Here is the fixed code:
+      </p>
+      <br>
+      <div class="code-block"><pre><code>fruits = [<span class="tok-str">'apple'</span>, <span class="tok-str">'banana'</span>, <span class="tok-str">'cherry'</span>]
+
+<span class="tok-fn">print</span>(fruits[<span class="tok-num">2</span>])   <span class="tok-com"># cherry</span>
+<span class="tok-fn">print</span>(fruits[<span class="tok-num">-1</span>])  <span class="tok-com"># cherry</span></code></pre></div>
+      <br>
+      <p class="section-body2">
+        Don't stop once you have a fix. Run it yourself to check that it works, and ask the AI <strong style="color: #0e578c">why</strong> the error happened, so you can spot it yourself next time.
+      </p>
+      <br><br>
+      <p class="section-body2">
+        Here is a second common error, from Week 3. The person types 20, but <strong style="color: #0e578c">input()</strong> gives back text, and Python can't compare text with a number:
+      </p>
+      <br>
+      <div class="code-block"><pre><code><span class="tok-com"># This code has a bug (on purpose!)</span>
+age = <span class="tok-fn">input</span>(<span class="tok-str">'How old are you? '</span>)
+
+<span class="tok-fn">if</span> age &gt;= <span class="tok-num">18</span>:
+    <span class="tok-fn">print</span>(<span class="tok-str">'You may enter.'</span>)
+
+<span class="tok-com"># Example run:</span>
+<span class="tok-com"># How old are you? 20</span>
+<span class="tok-com"># TypeError: '&gt;=' not supported between instances of 'str' and 'int'</span></code></pre></div>
+      <br>
+      <p class="section-body2">
+        You would follow the same steps: paste your code and that last error line into a prompt. The AI should tell you to turn the text into a number with <strong style="color: #0e578c">int()</strong>. Here is the fixed version:
+      </p>
+      <br>
+      <div class="code-block"><pre><code>age = <span class="tok-fn">int</span>(<span class="tok-fn">input</span>(<span class="tok-str">'How old are you? '</span>))
+
+<span class="tok-fn">if</span> age &gt;= <span class="tok-num">18</span>:
+    <span class="tok-fn">print</span>(<span class="tok-str">'You may enter.'</span>)
+
+<span class="tok-com"># Example run:</span>
+<span class="tok-com"># How old are you? 20</span>
+<span class="tok-com"># You may enter.</span></code></pre></div>
+    </div>
+
+    <br><br><br><hr><br><br>
+
+    <div class="feature reverse reveal" id="planning-project">
+      <div class="feature-visual-code">
+        <div class="code-block"><pre style="white-space: pre-wrap;"><code class="prompt"><span class="tok-fn">I'm a beginner who has learned Python variables, if/else, functions, lists, loops, dictionaries, try/except, and classes.</span>
+
+<span class="tok-str">Help me plan a small project that I can finish: a contact book that runs in the terminal (text only, no graphics).</span>
+
+<span class="tok-num">Please break it into small steps, in order. Do not write the code yet.</span></code></pre></div>
+      </div>
+      <div class="feature-content">
+        <div class="feature-number">04</div>
+        <p class="section-tag">Capstone Launch</p>
+        <h2 class="section-title">How Do You <strong>Plan a Simple Project?</strong></h2>
+        <p class="section-body">
+          Your capstone is a small project that puts together what you have learned. Planning first helps you avoid feeling lost. AI is very good at taking a big idea and breaking it into small steps.
+        </p>
+        <p class="section-body">
+          Pick a small idea, like a contact book, a quiz game, a to-do list, or an expense tracker. Tell the AI what you already know, and ask for a <strong>plan</strong> &mdash; not the finished code. That way, you still do the building and the learning.
+        </p>
+      </div>
+    </div>
+
+    <div class="feature-content2">
+      <p class="section-body2">
+        A plan you get back might look something like this. Yours may look different, and that's fine. Notice that every step is small, and each one uses something you already learned:
+      </p>
+      <br>
+      <div class="code-block"><pre style="white-space: pre-wrap;"><code class="prompt"><span class="tok-com">Example plan (yours may look different):</span>
+
+Step 1: Create a dictionary to store contacts (name and phone number). <span class="tok-com">Week 6</span>
+Step 2: Write an add_contact() function. <span class="tok-com">Week 4</span>
+Step 3: Write a show_contacts() function that loops through all contacts. <span class="tok-com">Week 5</span>
+Step 4: Let the user search for a name, and use try/except when the name is not found. <span class="tok-com">Week 6</span>
+Step 5: Add a menu with a while loop and input() so the user can choose what to do. <span class="tok-com">Weeks 3 and 5</span>
+Step 6 (optional): Turn each contact into a Contact class. <span class="tok-com">Week 7</span></code></pre></div>
+      <br>
+      <p class="section-body2">
+        Now start tiny. Build <strong style="color: #0e578c">Steps 1 to 3</strong>, run them, and check that they work before you go on:
+      </p>
+      <br>
+      <div class="code-block"><pre><code>contacts = {}
+
+<span class="tok-fn">def</span> add_contact(name, phone):
+    contacts[name] = phone
+
+<span class="tok-fn">def</span> show_contacts():
+    <span class="tok-fn">for</span> name, phone <span class="tok-fn">in</span> contacts.items():
+        <span class="tok-fn">print</span>(name, <span class="tok-str">':'</span>, phone)
+
+add_contact(<span class="tok-str">'Maria'</span>, <span class="tok-str">'555-0100'</span>)
+add_contact(<span class="tok-str">'Sam'</span>, <span class="tok-str">'555-0101'</span>)
+show_contacts()
+
+<span class="tok-com"># Maria : 555-0100</span>
+<span class="tok-com"># Sam : 555-0101</span></code></pre></div>
+      <br>
+      <p class="section-body2">
+        Build one step, run it, test it, and only then move to the next one. If you get stuck on a step, ask the AI about <em>just that step</em> &mdash; not the whole project.
+      </p>
+    </div>
+
+    <br><br><br><hr><br><br>
+
+    <div class="feature reveal" id="ai-wisely">
+      <div class="feature-visual-code">
+        <div class="code-block"><pre style="white-space: pre-wrap;"><code class="prompt"><span class="tok-fn">I'm a beginner learning Python. I'm working on step 4 of my contact book plan: searching for a name. Here is my code:</span>
+
+[paste your code here]
+
+<span class="tok-str">I'm stuck. Please give me a hint only, not the full answer, and explain the idea in simple words.</span></code></pre></div>
+      </div>
+      <div class="feature-content">
+        <div class="feature-number">05</div>
+        <p class="section-tag">Using AI Wisely</p>
+        <h2 class="section-title">How Do You <strong>Use AI Wisely?</strong></h2>
+        <p class="section-body">
+          <strong>Try first, then ask.</strong> Struggling with a problem for a while is how your brain learns. When you're stuck, ask for a <strong>hint</strong>, like in the prompt above, instead of the full answer.
+        </p>
+        <p class="section-body">
+          <strong>Never share private information.</strong> Don't paste passwords, secret keys, ID numbers, or home addresses into an AI tool. If your code contains any, remove them or replace them with fake values first.
+        </p>
+      </div>
+    </div>
+
+    <div class="feature-content2">
+      <p class="section-body2">
+        <strong style="color: #0e578c">AI can be wrong &mdash; even when it sounds sure.</strong> Always run the code yourself and check that the output is what you expected. If you're not sure about something, check the official Python documentation at docs.python.org.
+      </p>
+      <br>
+      <p class="section-body2">
+        <strong style="color: #0e578c">Understand before you use.</strong> Never put code in your project if you can't explain it. If you don't understand some code, ask:
+      </p>
+      <br>
+      <div class="code-block"><pre style="white-space: pre-wrap;"><code class="prompt">Explain this code line by line, as if I'm a complete beginner: [paste the code here]</code></pre></div>
+      <br>
+      <p class="section-body2">
+        <strong style="color: #0e578c">Follow your course rules.</strong> Check what your teacher or course allows for AI use on graded work, and be honest about where you used it.
+      </p>
+      <br><br>
+      <p class="section-body2">
+        <strong>Your capstone launch checklist:</strong>
+      </p>
+      <br>
+      <p class="section-body2">
+        <strong style="color: #0e578c">1.</strong> Pick one small project idea you're excited about.
+      </p>
+      <p class="section-body2">
+        <strong style="color: #0e578c">2.</strong> Write a planning prompt with context, task, and details &mdash; and ask for steps, not code.
+      </p>
+      <p class="section-body2">
+        <strong style="color: #0e578c">3.</strong> Build Step 1. Run it and test it.
+      </p>
+      <p class="section-body2">
+        <strong style="color: #0e578c">4.</strong> Repeat for each step. When you get an error, use a fix-it prompt with your code and the error message.
+      </p>
+      <p class="section-body2">
+        <strong style="color: #0e578c">5.</strong> When you're stuck, ask for a hint, not the answer.
+      </p>
+      <p class="section-body2">
+        <strong style="color: #0e578c">6.</strong> Finish by testing everything &mdash; and make sure you can explain every line of your project.
+      </p>
+    </div>
+
+  </section>
+
+
+
+  <div class="silk-divider reveal"></div>
+
+  <!-- ═══ TESTIMONIALS ═══ -->
+  <section class="section section-center" id="testimonials">
+    <p class="section-tag reveal">Quote for YOU!</p>
+    <h2 class="section-title reveal reveal-d1">Keep Learning <strong>no matter how hard it is.</strong></h2>
+
+    <div class="testimonials-grid">
+      <div class="testimonial-card reveal reveal-d1">
+        <p class="testimonial-quote">
+          "It's not about how hard you can hit, it's about how much you can take, and keep moving forward anyway. 
+          That's how wining is done."
+        </p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">RB</div>
+          <div>
+            <div class="testimonial-name">Rocky Balboa</div>
+            <div class="testimonial-role">Rocky</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card reveal reveal-d2">
+        <p class="testimonial-quote">
+          "Do, or do not. There's no such thing as almost — commit fully, or don't start at all."
+        </p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">YD</div>
+          <div>
+            <div class="testimonial-name">Yoda</div>
+            <div class="testimonial-role">Star Wars</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card reveal reveal-d3">
+        <p class="testimonial-quote">
+          "It's not that I'm so smart, it's just that I stay with problems longer."
+        </p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">AE</div>
+          <div>
+            <div class="testimonial-name">Elbert Einstein</div>
+            <div class="testimonial-role">Father of Modern Physics, Theory of Relativity</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="silk-divider reveal">
+    <!-- From Uiverse.io by BHARGAVPATEL1244 --> 
+<!-- From Uiverse.io by Gaurav-WebDev --> 
+<button class="button type1" onclick="window.location.href='2107_new_spot/index.html'">
+</button>
+  </div>
+
+  <!-- ═══ FOOTER CTA ═══ -->
+  <section class="footer-cta" id="cta">
+  <div class="footer-bar reveal reveal-d4" style="margin-top: 80px;">
+    <ul class="footer-links">
+      <li><a href="../../Variables.html">Week 1</a></li>
+      <li><a href="Number&Math_Operations.html">Week 2</a></li>
+      <li><a href="Week3_Conditions.html">Week 3</a></li>
+      <li><a href="Week4_Functions.html">Week 4</a></li>
+      <li><a href="Week5_Lists_Loops.html">Week 5</a></li>
+      <li><a href="Week6_Dictionaries_Errors.html">Week 6</a></li>
+      <li><a href="Week7_Classes_Objects.html">Week 7</a></li>
+      <li><a href="Week8_Inheritance.html">Week 8</a></li>
+      <li><a href="#">Week 9</a></li>
+    </ul>
+  </div>
+</section>
+
+</main>
+
+<script src="templatemo-621-luminary-script.js"></script>
+</body>
+</html>
