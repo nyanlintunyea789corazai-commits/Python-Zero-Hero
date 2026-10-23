@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Pop HTML CSS Template</title>
+    <title>Python Basics: Introduction to Programming</title>
 <!--
 
 Template 2097 Pop
@@ -13,7 +13,7 @@ https://www.tooplate.com/view/2097-pop
 
 -->
     <!-- load CSS -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300">  <!-- Google web font "Open Sans" -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,600">  <!-- Google web font "Open Sans" -->
     <link rel="stylesheet" href="css/bootstrap.min.css">                                  <!-- https://getbootstrap.com/ -->
     <link rel="stylesheet" href="fontawesome/css/fontawesome-all.min.css">                <!-- https://fontawesome.com/ -->
     <link rel="stylesheet" type="text/css" href="slick/slick.css"/>                       <!-- http://kenwheeler.github.io/slick/ -->
@@ -21,35 +21,182 @@ https://www.tooplate.com/view/2097-pop
     <link rel="stylesheet" href="css/tooplate-style.css">                               <!-- Templatemo style -->
 
     <script>document.documentElement.className="js";var supportsCssVars=function(){var e,t=document.createElement("style");return t.innerHTML="root: { --tmp-var: bold; }",document.head.appendChild(t),e=!!(window.CSS&&window.CSS.supports&&window.CSS.supports("font-weight","var(--tmp-var)")),t.parentNode.removeChild(t),e};supportsCssVars()||alert("Please view this in a modern browser such as latest version of Chrome or Microsoft Edge.");</script>
-    
-</head>
+
 <style>
-    /* Container Setup */
-.vscode-snippet {
-  background-color: #ffffff; /* White background requested */
+/* Code blocks: VS Code Dark+ colours need a dark background to be readable */
+.code-block {
+  background-color: #1e1e1e;
+  color: #d4d4d4;
   padding: 16px 20px;
   border-radius: 8px;
-  border: 1px solid #e2e8f0; /* Subtle border to define the block on white */
-  font-family: 'Consolas', 'Courier New', Courier, monospace;
-  font-size: 1rem;
-  line-height: 1.5;
-  display: inline-block;
+  border: 1px solid #3c3c3c;
+  margin: 0 0 1rem 0;
+  font-family: 'Consolas', 'Fira Code', Monaco, 'Courier New', monospace;
+  font-size: 15px;
+  line-height: 1.6;
+  white-space: pre;
+  overflow-x: auto;
 }
 
-/* VS Code Dark+ Color Palette Tokens */
-.vscode-snippet .function {
-  color: #DCDCAA; /* Soft yellow for function names */
+.code-block code {
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
 }
 
-.vscode-snippet .punctuation {
-  color: #D4D4D4; /* Light gray for parentheses and punctuation */
+/* Theme tokens */
+.code-block .function    { color: #DCDCAA; } /* yellow for functions/built-ins */
+.code-block .punctuation { color: #D4D4D4; } /* light gray for brackets */
+.code-block .string      { color: #CE9178; } /* terracotta for string literals */
+
+/* Output block: what the program shows on the screen */
+.output-block {
+  background-color: #0c0c0c;
+  color: #e5e5e5;
+  padding: 12px 20px;
+  border-radius: 8px;
+  border-left: 4px solid #4ec9b0;
+  margin: 0 0 1rem 0;
+  font-family: 'Consolas', 'Fira Code', Monaco, 'Courier New', monospace;
+  font-size: 15px;
+  line-height: 1.6;
+  white-space: pre;
+  overflow-x: auto;
 }
 
-.vscode-snippet .string {
-  color: #CE9178; /* Warm orange-brown for strings */
+.output-label {
+  display: block;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #a9a9a9;
+  margin-bottom: 4px;
 }
 
+/* Inline code, e.g. `print` */
+.inline-code {
+  background-color: #1e1e1e;
+  color: #DCDCAA;
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-family: 'Consolas', 'Fira Code', Monaco, 'Courier New', monospace;
+  font-size: 0.9em;
+}
+
+/* Input / Process / Output list with check markers */
+.luxury-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.5rem 0;
+}
+
+.luxury-list li {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.luxury-list li:last-child {
+  border-bottom: none;
+}
+
+.luxury-list .marker {
+  flex: 0 0 28px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background-color: #4ec9b0;
+  color: #1e1e1e;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 4px;
+}
+
+.luxury-list .marker svg {
+  width: 16px;
+  height: 16px;
+}
+
+.luxury-list h3 {
+  margin: 0 0 4px 0;
+  font-size: 1.15rem;
+  font-weight: 600;
+}
+
+/* Sub-topics with an elegant left line indicator */
+.elegant-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.5rem 0;
+  display: grid;
+  gap: 20px;
+}
+
+.elegant-list li {
+  position: relative;
+  padding: 12px 0 12px 24px;
+}
+
+.elegant-list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 15%;
+  height: 70%;
+  width: 2px;
+  background: #cbd5e1;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.elegant-list li:hover::before {
+  background: #4ec9b0;
+  width: 4px;
+  height: 90%;
+  top: 5%;
+}
+
+.elegant-list h3 {
+  margin: 0 0 6px 0;
+  color: #ffffff;
+  font-size: 1.15rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.elegant-list p {
+  margin: 0 0 0.75rem 0;
+  color: #ffffff;
+}
+
+.elegant-list p:last-child {
+  margin-bottom: 0;
+}
+
+.tm-section-number {
+  color: #4ec9b0;
+  margin-right: 8px;
+}
+
+.tm-sub-title {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin: 1.5rem 0 0.75rem 0;
+}
+
+.tm-callout {
+  border-left: 4px solid #4ec9b0;
+  padding: 10px 0 10px 18px;
+  margin: 1rem 0 1.5rem 0;
+}
+
+.details__description img {
+  margin-bottom: 1rem;
+}
 </style>
+</head>
 <body>
     <div id="tm-bg"></div>
     <div id="tm-wrap">
@@ -59,92 +206,165 @@ https://www.tooplate.com/view/2097-pop
                     <div class="col-sm-12 col-md-6 col-lg-6 col-md-col-xl-6 mb-md-0 mb-sm-4 mb-4 tm-site-header-col">
                         <div class="tm-site-header">
                             <h1 class="mb-4">Python Basics</h1>
-                            <img src="img/underline.png" class="img-fluid mb-4">
-                            <p>Introduction to Python together! 
-                                But, Solo-Leveling is better, and Consistency is a key in here အယ့်လယ့်!
-                            </p>        
-                        </div>                        
+                            <img src="img/underline.png" class="img-fluid mb-4" alt="">
+                            <p>Introduction to Python &amp; Programming together for the absolute beginner!
+                                But, Solo-Leveling is better, and Consistency is a key in here. Good luck!
+                            </p>
+                        </div>
                     </div>
                     <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
                         <div class="content">
                             <div class="grid">
+
+                                <!-- 1. What Is Programming? -->
                                 <div class="grid__item" id="home-link">
                                     <div class="product">
                                         <div class="tm-nav-link">
                                             <i class="fas fa-home fa-3x tm-nav-icon"></i>
-                                            <span class="tm-nav-text">Welcome</span>
-                                            <div class="product__bg"></div>        
-                                        </div>                                    
+                                            <span class="tm-nav-text">1. Welcome</span>
+                                            <div class="product__bg"></div>
+                                        </div>
                                         <div class="product__description">
                                             <div class="row mb-3">
                                                 <div class="col-12">
-                                                    <h2 class="tm-page-title">Welcome to Python Basics <br><br>
-                                                        What is Python and what are some Common Uses in the Industry?
-
-                                                    </h2>        
+                                                    <h2 class="tm-page-title">Welcome to Python Basics!</h2>
                                                 </div>
-                                            </div>                                        
+                                            </div>
+                                            <div class="row mb-3">
+                                                <div class="col-12">
+                                                    <p>
+                                                        In this lesson, we will begin by understanding what programming is, how computers follow instructions, what programming languages are, and why Python is a good language for beginners.
+                                                        You do not need any previous programming experience to study this lesson.
+                                                        We will start with simple ideas and familiar examples before moving on to writing our first lines of code.
+                                                    </p>
+                                                    <p class="tm-callout">
+                                                        Remember that learning programming is not about memorizing every command.
+                                                        It is about understanding problems, thinking logically, creating instructions, and learning how to solve problems step by step.
+                                                    </p>
+                                                    <h2 class="tm-page-title"><span class="tm-section-number">1.</span>What Is Programming?</h2>
+                                                </div>
+                                            </div>
                                             <div class="row">
                                                 <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
-                                                    <img src="Photo_for_Main/Introduction_background.webp" class="img-fluid mb-3">
+                                                    <img src="Photo_for_Main/Introduction_background.webp" class="img-fluid mb-3" alt="Introduction to programming">
                                                     <p>
-                                                        Python is used in many fields like data science and machine learning, web development, scripting and automation, embedded system (a dedicated micro-computer inside a machine doing one specific job), IoT (Internet of Things: It refers to a network of physical devices, vehicles, appliances, and other physical objects connected to the internet that talk to each other), and much more.
+                                                        Programming is the process of writing instructions that tell a computer what to do.
+                                                        Computers can perform many tasks, such as displaying information, calculating numbers, storing data, and running applications.
+                                                        However, they need instructions to know which tasks to perform and how to perform them.
+                                                        A programmer writes these instructions using a programming language that a computer can process.
                                                     </p>
                                                     <p>
-                                                        Python is the main language that most data scientists and machine learning engineers currently use. Libraries like Pandas and Numpy make data analysis less tedious, while others like Tensorflow and Scikit make machine learning and working with AI models much more accessible. 
-                                                    </p>    
+                                                        To understand this idea, imagine that you want to make a cup of tea.
+                                                        You need to follow a series of steps: prepare the cup, boil the water, put the tea into the cup, pour in the hot water, and wait for the tea to be ready.
+                                                        If you skip an important step or do things in the wrong order, you might not get the result you expect.
+                                                        Programming works in a similar way.
+                                                        We break a task into smaller steps and give the computer instructions to complete them.
+                                                    </p>
                                                 </div>
                                                 <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
                                                     <p>
-                                                        Python is a general-purpose programming language known for its simplicity and ease of use. 
-                                                        These made Python the most popular programming language in modern times.
+                                                        For example, imagine that you want a computer to display a welcome message to a student.
+                                                        You need to write an instruction telling the computer which message to display.
+                                                        The computer follows that instruction and produces the expected result.
+                                                        This is a simple example of programming, even though the task itself is not complicated.
                                                     </p>
-                                                    
-                                                    <img src="Photo_for_Main/HTML_CSS_JS.jpg" class="img-fluid">
-                                                     
-                                                </div>  
-                                                                               
+                                                    <p>
+                                                        Programming is useful because it allows us to turn our ideas into something a computer can do.
+                                                        We can write programs to solve mathematical problems, organize information, create games, build websites, and automate repetitive tasks.
+                                                        The important idea to remember is that <strong>programming means giving a computer instructions to accomplish a task or solve a problem.</strong>
+                                                    </p>
+                                                    <img src="Photo_for_Main/HTML_CSS_JS.jpg" class="img-fluid" alt="HTML, CSS and JavaScript">
+                                                </div>
                                             </div>
-                                            
                                         </div>
                                     </div>
                                 </div>
 
+                                <!-- 2. How Does Programming Work? -->
                                 <div class="grid__item" id="team-link">
                                     <div class="product">
                                         <div class="tm-nav-link">
-                                            <i class="fas fa-users fa-3x tm-nav-icon"></i>
-                                            <span class="tm-nav-text">More to Read</span>
-                                            <div class="product__bg"></div>            
-                                        </div>                                     
+                                            <i class="fas fa-cogs fa-3x tm-nav-icon"></i>
+                                            <span class="tm-nav-text">2. How It Works</span>
+                                            <div class="product__bg"></div>
+                                        </div>
                                         <div class="product__description">
                                             <div class="p-sm-4 p-2">
                                                 <div class="row mb-3">
                                                     <div class="col-12">
-                                                        <h2 class="tm-page-title">Keep Reading!</h2>        
+                                                        <h2 class="tm-page-title"><span class="tm-section-number">2.</span>How Does Programming Work?</h2>
                                                     </div>
                                                 </div>
                                                 <div class="row tm-reverse-sm">
                                                     <div class="col-sm-12 col-md-8 col-lg-8 col-xl-8">
                                                         <p>
-                                                        In web development, Python frameworks like Django, FastAPI, and Flask let developers build scalable and secure back-end systems(We have 2 types of system, fronted: which is the design that you can see with your eyes, backend: which stored the data and do automation)  with minimal effort. Many social media platforms like Instagram and Pinterest use Python on the back-end. 
-                                                    </p> 
-                                                    <p>
-                                                        Cybersecurity professionals and ethical hackers use Python to detect vulnerabilities like malware( malware is harmful software built to steal from or damage your computer) and other viruses, build automated security scans, and analyze threats. 
-                                                    </p>
-
-                                                    <p>
-                                                        Python runs well on microcomputers like Raspberry Pi and MicroPython-compatible boards, so you can build all kinds of IoT projects like smart home devices, weather monitoring stations, and more. 
-
-                                                    </p>
-                                                            
-                                                    </div>                                                
+                                                            A computer program generally follows a simple process: a programmer writes instructions, the computer processes those instructions, and the computer produces a result.
+                                                            We can understand this process by thinking about an ordinary calculator.
+                                                            When you enter two numbers and press the addition button, the calculator processes your input and displays the answer.
+                                                            A program can perform a similar calculation by following instructions written by a programmer.
+                                                        </p>
+                                                        <p>
+                                                            In programming, we can describe this process using three basic ideas:
+                                                            <strong>input, process, and output.</strong>
+                                                        </p>
+                                                        <ul class="luxury-list">
+                                                            <li>
+                                                                <span class="marker">
+                                                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                                                </span>
+                                                                <div>
+                                                                    <h3>Input</h3>
+                                                                    <p>
+                                                                        <strong>Input</strong> is the information or data given to a program.
+                                                                        For example, a user might enter two numbers into a program.
+                                                                    </p>
+                                                                </div>
+                                                            </li>
+                                                            <li>
+                                                                <span class="marker">
+                                                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                                                </span>
+                                                                <div>
+                                                                    <h3>Process</h3>
+                                                                    <p>
+                                                                        <strong>Process</strong> is the work the program performs using that information.
+                                                                        For example, the program adds the two numbers together.
+                                                                    </p>
+                                                                </div>
+                                                            </li>
+                                                            <li>
+                                                                <span class="marker">
+                                                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                                                </span>
+                                                                <div>
+                                                                    <h3>Output</h3>
+                                                                    <p>
+                                                                        <strong>Output</strong> is the result produced by the program.
+                                                                        For example, the program displays the sum of the two numbers on the screen.
+                                                                    </p>
+                                                                </div>
+                                                            </li>
+                                                        </ul>
+                                                        <p>
+                                                            Imagine that you want to calculate the total price of two notebooks.
+                                                            You enter the prices of the notebooks as input, the program adds the prices together as the process, and the total price appears as the output.
+                                                            This is a simple example of how programming can help people complete everyday tasks.
+                                                        </p>
+                                                        <p>
+                                                            Not every program needs a user to enter information.
+                                                            Some programs follow instructions automatically, while others receive information from files, sensors, websites, or other computer systems.
+                                                            However, input, process, and output are useful basic concepts for understanding how many programs work.
+                                                        </p>
+                                                        <p>
+                                                            It is also important to remember that computers follow the instructions provided to them.
+                                                            If a programmer writes an incorrect instruction or forgets an important step, the program might produce an unexpected result.
+                                                            Programmers therefore need to test their programs, identify mistakes, and correct them.
+                                                            Finding and fixing mistakes in code is called <strong>debugging</strong>, which you will learn more about as you continue studying programming.
+                                                        </p>
+                                                    </div>
                                                     <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 mb-lg-0 mb-sm-4 mb-4">
-                                                        <img src="Photo_for_Main/C_Arduino.webp" class="img-fluid">
-                                                        <img src="Photo_for_Main/game-programming-languages-6-choices.webp" class="img-fluid">
-                                                        <img src="Photo_for_Main/Python_SQL_R.avif" class="img-fluid">
-                                                        <img src="Photo_for_Main/Java_vs_Python.png" class="img-fluid">
-
+                                                        <img src="Photo_for_Main/Source_Code.png" class="img-fluid" alt="Source code">
+                                                        <img src="Photo_for_Main/What_is_Programming.webp" class="img-fluid" alt="What is programming">
                                                     </div>
                                                 </div>
                                             </div>
@@ -152,338 +372,422 @@ https://www.tooplate.com/view/2097-pop
                                     </div>
                                 </div>
 
+                                <!-- 3. What Is a Programming Language? -->
                                 <div class="grid__item">
                                     <div class="product">
                                         <div class="tm-nav-link">
-                                            <i class="fas fa-handshake fa-3x tm-nav-icon"></i>
-                                            <span class="tm-nav-text">Nice Reading!</span>
-                                            <div class="product__bg"></div>             
-                                        </div>   
+                                            <i class="fas fa-language fa-3x tm-nav-icon"></i>
+                                            <span class="tm-nav-text">3. Languages</span>
+                                            <div class="product__bg"></div>
+                                        </div>
                                         <div class="product__description">
                                             <div class="row mb-3">
                                                 <div class="col-12">
-                                                    <h2 class="tm-page-title">Keep Reading! NICE!
-                                                       
-
-                                                    </h2>        
+                                                    <h2 class="tm-page-title"><span class="tm-section-number">3.</span>What Is a Programming Language?</h2>
                                                 </div>
-                                            </div>                                        
+                                            </div>
                                             <div class="row">
                                                 <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
-                                                    <img src="Photo_for_Main/Multiple_Languages.png" class="img-fluid mb-3">
+                                                    <img src="Photo_for_Main/Multiple_Languages.png" class="img-fluid mb-3" alt="Many programming languages">
                                                     <p>
-                                                        In software testing, Python tools such as pytest are used to create reliable test suites, while system administrators rely on Python for server monitoring, log management, and system-level tasks. 
-
+                                                        A programming language is a language used to write instructions for a computer.
+                                                        People use programming languages to express what they want a computer to do in a structured way.
+                                                        Each programming language has its own rules, symbols, and ways of writing instructions.
+                                                        These rules are important because the computer needs to process the instructions according to the language's requirements.
                                                     </p>
                                                     <p>
-                                                        Finally, one of Python’s biggest strengths is automation. You can write simple scripts to help you with repetitive tasks like extracting data from spreadsheets, sending emails, and working with files on your local machine
-                                                    </p>    
+                                                        Think about human languages.
+                                                        People use Burmese, Thai, English, and many other languages to communicate with one another.
+                                                        Although these languages can express similar ideas, they use different words and grammar rules.
+                                                        Programming languages are similar in the sense that they provide different ways to write instructions, but they are designed for communicating instructions to computers rather than for ordinary human conversation.
+                                                    </p>
+                                                    <img src="Photo_for_Main/Java_vs_Python.png" class="img-fluid" alt="Java compared with Python">
                                                 </div>
                                                 <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
                                                     <p>
-                                                        Python is widely used in DevOps for writing CI/CD scripts and managing infrastructure across development pipelines. It is also commonly used to build back-end services and internal APIs. 
-
+                                                        There are many programming languages, including Python, JavaScript, Java, and C++.
+                                                        Programmers choose a language based on the task they want to complete, the requirements of their project, and other practical considerations.
+                                                        For example, JavaScript is widely used to make websites interactive, while Python is commonly used for general-purpose programming, data analysis, and many other tasks.
                                                     </p>
-                                                    
-                                                    <img src="Photo_for_Main/Programming_Languages_Python_or_JS.jpg" class="img-fluid">
-                                                     
-                                                </div>  
-                                                                               
+                                                    <img src="Photo_for_Main/Programming_Languages_Python_or_JS.jpg" class="img-fluid" alt="Python or JavaScript">
+                                                    <p>
+                                                        You do not need to learn all these languages at the same time.
+                                                        Each language has its own features, and learning one language first can help you understand the basic concepts that also appear in other languages.
+                                                        For this course, we will begin with Python because its syntax is relatively readable and makes it easier for beginners to focus on learning programming concepts.
+                                                    </p>
+                                                </div>
                                             </div>
-                                            
-                                        </div>                                                              
-                                            
+                                        </div>
                                     </div>
                                 </div>
 
+                                <!-- 4. What Is Python? -->
                                 <div class="grid__item">
                                     <div class="product">
                                         <div class="tm-nav-link">
-                                            <i class="fas fa-comments fa-3x tm-nav-icon"></i>
-                                            <span class="tm-nav-text">Quiz!</span>
-                                            <div class="product__bg"></div>             
-                                        </div>                                                              
+                                            <i class="fab fa-python fa-3x tm-nav-icon"></i>
+                                            <span class="tm-nav-text">4. What Is Python?</span>
+                                            <div class="product__bg"></div>
+                                        </div>
                                         <div class="product__description">
                                             <div class="p-sm-4 p-2">
                                                 <div class="row mb-3">
                                                     <div class="col-12">
-                                                        <h2 class="tm-page-title">Almost there!</h2>        
-                                                    </div>
-                                                </div>
-                                                <div class="row tm-reverse-sm">
-                                                    <div class="col-sm-12 col-md-8 col-lg-8 col-xl-8">
-                                                    <p>
-                                                        Libraries like Selenium and BeautifulSoup also make it easy to interact with websites, so you can scrape public data, automate tasks through a web UI, and even manage cloud developments for your projects. 
-
-                                                    </p> 
-                                                    <p>
-                                                        As you can see, Python is a very powerful language, and yet, it’s easy to learn. From simple automation scripts to large-scale, industrial-level applications, you can use Python for just about anything. 
-                                                    </p>
-
-                                                    <p>
-                                                        Python is a great choice for anyone who wants to learn programming, regardless of what they choose to specialize in later. 
-
-                                                    </p>
-                                                    
-
-                                                    <p>
-                                                        <ul class="elegant-list">
-                                                            <li>
-                                                                <h3>Premium Experience</h3>
-                                                                <p>Curated design patterns tailored for high-end digital products.</p>
-                                                            </li>
-                                                            <li>
-                                                                <h3>Tailored Solutions</h3>
-                                                                <p>Engineered precisely to match your unique brand identity.</p>
-                                                            </li>
-                                                            <li>
-                                                                <h3>Seamless Integration</h3>
-                                                                <p>Effortlessly connects with your existing tech architecture.</p>
-                                                            </li>
-                                                            </ul>
-
-                                                    </p>
-
-                                                        <a href="Python_Quiz_for_introduction.html" class="btn tm-btn-gray">Take a Quiz</a>        
-                                                    </div>                                                
-                                                    <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 mb-lg-0 mb-sm-4 mb-4">
-                                                        <img src="Photo_for_Main/Python_In_VS_Code.png" class="img-fluid">
-                                                        <img src="Photo_for_Main/Programming_.avif" class="img-fluid">
-                                                        <img src="Photo_for_Main/What_is_Programming.webp" class="img-fluid">
-                                                        
-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> 
-                        </div>                       
-                    </div>
-
-                    <!-- Comment for another section of Python Introduction-->
-
-                    <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
-                        <div class="content">
-                            <div class="grid">
-                                <div class="grid__item" id="home-link">
-                                    <div class="product">
-                                        <div class="tm-nav-link">
-                                            <i class="fas fa-home fa-3x tm-nav-icon"></i>
-                                            <span class="tm-nav-text">Welcome</span>
-                                            <div class="product__bg"></div>        
-                                        </div>                                    
-                                        <div class="product__description">
-                                            <div class="row mb-3">
-                                                <div class="col-12">
-                                                    <h2 class="tm-page-title">Welcome to Python Basics <br><br>
-                                                        What is Python and what are some Common Uses in the Industry?
-
-                                                    </h2>        
-                                                </div>
-                                            </div>                                        
-                                            <div class="row">
-                                                <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
-                                                    <img src="Photo_for_Main/Introduction_background.webp" class="img-fluid mb-3">
-                                                    <p>
-                                                        Python is used in many fields like data science and machine learning, web development, scripting and automation, embedded system (a dedicated micro-computer inside a machine doing one specific job), IoT (Internet of Things: It refers to a network of physical devices, vehicles, appliances, and other physical objects connected to the internet that talk to each other), and much more.
-                                                    </p>
-                                                    <p>
-                                                        Python is the main language that most data scientists and machine learning engineers currently use. Libraries like Pandas and Numpy make data analysis less tedious, while others like Tensorflow and Scikit make machine learning and working with AI models much more accessible. 
-                                                    </p>    
-                                                </div>
-                                                <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
-                                                    <p>
-                                                        Python is a general-purpose programming language known for its simplicity and ease of use. 
-                                                        These made Python the most popular programming language in modern times.
-                                                    </p>
-                                                    
-                                                    <img src="Photo_for_Main/HTML_CSS_JS.jpg" class="img-fluid">
-                                                     
-                                                </div>  
-                                                                               
-                                            </div>
-                                            
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="grid__item" id="team-link">
-                                    <div class="product">
-                                        <div class="tm-nav-link">
-                                            <i class="fas fa-users fa-3x tm-nav-icon"></i>
-                                            <span class="tm-nav-text">More to Read</span>
-                                            <div class="product__bg"></div>            
-                                        </div>                                     
-                                        <div class="product__description">
-                                            <div class="p-sm-4 p-2">
-                                                <div class="row mb-3">
-                                                    <div class="col-12">
-                                                        <h2 class="tm-page-title">Keep Reading!</h2>        
+                                                        <h2 class="tm-page-title"><span class="tm-section-number">4.</span>What Is Python?</h2>
                                                     </div>
                                                 </div>
                                                 <div class="row tm-reverse-sm">
                                                     <div class="col-sm-12 col-md-8 col-lg-8 col-xl-8">
                                                         <p>
-                                                        In web development, Python frameworks like Django, FastAPI, and Flask let developers build scalable and secure back-end systems(We have 2 types of system, fronted: which is the design that you can see with your eyes, backend: which stored the data and do automation)  with minimal effort. Many social media platforms like Instagram and Pinterest use Python on the back-end. 
-                                                    </p> 
-                                                    <p>
-                                                        Cybersecurity professionals and ethical hackers use Python to detect vulnerabilities like malware( malware is harmful software built to steal from or damage your computer) and other viruses, build automated security scans, and analyze threats. 
-                                                    </p>
-
-                                                    <p>
-                                                        Python runs well on microcomputers like Raspberry Pi and MicroPython-compatible boards, so you can build all kinds of IoT projects like smart home devices, weather monitoring stations, and more. 
-
-                                                    </p>
-                                                            
-                                                    </div>                                                
+                                                            Python is a general-purpose programming language that allows people to write instructions for computers.
+                                                            It was designed with an emphasis on readable code, which means that many Python instructions look relatively simple compared with those in some other programming languages.
+                                                            This makes Python a popular starting point for people who are learning programming for the first time.
+                                                        </p>
+                                                        <p>
+                                                            Python can be used for many different purposes.
+                                                            Programmers use it to create small programs, perform calculations, process information, automate repetitive tasks, and develop larger software projects.
+                                                            It is also used in areas such as web development, scientific research, data analysis, and artificial intelligence.
+                                                            You do not need to understand these fields in detail right now.
+                                                            For now, the important thing is to understand that Python is a tool we can use to write instructions and solve problems with a computer.
+                                                        </p>
+                                                        <p>
+                                                            One reason Python is suitable for beginners is that we can write useful instructions without needing to understand every detail of how a computer works internally.
+                                                            We can start with simple commands, learn what they do, and gradually combine them to create more complex programs.
+                                                        </p>
+                                                        <p><strong>Let's look at our first example:</strong></p>
+<pre class="code-block"><code><span class="function">print</span><span class="punctuation">(</span><span class="string">"Hello, World!"</span><span class="punctuation">)</span></code></pre>
+                                                        <p>
+                                                            This is a small Python program.
+                                                            The word <code class="inline-code">print</code> is the name of a built-in function that we can use to display information.
+                                                            The parentheses <code class="inline-code">()</code> contain the information we want to display, and the quotation marks indicate that <code class="inline-code">Hello, World!</code> is text.
+                                                        </p>
+                                                        <p>When Python runs this instruction, the output is:</p>
+<pre class="output-block"><span class="output-label">Output</span>Hello, World!</pre>
+                                                        <p>
+                                                            The computer displays the message because we instructed it to do so.
+                                                            The program does not need to be long or complicated to count as programming.
+                                                            Even a single line of code can be a complete program if it performs the task we want.
+                                                        </p>
+                                                        <p>Now consider another example:</p>
+<pre class="code-block"><code><span class="function">print</span><span class="punctuation">(</span><span class="string">"Hello!"</span><span class="punctuation">)</span>
+<span class="function">print</span><span class="punctuation">(</span><span class="string">"I am learning Python."</span><span class="punctuation">)</span>
+<span class="function">print</span><span class="punctuation">(</span><span class="string">"This is my first program."</span><span class="punctuation">)</span></code></pre>
+<pre class="output-block"><span class="output-label">Output</span>Hello!
+I am learning Python.
+This is my first program.</pre>
+                                                        <p>
+                                                            Python processes these instructions in order, from the first line to the last.
+                                                            As a result, the computer displays three messages on separate lines.
+                                                            This example introduces an important idea: the order of instructions can affect what a program does.
+                                                        </p>
+                                                        <p>
+                                                            Do not worry if the code looks unfamiliar at first.
+                                                            You are not expected to memorize everything immediately.
+                                                            Focus on understanding what each line tells the computer to do.
+                                                            With practice, you will become more comfortable reading and writing Python code.
+                                                        </p>
+                                                    </div>
                                                     <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 mb-lg-0 mb-sm-4 mb-4">
-                                                        <img src="Photo_for_Main/C_Arduino.webp" class="img-fluid">
-                                                        <img src="Photo_for_Main/game-programming-languages-6-choices.webp" class="img-fluid">
-                                                        <img src="Photo_for_Main/Python_SQL_R.avif" class="img-fluid">
-                                                        <img src="Photo_for_Main/Java_vs_Python.png" class="img-fluid">
-
+                                                        <img src="Photo_for_Main/Python_In_VS_Code.png" class="img-fluid" alt="Python code in VS Code">
+                                                        <img src="Photo_for_Main/Programming_.avif" class="img-fluid" alt="Programming">
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- The beginning of the Section -->
+                    <!-- Second part of the Python Introduction -->
 
+                    <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                        <div class="content">
+                            <div class="grid">
+
+                                <!-- 5. What Can We Create with Programming? -->
                                 <div class="grid__item">
                                     <div class="product">
                                         <div class="tm-nav-link">
-                                            <i class="fas fa-handshake fa-3x tm-nav-icon"></i>
-                                            <span class="tm-nav-text">Nice Reading!</span>
-                                            <div class="product__bg"></div>             
-                                        </div>   
+                                            <i class="fas fa-gamepad fa-3x tm-nav-icon"></i>
+                                            <span class="tm-nav-text">5. What to Create</span>
+                                            <div class="product__bg"></div>
+                                        </div>
                                         <div class="product__description">
                                             <div class="row mb-3">
                                                 <div class="col-12">
-                                                    <h2 class="tm-page-title">Keep Reading! NICE!
-                                                       
-
-                                                    </h2>        
+                                                    <h2 class="tm-page-title"><span class="tm-section-number">5.</span>What Can We Create with Programming?</h2>
                                                 </div>
-                                            </div>                                        
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <p>
+                                                        Programming is useful because it allows people to create digital products and solve problems in different areas of life.
+                                                        Many things we use every day, such as websites, mobile applications, computer games, and online learning platforms, rely on programs written by developers.
+                                                        Programmers decide how these systems should behave and write instructions that allow them to perform their intended tasks.
+                                                    </p>
+                                                </div>
+                                            </div>
                                             <div class="row">
                                                 <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
-                                                    <img src="Photo_for_Main/Multiple_Languages.png" class="img-fluid mb-3">
+                                                    <h3 class="tm-sub-title">Websites and Applications</h3>
                                                     <p>
-                                                        In software testing, Python tools such as pytest are used to create reliable test suites, while system administrators rely on Python for server monitoring, log management, and system-level tasks. 
-
+                                                        Programmers use code to build websites and applications that help people communicate, learn, shop, share information, and complete their work.
+                                                        For example, an educational website might allow students to read lessons, answer quizzes, and check their results.
+                                                        Programming makes it possible for the website to respond to user actions and perform tasks rather than simply displaying a fixed page.
                                                     </p>
                                                     <p>
-                                                        Finally, one of Python’s biggest strengths is automation. You can write simple scripts to help you with repetitive tasks like extracting data from spreadsheets, sending emails, and working with files on your local machine
-                                                    </p>    
+                                                        Different programming languages and technologies can be used to create different parts of a website or application.
+                                                        You do not need to learn all of them now.
+                                                        At this stage, simply remember that programming helps developers create the instructions that make digital products work.
+                                                    </p>
+                                                    <img src="Photo_for_Main/VS_Code.webp" class="img-fluid" alt="VS Code editor">
+                                                    <h3 class="tm-sub-title">Computer Games</h3>
+                                                    <p>
+                                                        Programming is also used to create computer and mobile games.
+                                                        A game needs instructions to control how characters move, how players earn points, how obstacles behave, and what happens when a player wins or loses.
+                                                        Programmers write code that connects these actions and makes the game respond to the player's decisions.
+                                                    </p>
+                                                    <p>
+                                                        For example, when you press a key to move a character, the game follows instructions that determine how the character should move.
+                                                        When you collect an item and receive points, the program updates the score and displays the new result.
+                                                        These actions happen because the developers have written rules and instructions for the game.
+                                                    </p>
                                                 </div>
                                                 <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                                                    <img src="Photo_for_Main/game-programming-languages-6-choices.webp" class="img-fluid" alt="Programming languages for games">
+                                                    <h3 class="tm-sub-title">Working with Information</h3>
                                                     <p>
-                                                        Python is widely used in DevOps for writing CI/CD scripts and managing infrastructure across development pipelines. It is also commonly used to build back-end services and internal APIs. 
-
+                                                        Computers can store and process large amounts of information, but programming helps people organize that information and use it effectively.
+                                                        A program might calculate students' average scores, sort a list of names, count the number of books in a library, or identify patterns in a collection of data.
                                                     </p>
-                                                    
-                                                    <img src="Photo_for_Main/Programming_Languages_Python_or_JS.jpg" class="img-fluid">
-                                                     
-                                                </div>  
-                                                                               
+                                                    <p>
+                                                        Imagine that a teacher has the scores of 100 students and wants to calculate the class average.
+                                                        Instead of calculating every result manually, the teacher could use a program to perform the calculation.
+                                                        Programming can save time, reduce repetitive work, and make it easier to process information.
+                                                    </p>
+                                                    <h3 class="tm-sub-title">Automation</h3>
+                                                    <p>
+                                                        <strong>Automation</strong> means using technology to perform tasks with less repeated human effort.
+                                                        Programmers can write programs that handle repetitive activities, such as organizing files, performing calculations, or processing information in a spreadsheet.
+                                                    </p>
+                                                    <p>
+                                                        For example, imagine that someone needs to rename hundreds of files one by one.
+                                                        A program could follow a set of instructions to rename those files automatically.
+                                                        The programmer must first decide the rules and write the instructions, but the computer can then perform the repeated task much faster than doing each file manually.
+                                                    </p>
+                                                </div>
                                             </div>
-                                            
-                                        </div>                                                              
-                                            
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <p class="tm-callout">
+                                                        These are only a few examples of what programming can do.
+                                                        You do not need to decide which area you want to specialize in yet.
+                                                        First, focus on understanding the basic concepts and developing your problem-solving skills.
+                                                        As your knowledge grows, you will be able to explore different areas and choose projects that interest you.
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
 
+                                <!-- 6. Why Should You Learn Python? -->
                                 <div class="grid__item">
                                     <div class="product">
                                         <div class="tm-nav-link">
-                                            <i class="fas fa-comments fa-3x tm-nav-icon"></i>
-                                            <span class="tm-nav-text">Quiz!</span>
-                                            <div class="product__bg"></div>             
-                                        </div>                                                              
+                                            <i class="fas fa-rocket fa-3x tm-nav-icon"></i>
+                                            <span class="tm-nav-text">6. Why Python?</span>
+                                            <div class="product__bg"></div>
+                                        </div>
                                         <div class="product__description">
                                             <div class="p-sm-4 p-2">
                                                 <div class="row mb-3">
                                                     <div class="col-12">
-                                                        <h2 class="tm-page-title">Almost there!</h2>        
+                                                        <h2 class="tm-page-title"><span class="tm-section-number">6.</span>Why Should You Learn Python?</h2>
                                                     </div>
                                                 </div>
                                                 <div class="row tm-reverse-sm">
                                                     <div class="col-sm-12 col-md-8 col-lg-8 col-xl-8">
-                                                    <p>
-                                                        Libraries like Selenium and BeautifulSoup also make it easy to interact with websites, so you can scrape public data, automate tasks through a web UI, and even manage cloud developments for your projects. 
-
-                                                    </p> 
-                                                    <p>
-                                                        As you can see, Python is a very powerful language, and yet, it’s easy to learn. From simple automation scripts to large-scale, industrial-level applications, you can use Python for just about anything. 
-                                                    </p>
-
-                                                    <p>
-                                                        Python is a great choice for anyone who wants to learn programming, regardless of what they choose to specialize in later. 
-
-                                                    </p>
-                                                    
-
-                                                    <p>
-                                                        <ul class="elegant-list">
-                                                            <li>
-                                                                <h3>Premium Experience</h3>
-                                                                <p>Curated design patterns tailored for high-end digital products.</p>
-                                                            </li>
-                                                            <li>
-                                                                <h3>Tailored Solutions</h3>
-                                                                <p>Engineered precisely to match your unique brand identity.</p>
-                                                            </li>
-                                                            <li>
-                                                                <h3>Seamless Integration</h3>
-                                                                <p>Effortlessly connects with your existing tech architecture.</p>
-                                                            </li>
-                                                            </ul>
-
-                                                    </p>
-
-                                                        <a href="Python_Quiz_for_introduction.html" class="btn tm-btn-gray">Take a Quiz</a>        
-                                                    </div>                                                
+                                                        <p>
+                                                            Learning Python is not only about learning how to write code.
+                                                            It is also an opportunity to develop logical thinking, patience, creativity, and problem-solving skills.
+                                                            When you write a program, you need to understand the problem, decide what steps are necessary, write instructions, and check whether the result is correct.
+                                                            These skills can be useful in programming and in many other areas of your education and daily life.
+                                                        </p>
+                                                        <p>
+                                                            Python is a good starting point because its readable syntax allows beginners to focus on the logic behind a program instead of struggling with too many complicated rules at once.
+                                                            You can begin with simple commands and gradually learn more advanced concepts, such as variables, conditions, loops, and functions.
+                                                            Each new concept builds on ideas you have already learned.
+                                                        </p>
+                                                        <p>
+                                                            However, learning programming still requires practice.
+                                                            Your first program might not work as expected, and you may sometimes receive an error message that you do not understand.
+                                                            This is a normal part of learning.
+                                                            Instead of becoming discouraged, read the message carefully, check your code, and try to identify what went wrong.
+                                                            Every mistake you investigate can teach you something new.
+                                                        </p>
+                                                        <p>
+                                                            You also do not need to understand everything immediately.
+                                                            Some concepts will become clearer only after you have used them several times in different examples.
+                                                            The best approach is to learn one concept at a time, practice it, ask questions when something is unclear, and gradually build your knowledge.
+                                                        </p>
+                                                        <p class="tm-callout">
+                                                            By the end of this course, the goal is not simply to memorize Python commands.
+                                                            The goal is to understand how to use programming to express ideas, solve problems, and create something useful.
+                                                            Start with the basics, stay curious, and remember that every experienced programmer once had to write their first line of code.
+                                                        </p>
+                                                    </div>
                                                     <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 mb-lg-0 mb-sm-4 mb-4">
-                                                        <img src="Photo_for_Main/Python_In_VS_Code.png" class="img-fluid">
-                                                        <img src="Photo_for_Main/Programming_.avif" class="img-fluid">
-                                                        <img src="Photo_for_Main/What_is_Programming.webp" class="img-fluid">
-                                                        
-
+                                                        <img src="Photo_for_Main/Python_Installation.png" class="img-fluid" alt="Installing Python">
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div> 
-                        </div>                       
+
+                                <!-- Extra reading: Python in the industry -->
+                                <div class="grid__item">
+                                    <div class="product">
+                                        <div class="tm-nav-link">
+                                            <i class="fas fa-industry fa-3x tm-nav-icon"></i>
+                                            <span class="tm-nav-text">Python at Work</span>
+                                            <div class="product__bg"></div>
+                                        </div>
+                                        <div class="product__description">
+                                            <div class="row mb-3">
+                                                <div class="col-12">
+                                                    <h2 class="tm-page-title">Extra Reading: Common Uses of Python in the Industry</h2>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                                                    <p>
+                                                        Python is a general-purpose programming language known for its simplicity and ease of use.
+                                                        These qualities have made Python one of the most popular programming languages today.
+                                                        It is used in many fields, such as data science and machine learning, web development, scripting and automation, embedded systems, IoT, and much more.
+                                                    </p>
+                                                    <ul class="elegant-list">
+                                                        <li>
+                                                            <h3>Data Science and AI</h3>
+                                                            <p>
+                                                                Python is the main language that most data scientists and machine learning engineers currently use.
+                                                                Libraries like Pandas and NumPy make data analysis less tedious, while others like TensorFlow and scikit-learn make machine learning and working with AI models much more accessible.
+                                                            </p>
+                                                        </li>
+                                                        <li>
+                                                            <h3>Web Development</h3>
+                                                            <p>
+                                                                Python frameworks like Django, FastAPI, and Flask let developers build scalable and secure back-end systems with minimal effort.
+                                                                (A website has two sides: the <strong>front end</strong> is the design you can see with your eyes, and the <strong>back end</strong> stores the data and does the work behind the scenes.)
+                                                                Many social media platforms like Instagram and Pinterest use Python on the back end.
+                                                            </p>
+                                                        </li>
+                                                        <li>
+                                                            <h3>Cybersecurity</h3>
+                                                            <p>
+                                                                Cybersecurity professionals and ethical hackers use Python to detect threats like malware (harmful software built to steal from or damage your computer), build automated security scans, and analyze threats.
+                                                            </p>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                                                    <img src="Photo_for_Main/Python_SQL_R.avif" class="img-fluid" alt="Python, SQL and R">
+                                                    <ul class="elegant-list">
+                                                        <li>
+                                                            <h3>Embedded Systems and IoT</h3>
+                                                            <p>
+                                                                An <strong>embedded system</strong> is a dedicated micro-computer inside a machine doing one specific job.
+                                                                <strong>IoT</strong> (Internet of Things) is a network of physical devices, vehicles, and appliances that are connected to the internet and talk to each other.
+                                                                Python runs well on microcomputers like Raspberry Pi and MicroPython-compatible boards, so you can build IoT projects like smart home devices and weather monitoring stations.
+                                                            </p>
+                                                        </li>
+                                                        <li>
+                                                            <h3>Testing, DevOps and System Administration</h3>
+                                                            <p>
+                                                                In software testing, Python tools such as pytest are used to create reliable test suites, while system administrators rely on Python for server monitoring, log management, and system-level tasks.
+                                                                Python is also widely used in DevOps for writing CI/CD scripts and managing infrastructure.
+                                                            </p>
+                                                        </li>
+                                                        <li>
+                                                            <h3>Automation</h3>
+                                                            <p>
+                                                                One of Python's biggest strengths is automation.
+                                                                You can write simple scripts to help with repetitive tasks like extracting data from spreadsheets, sending emails, and working with files on your computer.
+                                                                Libraries like Selenium and BeautifulSoup also make it easy to interact with websites, so you can collect public data and automate tasks in a web page.
+                                                            </p>
+                                                        </li>
+                                                    </ul>
+                                                    <img src="Photo_for_Main/C_Arduino.webp" class="img-fluid" alt="C and Arduino">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Final Reminder + Quiz -->
+                                <div class="grid__item">
+                                    <div class="product">
+                                        <div class="tm-nav-link">
+                                            <i class="fas fa-flag-checkered fa-3x tm-nav-icon"></i>
+                                            <span class="tm-nav-text">Final &amp; Quiz!</span>
+                                            <div class="product__bg"></div>
+                                        </div>
+                                        <div class="product__description">
+                                            <div class="p-sm-4 p-2">
+                                                <div class="row mb-3">
+                                                    <div class="col-12">
+                                                        <h2 class="tm-page-title">Final Reminder</h2>
+                                                    </div>
+                                                </div>
+                                                <div class="row tm-reverse-sm">
+                                                    <div class="col-sm-12 col-md-8 col-lg-8 col-xl-8">
+                                                        <p>
+                                                            Programming begins with a simple idea: giving a computer instructions to complete a task.
+                                                            A programming language provides a way to write those instructions, and Python is the language we will use to begin our journey.
+                                                        </p>
+                                                        <p class="tm-callout">
+                                                            You do not need previous experience to get started.
+                                                            All you need is a willingness to learn, practice, ask questions, and keep improving.
+                                                        </p>
+                                                        <p>Ready to check what you have learned?</p>
+                                                        <a href="Python_Quiz_for_introduction.html" class="btn tm-btn-gray">Take a Quiz</a>
+                                                    </div>
+                                                    <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4 mb-lg-0 mb-sm-4 mb-4">
+                                                        <img src="Photo_for_Main/What_is_Programming.webp" class="img-fluid" alt="What is programming">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="col-sm-12 col-md-6 col-lg-6 col-md-col-xl-6 mb-md-0 mb-sm-4 mb-4 tm-site-header-col">
                         <div class="tm-site-header">
                             <h1 class="mb-4">Python Basics</h1>
-                            <img src="img/underline.png" class="img-fluid mb-4">
-                            <p>Introduction to Python together! 
-                                But, Solo-Leveling is better, and Consistency is a key in here အယ့်လယ့်!
-                            </p>        
-                        </div>                        
+                            <img src="img/underline.png" class="img-fluid mb-4" alt="">
+                            <p>Introduction to Python together!
+                                But, Solo-Leveling is better, and Consistency is a key in here အယ့်လယ့်!
+                            </p>
+                        </div>
                     </div>
                     <!-- The end of the section-->
-                </div>                
+                </div>
             </div>
-            
-        </div> <!-- .tm-main-content -->  
 
-        
+        </div> <!-- .tm-main-content -->
     </div>
     <!-- load JS -->
-    <script src="js/jquery-3.2.1.slim.min.js"></script>         <!-- https://jquery.com/ -->    
-    <script src="slick/slick.min.js"></script>                  <!-- http://kenwheeler.github.io/slick/ -->  
+    <script src="js/jquery-3.2.1.slim.min.js"></script>         <!-- https://jquery.com/ -->
+    <script src="slick/slick.min.js"></script>                  <!-- http://kenwheeler.github.io/slick/ -->
     <script src="js/anime.min.js"></script>                     <!-- http://animejs.com/ -->
-    <script src="js/main.js"></script>  
-    <script>      
+    <script src="js/main.js"></script>
+    <script>
 
         function setupFooter() {
             var pageHeight = $('.tm-site-header-container').height() + $('footer').height() + 100;
@@ -494,7 +798,7 @@ https://www.tooplate.com/view/2097-pop
                 main.addClass('tm-footer-relative');
             }
             else {
-                main.removeClass('tm-footer-relative');   
+                main.removeClass('tm-footer-relative');
             }
         }
 
@@ -508,10 +812,10 @@ https://www.tooplate.com/view/2097-pop
                 setupFooter();
             });
 
-            $('.tm-current-year').text(new Date().getFullYear());  // Update year in copyright           
+            $('.tm-current-year').text(new Date().getFullYear());  // Update year in copyright
         });
 
-    </script>             
+    </script>
 
 </body>
 </html>
