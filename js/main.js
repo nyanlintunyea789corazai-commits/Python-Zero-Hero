@@ -211,7 +211,8 @@
 	const DOM = {};
 	DOM.grid = document.querySelector('.grid');
 	DOM.content = DOM.grid.parentNode;
-	DOM.gridItems = Array.from(DOM.grid.querySelectorAll('.grid__item'));
+	// Collect tiles from every .grid on the page, not only the first one
+	DOM.gridItems = Array.from(document.querySelectorAll('.grid .grid__item'));
 	let items = [];
 	DOM.gridItems.forEach(item => items.push(new Item(item)));
 
